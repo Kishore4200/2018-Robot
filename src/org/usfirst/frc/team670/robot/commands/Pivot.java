@@ -30,8 +30,8 @@ public class Pivot extends Command {
     protected void execute() {
     	//Percent of the turn left
     	double percent = (finalAngle - Robot.navXMicro.getYaw())/angle;
-    	double speed = (0.8) - ((2.8)*(Math.pow(percent-0.5, 2)));
-    	
+    	//double speed = (0.8) - ((2.8)*(Math.pow(percent-0.5, 2)));
+    	double speed = 0.1;
     	if(direction == 'r')
     		Robot.driveBase.drive(speed, -speed);
     	else if(direction == 'l') 
@@ -42,7 +42,7 @@ public class Pivot extends Command {
     protected boolean isFinished() {
     	double percent = (finalAngle - Robot.navXMicro.getYaw())/angle;
 
-    	if(percent <= 0.025)
+    	if(percent <= 0)
     	{
     		Robot.driveBase.drive(0, 0);
     		return true;

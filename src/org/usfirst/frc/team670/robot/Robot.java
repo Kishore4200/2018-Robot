@@ -35,7 +35,7 @@ public class Robot extends TimedRobot {
 	public static final DriveBase driveBase = new DriveBase();
 	public static AHRS navXMicro;
 	public static OI oi;
-	public static String gameLayout;
+	//public static String gameLayout;
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -64,9 +64,9 @@ public class Robot extends TimedRobot {
 		else
 		{
 			m_chooser.addObject("Turn Right 90 degrees", new Pivot(90, 'r'));
-			m_chooser.addObject("Center Switch Auto", new Auto_Center());
-			m_chooser.addObject("Left Auto", new Auto_Left());
-			m_chooser.addObject("Right Auto", new Auto_Right());
+		//	m_chooser.addObject("Center Switch Auto", new Auto_Center());
+			//m_chooser.addObject("Left Auto", new Auto_Left());
+			//m_chooser.addObject("Right Auto", new Auto_Right());
 		}
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
@@ -85,6 +85,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		putData();
 	}
 
 	/**
@@ -102,8 +103,8 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		
 		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		gameLayout = gameData;
+		//gameData = DriverStation.getInstance().getGameSpecificMessage();
+		//gameLayout = gameData;
 		
 		m_autonomousCommand = m_chooser.getSelected();
 
@@ -158,6 +159,7 @@ public class Robot extends TimedRobot {
 	
 	public void putData()
 	{
-		SmartDashboard.putString("Time:", DriverStation.getInstance().getMatchTime()+"");
+		//SmartDashboard.putString("Time:", DriverStation.getInstance().getMatchTime()+"");
+		SmartDashboard.putString("Angle:", navXMicro.getYaw()+"");
 	}
 }
