@@ -52,7 +52,7 @@ NOTE: Remember your try catches, in case the robot sensor is unplugged
   - [ ] Go for baseline
   - [ ] ~~IF navXMicro works~~
        - [ ] ~~Complete schematic to approach, and place box, with ultrasonic input~~
-
+	-[ ] ~After Everything~ Waypoint Pathfinding
 
 --------------------------
 Guides
