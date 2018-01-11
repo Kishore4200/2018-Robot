@@ -1,18 +1,8 @@
 # Power Up!
-Code for Team 670's Steamworks Robot
+Code for Team 670's PowerUp Robot
 --------------------------
 **Robot Code**
 
-- [ ] DriveBase
-  - [ ] Drive With Joystick
-    - [ ] Field Centric
-    - [ ] Driver Centric
-  - [ ] Four TalonSRX (Follower control)
-- [ ] Elevator
-  - [ ] Up/Down movement
-  - [ ]	Sensor to record position
-  - [ ] Reset position to 0
-  - [ ] Position Control
 - [ ] Intake/Shooter
   - [ ] Basic motor activation (Control from operator joystick)
 - [ ] Climber
@@ -54,6 +44,21 @@ NOTE: Remember your try catches, in case the robot sensor is unplugged
        - [ ] ~~Complete schematic to approach, and place box, with ultrasonic input~~
 	-[ ] ~After Everything~ Waypoint Pathfinding
 
+--------------------------
+**Need to have**
+	*Robot Code*
+	- [ ] DriveBase
+	  - [ ] Drive With Joystick
+	    - [ ] Driver Centric
+	  - [ ] Four TalonSRX (Follower control)
+	- [ ] Elevator
+	  - [ ] Up/Down movement
+	  - [ ]	Sensor to record position
+	  - [ ] Reset position to 0
+	  - [ ] Position Control
+	  
+**Want to have**
+**Dream to have**
 --------------------------
 Guides
 
