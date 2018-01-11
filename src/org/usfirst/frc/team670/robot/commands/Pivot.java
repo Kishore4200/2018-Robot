@@ -3,6 +3,7 @@ package org.usfirst.frc.team670.robot.commands;
 import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Pivot extends Command {
     public Pivot(double angle, char direction) {
     	this.direction = direction;
     	this.angle = angle;
-    	Robot.navXMicro.zeroYaw();
+    	Robot.navXMicro.reset();
     	startAngle = Robot.navXMicro.getYaw();
     	this.finalAngle = startAngle + angle;
     	requires(Robot.driveBase);
@@ -41,7 +42,8 @@ public class Pivot extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	double percent = (finalAngle - Robot.navXMicro.getYaw())/angle;
-
+    	SmartDashboard.putString("Percent:", percent + "");
+    	
     	if(percent <= 0)
     	{
     		Robot.driveBase.drive(0, 0);
