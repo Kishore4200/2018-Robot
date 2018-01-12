@@ -15,14 +15,17 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team670.robot.commands.Pivot;
-import org.usfirst.frc.team670.robot.commands.Auto_Center;
-import org.usfirst.frc.team670.robot.commands.Auto_Left;
-import org.usfirst.frc.team670.robot.commands.Auto_Right;
-import org.usfirst.frc.team670.robot.commands.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Center;
+import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Left;
+import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Right;
+import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.autonomous.helpers.Pivot;
 import org.usfirst.frc.team670.robot.commands.Joystick_MoveElevator;
+import org.usfirst.frc.team670.robot.subsystems.Camera;
+import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Elevator;
+import org.usfirst.frc.team670.robot.subsystems.Intake;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -36,8 +39,13 @@ import com.kauailabs.navx.frc.AHRS;
 public class Robot extends TimedRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final DriveBase driveBase = new DriveBase();
+	public static final Intake intake = new Intake();
+	public static final Climber climber = new Climber();
+	
+	public static Camera vision_subsystem;
+	public static SensorThread sensors;
 	public static OI oi;
-	//public static String gameLayout;
+	public static String gameLayout;
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -49,17 +57,18 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		
+		sensors = new SensorThread();
+		vision_subsystem = new Camera();
 		
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 		
-		if(SensorThread.isNavXConnected() == false)
+		if(!sensors.isNavXConnected())
 		{
 			
 		}
 		else
 		{
-			m_chooser.addObject("Turn Right 90 degrees", new Pivot(90, 'r'));
+			m_chooser.addObject("Turn Right 90 degrees", new Pivot(90));
 		//	m_chooser.addObject("Center Switch Auto", new Auto_Center());
 			//m_chooser.addObject("Left Auto", new Auto_Left());
 			//m_chooser.addObject("Right Auto", new Auto_Right());

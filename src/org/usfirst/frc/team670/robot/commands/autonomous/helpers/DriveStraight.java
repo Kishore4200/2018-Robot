@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands;
+package org.usfirst.frc.team670.robot.commands.autonomous.helpers;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.SensorThread;
@@ -17,8 +17,8 @@ public class DriveStraight extends Command {
         // Use requires() here to declare subsystem dependencies
     	this.direction = direction;
     	this.inches = inches;
-    	SensorThread.reset();
-    	start = SensorThread.getDisplacementY();
+    	Robot.sensors.reset();
+    	start = Robot.sensors.getDisplacementY();
     	this.finalInches = start + inches;
         requires(Robot.driveBase);
     }
@@ -30,7 +30,7 @@ public class DriveStraight extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double percent = (finalInches - SensorThread.getDisplacementY())/inches;
+    	double percent = (finalInches - Robot.sensors.getDisplacementY())/inches;
     	double speed = (0.8) - ((2.8)*(Math.pow(percent-0.5, 2)));
     	
     	if(direction == 'f')
@@ -41,7 +41,7 @@ public class DriveStraight extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double percent = (finalInches - SensorThread.getDisplacementY())/inches;
+    	double percent = (finalInches - Robot.sensors.getDisplacementY())/inches;
 
     	if(percent <= 0.025)
     	{

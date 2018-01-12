@@ -22,14 +22,9 @@ public class Intake extends Subsystem {
 		intakeMotor1 = new TalonSRX(RobotMap.intakeMotor1);
 	}
 	
-	public void intake()
+	public void intake(double speed)
 	{
-		
-	}
-	
-	public void chuck()
-	{
-		
+		intakeMotor1.set(ControlMode.PercentOutput, speed);
 	}
 	
     public void initDefaultCommand() {

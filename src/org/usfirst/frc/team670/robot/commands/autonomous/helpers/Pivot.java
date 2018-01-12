@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands;
+package org.usfirst.frc.team670.robot.commands.autonomous.helpers;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.SensorThread;
@@ -12,13 +12,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Pivot extends Command {
 
 	private double finalAngle, startAngle, angle;
-	private char direction;
 	
-    public Pivot(double angle, char direction) {
-    	this.direction = direction;
+    public Pivot(double angle) {
     	this.angle = angle;
-    	SensorThread.reset();
-    	startAngle = SensorThread.getYaw();
+    	Robot.sensors.reset();
+    	startAngle = Robot.sensors.getYaw();
     	this.finalAngle = startAngle + angle;
     	requires(Robot.driveBase);
         // Use requires() here to declare subsystem dependencies
@@ -31,18 +29,20 @@ public class Pivot extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Percent of the turn left
-    	double percent = (finalAngle - SensorThread.getYaw())/angle;
+    	double percent = (finalAngle - Robot.sensors.getYaw())/angle;
     	//double speed = (0.8) - ((2.8)*(Math.pow(percent-0.5, 2)));
     	double speed = 0.1;
-    	if(direction == 'r')
+    	if(angle > 0)
     		Robot.driveBase.drive(speed, -speed);
-    	else if(direction == 'l') 
+    	else if(angle < 0) 
     		Robot.driveBase.drive(-speed, speed);
+    	else
+    		cancel();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double percent = (finalAngle - SensorThread.getYaw())/angle;
+    	double percent = (finalAngle - Robot.sensors.getYaw())/angle;
     	SmartDashboard.putString("Percent:", percent + "");
     	
     	if(percent <= 0)

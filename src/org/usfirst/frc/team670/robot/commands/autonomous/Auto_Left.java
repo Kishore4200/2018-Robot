@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands;
+package org.usfirst.frc.team670.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -6,27 +6,26 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class Auto_Right extends CommandGroup {
+public class Auto_Left extends CommandGroup {
 
-    public Auto_Right() {
+    public Auto_Left() {
     	String gameLayout = DriverStation.getInstance().getGameSpecificMessage();
     	
     	//Checking and going for the Switch
-    	if(gameLayout.charAt(0) == 'R')
+    	if(gameLayout.charAt(0) == 'L')
 		{
-			//Put right auto code here for the switch
+			//Put left auto code here for the switch
 		} 
-    	else if(gameLayout.charAt(1) == 'R'){
-			//Put right auto code here for the scale
+    	else if(gameLayout.charAt(1) == 'L'){
+			//Put left auto code here for the scale
 		}
-		else if(gameLayout.charAt(2) == 'R'){
-			//Put right auto code here for the switch on the other team's side
+		else if(gameLayout.charAt(2) == 'L'){
+			//Put left auto code here for the switch on the other team's side
 		}
 		else
 		{
 			//Drive to baseline
 		}
-    	
     	// Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

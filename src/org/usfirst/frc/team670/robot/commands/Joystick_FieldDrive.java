@@ -27,7 +27,7 @@ public class Joystick_FieldDrive extends Command {
 		 
 		/* Adjust Joystick X/Y inputs by navX MXP yaw angle */
 		
-		double gyro_degrees = SensorThread.getYaw();
+		double gyro_degrees = Robot.sensors.getYaw();
 		double gyro_radians = gyro_degrees * Math.PI/180; 
 		double temp = forwrd * Math.cos(gyro_radians) + 
 		strafe * Math.sin(gyro_radians);

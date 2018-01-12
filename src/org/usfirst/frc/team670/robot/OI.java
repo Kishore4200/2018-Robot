@@ -7,6 +7,10 @@
 
 package org.usfirst.frc.team670.robot;
 
+import java.awt.Point;
+
+import org.opencv.core.Scalar;
+
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -18,6 +22,11 @@ public class OI {
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
+	
+	public final Scalar upperHSV = new Scalar(110,101,30);
+	public final Scalar lowerHSV = new Scalar(180,255,255);
+	//The targetPoint of where the powercube needs to be
+	public final Point targetPoint = new Point(640, 360);
 	
 	public Joystick getLeftStick(){
 		return leftDriveStick;
