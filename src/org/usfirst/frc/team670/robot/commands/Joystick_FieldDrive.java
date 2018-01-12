@@ -1,15 +1,16 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.SensorThread;
 
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class fieldCentricJoystick extends Command {
+public class Joystick_FieldDrive extends Command {
 
-	public fieldCentricJoystick() {
+	public Joystick_FieldDrive() {
 		requires(Robot.driveBase);
 	}
 
@@ -19,18 +20,15 @@ public class fieldCentricJoystick extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Joystick left = Robot.oi.getleftStick();
+		Joystick left = Robot.oi.getLeftStick();
 		double rcw = left.getTwist();
 		double forwrd = left.getY() * -1; /* Invert stick Y axis */
 		double strafe = left.getX();
 		 
-		double pi = 3.1415926;
-		 
 		/* Adjust Joystick X/Y inputs by navX MXP yaw angle */
-		AHRS navX = Robot.navXMicro; 
 		
-		double gyro_degrees = navX.getYaw();
-		double gyro_radians = gyro_degrees * pi/180; 
+		double gyro_degrees = SensorThread.getYaw();
+		double gyro_radians = gyro_degrees * Math.PI/180; 
 		double temp = forwrd * Math.cos(gyro_radians) + 
 		strafe * Math.sin(gyro_radians);
 		strafe = -forwrd * Math.sin(gyro_radians) + strafe * Math.cos(gyro_radians);

@@ -20,7 +20,9 @@ import org.usfirst.frc.team670.robot.commands.Auto_Center;
 import org.usfirst.frc.team670.robot.commands.Auto_Left;
 import org.usfirst.frc.team670.robot.commands.Auto_Right;
 import org.usfirst.frc.team670.robot.commands.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.Joystick_MoveElevator;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
+import org.usfirst.frc.team670.robot.subsystems.Elevator;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -32,8 +34,8 @@ import com.kauailabs.navx.frc.AHRS;
  * project.
  */
 public class Robot extends TimedRobot {
+	public static final Elevator elevator = new Elevator();
 	public static final DriveBase driveBase = new DriveBase();
-	public static AHRS navXMicro;
 	public static OI oi;
 	//public static String gameLayout;
 	
@@ -47,17 +49,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		try {
-			navXMicro = new AHRS(SerialPort.Port.kUSB);
-		}
-		catch (RuntimeException ex ) {
-			DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
-			navXMicro = null;
-		}
+		
 		
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 		
-		if(navXMicro == null)
+		if(SensorThread.isNavXConnected() == false)
 		{
 			
 		}
@@ -160,6 +156,6 @@ public class Robot extends TimedRobot {
 	public void putData()
 	{
 		//SmartDashboard.putString("Time:", DriverStation.getInstance().getMatchTime()+"");
-		SmartDashboard.putString("Angle:", navXMicro.getYaw()+"");
+		//SmartDashboard.putString("Angle:", navXMicro.getYaw()+"");
 	}
 }

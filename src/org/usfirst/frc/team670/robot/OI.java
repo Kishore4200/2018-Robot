@@ -19,13 +19,18 @@ public class OI {
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
 	
-	public Joystick getleftStick(){
+	public Joystick getLeftStick(){
 		return leftDriveStick;
 	}
 	
-	public Joystick getrightStick(){
+	public Joystick getRightStick(){
 		return rightDriveStick;
 	}
+	
+	public Joystick getOperatorStick() {
+		return operatorStick;
+	}
+	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.

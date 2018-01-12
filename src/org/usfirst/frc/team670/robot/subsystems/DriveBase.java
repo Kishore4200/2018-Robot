@@ -8,7 +8,7 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
-import org.usfirst.frc.team670.robot.commands.robotCentricJoystick;
+import org.usfirst.frc.team670.robot.commands.Joystick_RobotDrive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -20,10 +20,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveBase extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	public TalonSRX leftTalon1;
-	public TalonSRX leftTalon2;
-	public TalonSRX rightTalon1;
-	public TalonSRX rightTalon2;
+	private TalonSRX leftTalon1;
+	private TalonSRX leftTalon2;
+	private TalonSRX rightTalon1;
+	private TalonSRX rightTalon2;
 
 	public DriveBase() {
 		leftTalon1 = new TalonSRX(RobotMap.leftMotor1);
@@ -41,6 +41,6 @@ public class DriveBase extends Subsystem {
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
-		setDefaultCommand(new robotCentricJoystick());
+		setDefaultCommand(new Joystick_RobotDrive());
 	}
 }

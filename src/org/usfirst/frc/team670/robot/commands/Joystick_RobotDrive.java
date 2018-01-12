@@ -4,9 +4,9 @@ import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class robotCentricJoystick extends Command {
+public class Joystick_RobotDrive extends Command {
 
-	public robotCentricJoystick() {
+	public Joystick_RobotDrive() {
 		requires(Robot.driveBase);
 	}
 
@@ -16,7 +16,7 @@ public class robotCentricJoystick extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-			Robot.driveBase.drive(-Robot.oi.getleftStick().getY(),-Robot.oi.getrightStick().getY());
+			Robot.driveBase.drive(-Robot.oi.getLeftStick().getY(),-Robot.oi.getRightStick().getY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

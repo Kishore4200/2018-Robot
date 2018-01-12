@@ -1,6 +1,7 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.SensorThread;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -16,8 +17,8 @@ public class Pivot extends Command {
     public Pivot(double angle, char direction) {
     	this.direction = direction;
     	this.angle = angle;
-    	Robot.navXMicro.reset();
-    	startAngle = Robot.navXMicro.getYaw();
+    	SensorThread.reset();
+    	startAngle = SensorThread.getYaw();
     	this.finalAngle = startAngle + angle;
     	requires(Robot.driveBase);
         // Use requires() here to declare subsystem dependencies
@@ -30,7 +31,7 @@ public class Pivot extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Percent of the turn left
-    	double percent = (finalAngle - Robot.navXMicro.getYaw())/angle;
+    	double percent = (finalAngle - SensorThread.getYaw())/angle;
     	//double speed = (0.8) - ((2.8)*(Math.pow(percent-0.5, 2)));
     	double speed = 0.1;
     	if(direction == 'r')
@@ -41,7 +42,7 @@ public class Pivot extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double percent = (finalAngle - Robot.navXMicro.getYaw())/angle;
+    	double percent = (finalAngle - SensorThread.getYaw())/angle;
     	SmartDashboard.putString("Percent:", percent + "");
     	
     	if(percent <= 0)
