@@ -1,5 +1,7 @@
 package org.usfirst.frc.team670.robot.commands;
 
+import org.usfirst.frc.team670.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,7 +11,7 @@ public class Joystick_Intake extends Command {
 
     public Joystick_Intake() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time

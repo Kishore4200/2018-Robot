@@ -58,24 +58,36 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 		sensors = new SensorThread();
-		vision_subsystem = new Camera();
-		
-		m_chooser.addDefault("Do Nothing", new CancelCommand());
-		
-		if(!sensors.isNavXConnected())
-		{
-			
-		}
-		else
-		{
+//		try {
+//			navXMicro = new AHRS(SerialPort.Port.kUSB);
+//		}
+//		catch (RuntimeException ex ) {
+//			DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
+//			navXMicro = null;
+//		}
+//		
+//		m_chooser.addDefault("Do Nothing", new CancelCommand());
+//		
+//		if(navXMicro == null)
+//		{
+//			
+//		}
+//		else
+//		{
 			m_chooser.addObject("Turn Right 90 degrees", new Pivot(90));
+			m_chooser.addObject("Turn Left 90 degrees", new Pivot(-90));
+
+			m_chooser.addObject("Turn 180 degrees", new Pivot(180));
+
+			m_chooser.addObject("Turn Right 60 degrees", new Pivot(60));
+
 		//	m_chooser.addObject("Center Switch Auto", new Auto_Center());
 			//m_chooser.addObject("Left Auto", new Auto_Left());
 			//m_chooser.addObject("Right Auto", new Auto_Right());
-		}
+//		}
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
-	}
+}
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -164,7 +176,7 @@ public class Robot extends TimedRobot {
 	
 	public void putData()
 	{
-		//SmartDashboard.putString("Time:", DriverStation.getInstance().getMatchTime()+"");
-		//SmartDashboard.putString("Angle:", navXMicro.getYaw()+"");
+		SmartDashboard.putString("Is NavXConnected:", sensors.isNavXConnected()+"");
+		SmartDashboard.putString("Angle:", sensors.getYaw()+"");
 	}
 }

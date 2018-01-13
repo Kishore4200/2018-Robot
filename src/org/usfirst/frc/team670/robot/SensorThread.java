@@ -71,8 +71,8 @@ public class SensorThread extends Thread{
 
 	public double getYaw() {
 		if (isNavXConnected())
-			return -1;
-		return navXMicro.getYaw();
+			return navXMicro.getYaw();
+		return -1;
 	}
 	
 	public void zeroYaw()
@@ -83,18 +83,18 @@ public class SensorThread extends Thread{
 
 	public double getTilt() {
 		if (isNavXConnected())
-			return -1;
-		return navXMicro.getAngle();	}
+			return navXMicro.getAngle();
+		return -1;	}
 
 	public double getVelocityY() {
 		if (isNavXConnected())
-			return -1;
-		return navXMicro.getVelocityY();	}
+			return navXMicro.getVelocityY();
+		return -1;	}
 
 	public double getDisplacementY() {
 		if (isNavXConnected())
-			return -1;
-		return navXMicro.getDisplacementY();
+			return navXMicro.getDisplacementY();
+		return -1;
 	}
 
 }
