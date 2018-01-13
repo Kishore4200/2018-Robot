@@ -75,7 +75,7 @@ public class Camera extends Subsystem {
 		return angle;
 	}
 	
-	public void enableCapture()
+	public void startCapture()
 	{
 		capture = true;
 	}

@@ -10,8 +10,15 @@ package org.usfirst.frc.team670.robot;
 import java.awt.Point;
 
 import org.opencv.core.Scalar;
+import org.usfirst.frc.team670.robot.commands.LocatePowerUp;
+import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.autonomous.helpers.AutoClimb;
+import org.usfirst.frc.team670.robot.commands.autonomous.helpers.AutoIntake;
+import org.usfirst.frc.team670.robot.commands.autonomous.helpers.DeployClimber;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -22,11 +29,40 @@ public class OI {
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
+	private Joystick arcadeStick = new Joystick(RobotMap.arcadeStick);
 	
 	public final Scalar upperHSV = new Scalar(110,101,30);
 	public final Scalar lowerHSV = new Scalar(180,255,255);
 	//The targetPoint of where the powercube needs to be
 	public final Point targetPoint = new Point(640, 360);
+	
+	
+	private Button runClimb = new JoystickButton(arcadeStick, 1);
+	private Button reverseClimb = new JoystickButton(arcadeStick, 2);
+	private Button deployClimber = new JoystickButton(arcadeStick, 3);	
+	
+	private Button intake = new JoystickButton(arcadeStick, 4);
+	private Button outake = new JoystickButton(arcadeStick, 5);
+	
+	private Button powerCubeVision = new JoystickButton(arcadeStick, 6);
+
+	//private Button deployClimber = new JoystickButton(arcadeStick, 6);
+	
+	private Button cancelCommand = new JoystickButton(arcadeStick, 10);
+	
+	public OI()
+	{
+		runClimb.whileHeld(new AutoClimb(true));
+		reverseClimb.whenPressed(new AutoClimb(false));
+		deployClimber.whenPressed(new DeployClimber());
+		
+		intake.whenPressed(new AutoIntake(true, 0.6));
+		outake.whenPressed(new AutoIntake(false, 0.6));
+		
+		powerCubeVision.whenPressed(new LocatePowerUp());
+		
+		cancelCommand.whenPressed(new CancelCommand());
+	}
 	
 	public Joystick getLeftStick(){
 		return leftDriveStick;

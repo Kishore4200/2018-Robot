@@ -2,20 +2,18 @@ package org.usfirst.frc.team670.robot.commands.autonomous.helpers;
 
 import org.usfirst.frc.team670.robot.Robot;
 
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class UltrasonicDrive extends Command {
+public class AutoClimb extends Command {
 
-	private double limit, speed;
+	boolean isGoingUp;
 	
-    public UltrasonicDrive(double speed, double limit) {
-        this.limit = limit;
-        this.speed = speed;
-    	requires(Robot.driveBase);
+    public AutoClimb(boolean b) {
+    	this.isGoingUp = b;
+        requires(Robot.climber);
     }
 
     // Called just before this Command runs the first time
@@ -24,15 +22,11 @@ public class UltrasonicDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveBase.drive(speed, speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.sensors.getDistanceIntake() <= limit)
-    		return true;
-    	else
-    		return false;
+        return false;
     }
 
     // Called once after isFinished returns true

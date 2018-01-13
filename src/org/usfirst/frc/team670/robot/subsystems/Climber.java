@@ -28,6 +28,16 @@ public class Climber extends Subsystem {
 		rightWinch.set(ControlMode.PercentOutput, speed);
 	}
 	
+	public void leftControl(double speed)
+	{
+		leftWinch.set(ControlMode.PercentOutput, speed);
+	}
+	
+	public void rightControl(double speed)
+	{
+		rightWinch.set(ControlMode.PercentOutput, speed);
+	}
+	
 	public void deployForklifts()
 	{
 		

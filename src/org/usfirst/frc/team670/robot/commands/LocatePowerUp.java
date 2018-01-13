@@ -13,10 +13,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LocatePowerUp extends CommandGroup {
 
     public LocatePowerUp() {
+    	Robot.vision_subsystem.startCapture();
     	double angle = Robot.vision_subsystem.getAngle();
+    	Robot.vision_subsystem.endCapture();
         addSequential(new Pivot(angle));
         //Number is the distance to begin intaking at
-        addSequential(new UltrasonicDrive(Robot.sensors.ultrasonic, 10));
-        addSequential(new AutoIntake());
+        addSequential(new UltrasonicDrive(0.1, 10));
+        addSequential(new AutoIntake(true, 0.6));
     }
 }
