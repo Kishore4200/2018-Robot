@@ -35,8 +35,8 @@ public class DriveBase extends Subsystem {
 	}
 
 	public void drive(double left, double right) {
-		leftTalon1.set(ControlMode.PercentOutput, -left);
-		rightTalon1.set(ControlMode.PercentOutput, right);
+		leftTalon1.set(ControlMode.PercentOutput, left);
+		rightTalon1.set(ControlMode.PercentOutput, -right);
 	}
 	
 	public void initDefaultCommand() {

@@ -66,7 +66,7 @@ public class Robot extends TimedRobot {
 //			navXMicro = null;
 //		}
 //		
-//		m_chooser.addDefault("Do Nothing", new CancelCommand());
+		m_chooser.addDefault("Do Nothing", new CancelCommand());
 //		
 //		if(navXMicro == null)
 //		{

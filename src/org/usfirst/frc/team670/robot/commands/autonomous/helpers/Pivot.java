@@ -36,10 +36,10 @@ public class Pivot extends Command {
 		// Percent of the turn left
 		// double speed = (0.8) - ((2.8)*(Math.pow(percent-0.5, 2)));
 
-		double speed = 0;
+		double speed = 0.25;
 		percentComplete = Math.abs((angle - yawRemaining()) / (angle));
 
-		speed = -3.6 * (percentComplete - .5) * (percentComplete - .5) + 1;
+		//speed = -3.6 * (percentComplete - .5) * (percentComplete - .5) + 1;
 
 		// double percentComplete = Math.abs((Math.abs(finalAngle) -
 		// Math.abs(currentAngle))/angle);
@@ -50,9 +50,9 @@ public class Pivot extends Command {
 
 		// double speed = 0.1;
 		if (angle > 0)
-			Robot.driveBase.drive(-speed, speed);
-		else
 			Robot.driveBase.drive(speed, -speed);
+		else
+			Robot.driveBase.drive(-speed, speed);
 
 		System.out.println("Start: " + startAngle);
 		System.out.println("Yaw: " + getYaw());
@@ -61,7 +61,7 @@ public class Pivot extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (percentComplete >= 1) {
+		if (percentComplete >= 0.875) {
 			System.out.println("finished");
 			return true;
 		} else {
