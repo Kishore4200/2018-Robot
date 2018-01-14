@@ -36,10 +36,15 @@ public class Pivot extends Command {
 		// Percent of the turn left
 		// double speed = (0.8) - ((2.8)*(Math.pow(percent-0.5, 2)));
 
-		double speed = 0.25;
+		double speed = 0;
 		percentComplete = Math.abs((angle - yawRemaining()) / (angle));
 
-		//speed = -3.6 * (percentComplete - .5) * (percentComplete - .5) + 1;
+		if (percentComplete <= 0.363) {
+			speed = -2.3 * 2.3 * (percentComplete * percentComplete) + 0.8;
+		} else {
+			speed = 0.1;
+		}
+//		speed = -3.6 * (percentComplete - .5) * (percentComplete - .5) + 1;
 
 		// double percentComplete = Math.abs((Math.abs(finalAngle) -
 		// Math.abs(currentAngle))/angle);
