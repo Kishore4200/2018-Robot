@@ -11,6 +11,7 @@ public class Pivot extends Command {
 
 	private double finalAngle, startAngle, angle;
 	private double percentComplete;
+	private int numTimesIsFinished;
 
 	/**
 	 * 
@@ -20,6 +21,7 @@ public class Pivot extends Command {
 	 */
 	public Pivot(double angle) {
 		this.angle = angle;
+		numTimesIsFinished = 0;
 		requires(Robot.driveBase);
 		// Use requires() here to declare subsystem dependencies
 	}
@@ -28,6 +30,7 @@ public class Pivot extends Command {
 	protected void initialize() {
 		this.startAngle = getYaw();
 		this.finalAngle = startAngle + angle;
+		this.numTimesIsFinished = 0;
 		System.out.println("started: Pivot");
 	}
 
@@ -43,8 +46,17 @@ public class Pivot extends Command {
 			speed = -2.3 * 2.3 * (percentComplete * percentComplete) + 0.8;
 		} else {
 			speed = 0.1;
+		} 
+		if (percentComplete > 1.0){
+			speed = -2.5*speed;
 		}
-//		speed = -3.6 * (percentComplete - .5) * (percentComplete - .5) + 1;
+		
+//		if(checkOverRotation()){
+//			speed = -speed; //Changing speed to reverse if it is over
+//		}
+
+		
+		// speed = -3.6 * (percentComplete - .5) * (p/ercentComplete - .5) + 1;
 
 		// double percentComplete = Math.abs((Math.abs(finalAngle) -
 		// Math.abs(currentAngle))/angle);
@@ -54,11 +66,14 @@ public class Pivot extends Command {
 		// speed = 1 - percentComplete + 0.09;
 
 		// double speed = 0.1;
-		if (angle > 0)
+		if (angle > 0){
 			Robot.driveBase.drive(speed, -speed);
-		else
+		}
+		else{
 			Robot.driveBase.drive(-speed, speed);
-
+		}
+					
+		
 		System.out.println("Start: " + startAngle);
 		System.out.println("Yaw: " + getYaw());
 		System.out.println("Percent Complete: " + percentComplete);
@@ -66,15 +81,24 @@ public class Pivot extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (percentComplete >= 0.875) {
+		if (checkOverRotation()) {
 			System.out.println("finished");
-			return true;
-		} else {
-			return false;
+			numTimesIsFinished++;
+			if (numTimesIsFinished > 10) {
+				return true;
+			}
+		} else if (numTimesIsFinished > 0) {
+			System.out.println("count reset");
+			numTimesIsFinished = 0;
 		}
-
+		return false;
 	}
 
+	private boolean checkOverRotation(){
+		System.out.println(Math.abs(finalAngle - getYaw()));
+		return (Math.abs(finalAngle - getYaw()) <= 0.5);
+	}
+	
 	// Called once after isFinished returns true
 	protected void end() {
 		Robot.driveBase.drive(0, 0);
@@ -85,20 +109,28 @@ public class Pivot extends Command {
 	protected void interrupted() {
 		Robot.driveBase.drive(0, 0);
 	}
-	
-	private double getYaw(){
+
+	private double getYaw() {
 		return Robot.sensors.getYaw() + 180;
 	}
-	
-	private double yawRemaining(){
+
+	private double yawRemaining() {
 		double yaw = getYaw();
-		if(angle > 0 && yaw < (startAngle - 10/*Margin of Error Value*/)){ //IF WE WANT TO TURN 360 THIS WON't WORK
+		if (angle > 0 && yaw < (startAngle - 10/* Margin of Error Value */)) { // IF
+																				// WE
+																				// WANT
+																				// TO
+																				// TURN
+																				// 360
+																				// THIS
+																				// WON't
+																				// WORK
 			return finalAngle - yaw - 360;
-		}
-		else if(angle < 0 && yaw > (startAngle + 10/*Margin of Error Value*/)){
+		} else if (angle < 0
+				&& yaw > (startAngle + 10/* Margin of Error Value */)) {
 			return finalAngle - yaw + 360;
 		}
 		return finalAngle - yaw;
 	}
-	
+
 }
