@@ -45,16 +45,17 @@ public class Camera extends Subsystem {
 	            CvSink cvSink = CameraServer.getInstance().getVideo();
 	            CvSource outputStream = CameraServer.getInstance().putVideo("PowerCube", 640, 480);
 	            
-	            while(!Thread.interrupted()) {
-	            	if(capture)
-	            	{
+	            while(!Thread.interrupted()) 
+	            {
 	            		cvSink.grabFrame(source);
-	            		if(stream) 
-	            			outputStream.putFrame(source);
-	            	}
+	            		//Rect boundingBox = getPowerCube(source, Robot.oi.lowerHSV, Robot.oi.upperHSV);
+	        			//double angle = getAngle(boundingBox, Robot.oi.targetPoint);
+	        			//SmartDashboard.putString("Angle to power cube", ""+angle);
+	            		//Imgproc.rectangle(source, new org.opencv.core.Point(boundingBox.x, boundingBox.y), new org.opencv.core.Point(boundingBox.x+boundingBox.width, boundingBox.y+boundingBox.height), new Scalar(255, 0, 0));
+	            		outputStream.putFrame(source);
 	            }
 		      }
-		}.start();
+			}.start();
 	}
 
 	//Get angle to powercube
@@ -75,16 +76,6 @@ public class Camera extends Subsystem {
 		double angle = getAngle(r, Robot.oi.targetPoint);
 		SmartDashboard.putString("Angle to Power Cube:", angle + "");
 		return angle;
-	}
-	
-	public void startCapture()
-	{
-		capture = true;
-	}
-	
-	public void endCapture()
-	{
-		capture = false;
 	}
 
 	private double getAngle(Rect r, Point targetPoint) {

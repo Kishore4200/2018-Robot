@@ -1,17 +1,6 @@
 # Power Up!
 Code for Team 670's PowerUp Robot
 --------------------------
-**Robot Code**
-
-- [ ] Intake/Shooter
-  - [ ] Basic motor activation (Control from operator joystick)
-- [ ] Climber
-  - [ ] Motor Activation (Controlling from operator joystick)
-  - [ ] Vision alignment with the central position
-- [ ] Camera
-  - [ ] Program subsystem from robot (On roborio)
-  - [ ] Align with the climber using vision processing 
-
 **Sensors/Inputs**
 NOTE: Remember your try catches, in case the robot sensor is unplugged
 
@@ -56,6 +45,14 @@ NOTE: Remember your try catches, in case the robot sensor is unplugged
 	  - [ ]	Sensor to record position
 	  - [ ] Reset position to 0
 	  - [ ] Position Control
+	- [ ] Intake/Shooter
+	  - [ ] Basic motor activation (Control from operator joystick)
+	- [ ] Climber
+	  - [ ] Motor Activation (Controlling from operator joystick)
+	  - [ ] Vision alignment with the central position
+	- [ ] Camera
+	  - [ ] Program subsystem from robot (On roborio)
+	  - [ ] Align with the climber using vision processing 
 	  
 **Want to have**
 **Dream to have**

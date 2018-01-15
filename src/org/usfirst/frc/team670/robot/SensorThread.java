@@ -16,7 +16,7 @@ public class SensorThread extends Thread{
 	private boolean isArduinoConnected;
 	
 	public Ultrasonic ultrasonic;
-		
+			
 	public SensorThread(){
 		//Check the navXMicro is plugged in
 	    try {
@@ -42,10 +42,14 @@ public class SensorThread extends Thread{
 	//Example input: distance_powercube:124.5,distance_humanplayer:123.54
 	public String getValue(String key)
 	{
-		String data = arduino.readString();
-		String d1 = data.substring(data.indexOf(key)+key.length()+1);
-		String d2 = d1.substring(0, d1.indexOf(","));
-		return d2;
+		if(isArduinoConnected)
+		{
+			String data = arduino.readString();
+			String d1 = data.substring(data.indexOf(key)+key.length()+1);
+			String d2 = d1.substring(0, d1.indexOf(","));
+			return d2;
+		}
+		return "-1";
 	}
 	
 	/*@return The distance read in inches by the ultrasonic sensor inside the intake * */
@@ -95,6 +99,34 @@ public class SensorThread extends Thread{
 		if (isNavXConnected())
 			return navXMicro.getDisplacementY();
 		return -1;
+	}
+	
+	public void instantiateLogger()
+	{
+		//Write string Match info to file
+		String eventName = DriverStation.getInstance().getEventName();
+		double matchNum = DriverStation.getInstance().getMatchNumber();
+    	String matchInfo = eventName + ", Match Number:" + matchNum;
+    	writeToLogFile(matchInfo);
+	}
+	
+	private void writeToLogFile(String info) {
+		String fileName = "log.txt";
+		//Write on a new line
+	}
+
+	public void logData()
+	{
+		new Thread(new Runnable() {
+
+		    @Override
+		    public void run() {
+		    	double time = DriverStation.getInstance().getMatchTime();
+		    	String data = "[" + time + "]: " +"Intake Distance->" + getDistanceIntake() + ", Yaw->" + getYaw();
+		    	writeToLogFile(data);
+		    }
+		            
+		}).start();
 	}
 
 }
