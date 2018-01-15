@@ -31,7 +31,7 @@ public class Pivot extends Command {
 		this.startAngle = getYaw();
 		this.finalAngle = startAngle + angle;
 		this.numTimesIsFinished = 0;
-		System.out.println("started: Pivot");
+//		System.out.println("started: Pivot");
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -74,28 +74,28 @@ public class Pivot extends Command {
 		}
 					
 		
-		System.out.println("Start: " + startAngle);
-		System.out.println("Yaw: " + getYaw());
-		System.out.println("Percent Complete: " + percentComplete);
+//		System.out.println("Start: " + startAngle);
+//		System.out.println("Yaw: " + getYaw());
+//		System.out.println("Percent Complete: " + percentComplete);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		if (isInThreshold()) {
-			System.out.println("finished");
+//			System.out.println("finished");
 			numTimesIsFinished++;
 			if (numTimesIsFinished > 5) {
 				return true;
 			}
 		} else if (numTimesIsFinished > 0) {
-			System.out.println("count reset");
+//			System.out.println("count reset");
 			numTimesIsFinished = 0;
 		}
 		return false;
 	}
 
 	private boolean isInThreshold(){
-		System.out.println(Math.abs(finalAngle - getYaw()));
+//		System.out.println(Math.abs(finalAngle - getYaw()));
 		return (Math.abs(finalAngle - getYaw()) <= 0.5);
 	}
 	
