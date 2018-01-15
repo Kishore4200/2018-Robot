@@ -179,5 +179,6 @@ public class Robot extends TimedRobot {
 	{
 		SmartDashboard.putString("Is NavXConnected:", sensors.isNavXConnected()+"");
 		SmartDashboard.putString("Angle:", sensors.getYaw()+"");
+		SmartDashboard.putString("Distance read by Arduino:", sensors.getDistanceIntake()+"");
 	}
 }
