@@ -81,7 +81,7 @@ public class Pivot extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (checkOverRotation()) {
+		if (isInThreshold()) {
 			System.out.println("finished");
 			numTimesIsFinished++;
 			if (numTimesIsFinished > 10) {
@@ -94,7 +94,7 @@ public class Pivot extends Command {
 		return false;
 	}
 
-	private boolean checkOverRotation(){
+	private boolean isInThreshold(){
 		System.out.println(Math.abs(finalAngle - getYaw()));
 		return (Math.abs(finalAngle - getYaw()) <= 0.5);
 	}
