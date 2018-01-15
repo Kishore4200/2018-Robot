@@ -84,7 +84,7 @@ public class Pivot extends Command {
 		if (isInThreshold()) {
 			System.out.println("finished");
 			numTimesIsFinished++;
-			if (numTimesIsFinished > 10) {
+			if (numTimesIsFinished > 5) {
 				return true;
 			}
 		} else if (numTimesIsFinished > 0) {
