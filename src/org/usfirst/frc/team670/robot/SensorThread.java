@@ -28,14 +28,14 @@ public class SensorThread extends Thread{
 			navXMicro = null;
 		}
 	    
-	    try {
+	  /*  try {
 		    arduino = new SerialPort(19200, SerialPort.Port.kUSB1);
 			isArduinoConnected = true;
-		} catch (RuntimeException ex) {
+		} 8catch (RuntimeException ex) {
 			isArduinoConnected = false;
 			DriverStation.reportError("Error instantiating Arduino:  " + ex.getMessage(), true);
 			arduino = null;
-		}
+		}*/
 		
 	}
 
