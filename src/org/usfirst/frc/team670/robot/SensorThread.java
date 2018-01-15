@@ -42,10 +42,14 @@ public class SensorThread extends Thread{
 	//Example input: distance_powercube:124.5,distance_humanplayer:123.54
 	public String getValue(String key)
 	{
-		String data = arduino.readString();
-		String d1 = data.substring(data.indexOf(key)+key.length()+1);
-		String d2 = d1.substring(0, d1.indexOf(","));
-		return d2;
+		if(isArduinoConnected)
+		{
+			String data = arduino.readString();
+			String d1 = data.substring(data.indexOf(key)+key.length()+1);
+			String d2 = d1.substring(0, d1.indexOf(","));
+			return d2;
+		}
+		return "-1";
 	}
 	
 	/*@return The distance read in inches by the ultrasonic sensor inside the intake * */

@@ -7,8 +7,6 @@
 
 package org.usfirst.frc.team670.robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -60,7 +58,6 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		sensors = new SensorThread();
 		vision_subsystem = new Camera();
-		System.out.println(""+vision_subsystem);
 		//		try {
 //			navXMicro = new AHRS(SerialPort.Port.kUSB);
 //		}

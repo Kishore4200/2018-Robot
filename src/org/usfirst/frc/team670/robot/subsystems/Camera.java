@@ -49,7 +49,9 @@ public class Camera extends Subsystem {
 	            {
 	            		cvSink.grabFrame(source);
 	            		Rect boundingBox = getPowerCube(source, Robot.oi.lowerHSV, Robot.oi.upperHSV);
-	        			Imgproc.rectangle(frame, new Point(boundingBox.x, boundingBox.y), new Point(boundingBox.x+boundingBox.width, boundingBox.y+boundingBox.height), new Scalar(255, 0, 0));
+	        			double angle = getAngle(boundingBox, Robot.oi.targetPoint);
+	        			SmartDashboard.putString("Angle to power cube", ""+angle);
+	            		Imgproc.rectangle(source, new org.opencv.core.Point(boundingBox.x, boundingBox.y), new org.opencv.core.Point(boundingBox.x+boundingBox.width, boundingBox.y+boundingBox.height), new Scalar(255, 0, 0));
 	            		outputStream.putFrame(source);
 	            }
 		      }

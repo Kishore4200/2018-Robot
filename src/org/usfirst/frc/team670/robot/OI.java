@@ -12,8 +12,8 @@ import java.awt.Point;
 import org.opencv.core.Scalar;
 import org.usfirst.frc.team670.robot.commands.LocatePowerUp;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
-import org.usfirst.frc.team670.robot.commands.autonomous.helpers.AutoClimb;
 import org.usfirst.frc.team670.robot.commands.autonomous.helpers.AutoIntake;
+import org.usfirst.frc.team670.robot.commands.autonomous.helpers.Climber_Auto;
 import org.usfirst.frc.team670.robot.commands.autonomous.helpers.DeployClimber;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -52,8 +52,8 @@ public class OI {
 	
 	public OI()
 	{
-		runClimb.whileHeld(new AutoClimb(true));
-		reverseClimb.whenPressed(new AutoClimb(false));
+		runClimb.whileHeld(new Climber_Auto());
+		reverseClimb.whenPressed(new Climber_Auto());
 		deployClimber.whenPressed(new DeployClimber());
 		
 		intake.whenPressed(new AutoIntake(true, 0.6));
