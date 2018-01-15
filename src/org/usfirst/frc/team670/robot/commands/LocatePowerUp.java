@@ -6,6 +6,7 @@ import org.usfirst.frc.team670.robot.commands.autonomous.helpers.Pivot;
 import org.usfirst.frc.team670.robot.commands.autonomous.helpers.UltrasonicDrive;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -13,13 +14,12 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LocatePowerUp extends CommandGroup {
 
     public LocatePowerUp() {
-    	//Robot.vision_subsystem.startCapture();
+    	SmartDashboard.putString("IS Vision", Robot.vision_subsystem + "");
     	//double angle = Robot.vision_subsystem.getAngle();
     	double angle = 0;
-    	//Robot.vision_subsystem.endCapture();
-        addSequential(new Pivot(angle));
+    	addSequential(new Pivot(angle));
         //Number is the distance to begin intaking at
-        //addSequential(new UltrasonicDrive(0.1, 10));
-        //addSequential(new AutoIntake(true, 0.6));
+        addSequential(new UltrasonicDrive(0.1, 10));
+        addSequential(new AutoIntake(true, 0.6));
     }
 }

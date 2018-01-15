@@ -21,6 +21,7 @@ import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Right;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.autonomous.helpers.Pivot;
 import org.usfirst.frc.team670.robot.commands.Joystick_MoveElevator;
+import org.usfirst.frc.team670.robot.commands.LocatePowerUp;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
@@ -58,7 +59,9 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 		sensors = new SensorThread();
-//		try {
+		vision_subsystem = new Camera();
+		System.out.println(""+vision_subsystem);
+		//		try {
 //			navXMicro = new AHRS(SerialPort.Port.kUSB);
 //		}
 //		catch (RuntimeException ex ) {
@@ -76,7 +79,8 @@ public class Robot extends TimedRobot {
 //		{
 			m_chooser.addObject("Turn Right 90 degrees", new Pivot(90));
 			m_chooser.addObject("Turn Left 90 degrees", new Pivot(-90));
-
+			m_chooser.addObject("Locate Cube", new LocatePowerUp());
+			
 			m_chooser.addObject("Turn 180 degrees", new Pivot(180));
 
 			m_chooser.addObject("Turn Right 60 degrees", new Pivot(60));
