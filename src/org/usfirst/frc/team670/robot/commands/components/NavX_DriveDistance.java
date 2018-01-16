@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands.autonomous.helpers;
+package org.usfirst.frc.team670.robot.commands.components;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -12,13 +12,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author shayl
  *
  */
-public class DriveStraight extends Command{
+public class NavX_DriveDistance extends Command{
 
 	private double distance, finalDistance, initialDisplacement;
     private double integral, derivative, previous_error = 0;
     private double P = 1, I = 0.1, D = 0.1;
 
-	public DriveStraight(double feet) {
+	public NavX_DriveDistance(double feet) {
 		// Use requires() here to declare subsystem dependencies
 		distance = feet;
 		requires(Robot.driveBase);

@@ -1,47 +1,46 @@
-package org.usfirst.frc.team670.robot.commands.autonomous.helpers;
+package org.usfirst.frc.team670.robot.commands.components;
 
 import org.usfirst.frc.team670.robot.Robot;
 
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Class that uses to ultrasonic sensor to continue driving until object is within certain limit
  */
-public class Time_AutoTank extends Command {
+public class Ultrasonic_ObjectDrive extends Command {
 
-    private double speed = 0, seconds = 0;
-    
-    public Time_AutoTank(double seconds, double speed) {
+	private double limit, speed;
+	
+    public Ultrasonic_ObjectDrive(double speed, double limit) {
+        this.limit = limit;
         this.speed = speed;
-        this.seconds = seconds;
-        requires(Robot.driveBase);
+    	requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        setTimeout(seconds);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Drive seven feet to baseline
     	Robot.driveBase.drive(speed, speed);
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isTimedOut();
+    	if(Robot.sensors.getDistanceIntake() <= limit)
+    		return true;
+    	else
+    		return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveBase.drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.driveBase.drive(0, 0);
     }
 }

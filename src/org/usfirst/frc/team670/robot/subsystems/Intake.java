@@ -1,7 +1,7 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
-import org.usfirst.frc.team670.robot.commands.Joystick_Intake;
+import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_Intake;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;

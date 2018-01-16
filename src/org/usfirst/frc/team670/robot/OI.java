@@ -14,7 +14,7 @@ import org.usfirst.frc.team670.robot.commands.DeployClimber;
 import org.usfirst.frc.team670.robot.commands.FlipControls;
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
-import org.usfirst.frc.team670.robot.commands.autonomous.helpers.LocatePowerUp;
+import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -70,7 +70,7 @@ public class OI {
 		//intake.whenPressed(new AutoIntake(true, 0.6));
 		//outake.whenPressed(new AutoIntake(false, 0.6));
 		
-		powerCubeVision.whenPressed(new LocatePowerUp());
+		powerCubeVision.whenPressed(new Vision_LocatePowerUp());
 		
 		cancelCommand.whenPressed(new CancelCommand());
 		

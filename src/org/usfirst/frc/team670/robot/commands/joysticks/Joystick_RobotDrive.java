@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands;
+package org.usfirst.frc.team670.robot.commands.joysticks;
 
 import org.usfirst.frc.team670.robot.Robot;
 

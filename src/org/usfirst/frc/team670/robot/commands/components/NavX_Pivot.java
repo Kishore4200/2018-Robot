@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands.autonomous.helpers;
+package org.usfirst.frc.team670.robot.commands.components;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Pivot extends Command {
+public class NavX_Pivot extends Command {
 
 	private double finalAngle, startAngle, angle;
 	private double percentComplete;
@@ -19,7 +19,7 @@ public class Pivot extends Command {
 	 * @param angle
 	 *            The angle to turn, positive is right, negative is left.
 	 */
-	public Pivot(double angle) {
+	public NavX_Pivot(double angle) {
 		this.angle = angle;
 		numTimesIsFinished = 0;
 		requires(Robot.driveBase);

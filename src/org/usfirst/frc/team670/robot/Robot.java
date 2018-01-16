@@ -17,10 +17,10 @@ import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Center;
 import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Left;
 import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Right;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
-import org.usfirst.frc.team670.robot.commands.autonomous.helpers.DriveStraight;
-import org.usfirst.frc.team670.robot.commands.autonomous.helpers.LocatePowerUp;
-import org.usfirst.frc.team670.robot.commands.autonomous.helpers.Pivot;
-import org.usfirst.frc.team670.robot.commands.Joystick_Elevator;
+import org.usfirst.frc.team670.robot.commands.components.DriveDistance_NavX;
+import org.usfirst.frc.team670.robot.commands.components.NavX_Pivot;
+import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
+import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_Elevator;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
@@ -75,14 +75,14 @@ public class Robot extends TimedRobot {
 //		}
 //		else
 //		{
-			m_chooser.addObject("Turn Right 90 degrees", new Pivot(90));
-			m_chooser.addObject("Turn Left 90 degrees", new Pivot(-90));
-			m_chooser.addObject("Locate Cube", new LocatePowerUp());
+			m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));
+			m_chooser.addObject("Turn Left 90 degrees", new NavX_Pivot(-90));
+			m_chooser.addObject("Locate Cube", new Vision_LocatePowerUp());
 			
-			m_chooser.addObject("Turn 180 degrees", new Pivot(180));
+			m_chooser.addObject("Turn 180 degrees", new NavX_Pivot(180));
 
-			m_chooser.addObject("Turn Right 60 degrees", new Pivot(60));
-			m_chooser.addObject("Drive 1 Foot", new DriveStraight(1));
+			m_chooser.addObject("Turn Right 60 degrees", new NavX_Pivot(60));
+			m_chooser.addObject("Drive 1 Foot", new DriveDistance_NavX(1));
 
 
 		//	m_chooser.addObject("Center Switch Auto", new Auto_Center());

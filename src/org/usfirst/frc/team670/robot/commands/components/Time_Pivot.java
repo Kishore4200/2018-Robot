@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands.autonomous.helpers;
+package org.usfirst.frc.team670.robot.commands.components;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Time_AutoPivot extends Command {
+public class Time_Pivot extends Command {
 
     private double speed = 0, seconds = 0;
     
@@ -15,7 +15,7 @@ public class Time_AutoPivot extends Command {
      * @param seconds The number of seconds the command should run
      * @param speed The speed the omni wheel should run at
      */
-    public Time_AutoPivot(double seconds, double speed) {
+    public Time_Pivot(double seconds, double speed) {
         this.speed = speed;
         this.seconds = seconds;
         requires(Robot.driveBase);
