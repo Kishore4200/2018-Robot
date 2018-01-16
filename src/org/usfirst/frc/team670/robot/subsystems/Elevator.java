@@ -1,7 +1,7 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
-import org.usfirst.frc.team670.robot.commands.Joystick_MoveElevator;
+import org.usfirst.frc.team670.robot.commands.Joystick_Elevator;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -30,7 +30,7 @@ public class Elevator extends Subsystem {
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new Joystick_MoveElevator());
+        setDefaultCommand(new Joystick_Elevator());
     }
 }
 

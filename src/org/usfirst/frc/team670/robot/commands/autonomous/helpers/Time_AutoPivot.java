@@ -7,35 +7,45 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Climber_Auto extends Command {
+public class Time_AutoPivot extends Command {
 
-    public Climber_Auto() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.climber);
+    private double speed = 0, seconds = 0;
+    
+    /*
+     * @param seconds The number of seconds the command should run
+     * @param speed The speed the omni wheel should run at
+     */
+    public Time_AutoPivot(double seconds, double speed) {
+        this.speed = speed;
+        this.seconds = seconds;
+        requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     }
+
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double angle = Robot.sensors.getTilt();
-    	Robot.climber.leftControl(0);
-    	Robot.climber.climb(Robot.oi.getOperatorStick().getY());
+        setTimeout(seconds);
+    	//Drive seven feet to baseline
+    	Robot.driveBase.drive(-speed, speed);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !Robot.sensors.isNavXConnected();
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.climber.climb(0);
+    	Robot.driveBase.drive(0,0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.driveBase.drive(0, 0);
     }
 }
