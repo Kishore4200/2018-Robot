@@ -48,13 +48,12 @@ public class Pivot extends Command {
 			speed = 0.1;
 		} 
 		if (percentComplete > 1.0){
-			speed = -2.5*speed;
+			speed = -speed;
 		}
-		
+		System.out.println("YawRemaining: " + yawRemaining());
 //		if(checkOverRotation()){
 //			speed = -speed; //Changing speed to reverse if it is over
 //		}
-
 		
 		// speed = -3.6 * (percentComplete - .5) * (p/ercentComplete - .5) + 1;
 
@@ -82,13 +81,12 @@ public class Pivot extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		if (isInThreshold()) {
-//			System.out.println("finished");
 			numTimesIsFinished++;
-			if (numTimesIsFinished > 10) {
+//			if (numTimesIsFinished > 4) {
+//				System.out.println("Finished");
 				return true;
-			}
+//			}
 		} else if (numTimesIsFinished > 0) {
-//			System.out.println("count reset");
 			numTimesIsFinished = 0;
 		}
 		return false;

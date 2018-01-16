@@ -17,6 +17,7 @@ import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Center;
 import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Left;
 import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Right;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.autonomous.helpers.DriveStraight;
 import org.usfirst.frc.team670.robot.commands.autonomous.helpers.Pivot;
 import org.usfirst.frc.team670.robot.commands.Joystick_MoveElevator;
 import org.usfirst.frc.team670.robot.commands.LocatePowerUp;
@@ -81,6 +82,8 @@ public class Robot extends TimedRobot {
 			m_chooser.addObject("Turn 180 degrees", new Pivot(180));
 
 			m_chooser.addObject("Turn Right 60 degrees", new Pivot(60));
+			m_chooser.addObject("Drive 1 Foot", new DriveStraight(1));
+
 
 		//	m_chooser.addObject("Center Switch Auto", new Auto_Center());
 			//m_chooser.addObject("Left Auto", new Auto_Left());
