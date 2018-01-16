@@ -1,15 +1,16 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Joystick_MoveElevator extends Command {
+public class Joystick_Elevator extends Command {
 
-    public Joystick_MoveElevator() {
+    public Joystick_Elevator() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.elevator);
     }
@@ -20,7 +21,8 @@ public class Joystick_MoveElevator extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevator.moveElevator(Robot.oi.getOperatorStick().getX());
+    	if(Robot.oi.getOS().equals(OperatorState.ELEVATOR))
+    		Robot.elevator.moveElevator(Robot.oi.getOperatorStick().getY());
     }
 
     // Make this return true when this Command no longer needs to run execute()

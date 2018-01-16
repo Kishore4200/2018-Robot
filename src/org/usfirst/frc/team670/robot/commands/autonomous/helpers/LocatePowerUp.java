@@ -1,9 +1,7 @@
-package org.usfirst.frc.team670.robot.commands;
+package org.usfirst.frc.team670.robot.commands.autonomous.helpers;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.autonomous.helpers.AutoIntake;
-import org.usfirst.frc.team670.robot.commands.autonomous.helpers.Pivot;
-import org.usfirst.frc.team670.robot.commands.autonomous.helpers.UltrasonicDrive;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;

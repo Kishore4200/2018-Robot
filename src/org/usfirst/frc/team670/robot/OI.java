@@ -10,11 +10,12 @@ package org.usfirst.frc.team670.robot;
 import java.awt.Point;
 
 import org.opencv.core.Scalar;
-import org.usfirst.frc.team670.robot.commands.LocatePowerUp;
+import org.usfirst.frc.team670.robot.commands.DeployClimber;
+import org.usfirst.frc.team670.robot.commands.FlipControls;
+import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
-import org.usfirst.frc.team670.robot.commands.autonomous.helpers.AutoIntake;
-import org.usfirst.frc.team670.robot.commands.autonomous.helpers.Climber_Auto;
-import org.usfirst.frc.team670.robot.commands.autonomous.helpers.DeployClimber;
+import org.usfirst.frc.team670.robot.commands.autonomous.helpers.LocatePowerUp;
+import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -26,6 +27,9 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	
+	private OperatorState os = OperatorState.NONE;
+	public static boolean isControlsStandard = true;
+	
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
@@ -36,6 +40,10 @@ public class OI {
 	//The targetPoint of where the powercube needs to be
 	public final Point targetPoint = new Point(640, 360);
 	
+	//Operator Controls
+	private Button toggleElevator = new JoystickButton(operatorStick, 3);
+	private Button toggleIntake = new JoystickButton(operatorStick, 4);
+	private Button toggleClimber = new JoystickButton(operatorStick, 5);
 	
 	private Button runClimb = new JoystickButton(arcadeStick, 1);
 	private Button reverseClimb = new JoystickButton(arcadeStick, 2);
@@ -50,18 +58,31 @@ public class OI {
 	
 	private Button cancelCommand = new JoystickButton(arcadeStick, 10);
 	
+	private Button flipControls = new JoystickButton(leftDriveStick, 2);
+	
 	public OI()
 	{
-		runClimb.whileHeld(new Climber_Auto());
-		reverseClimb.whenPressed(new Climber_Auto());
+		//runClimb.whileHeld(new Climber_Auto());
+		//reverseClimb.whenPressed(new Climber_Auto());
 		deployClimber.whenPressed(new DeployClimber());
 		
-		intake.whenPressed(new AutoIntake(true, 0.6));
-		outake.whenPressed(new AutoIntake(false, 0.6));
+		//intake.whenPressed(new AutoIntake(true, 0.6));
+		//outake.whenPressed(new AutoIntake(false, 0.6));
 		
 		powerCubeVision.whenPressed(new LocatePowerUp());
 		
 		cancelCommand.whenPressed(new CancelCommand());
+		
+		toggleClimber.whenPressed(new SetOperatorControl(OperatorState.CLIMBER));
+		toggleClimber.whenReleased(new SetOperatorControl(OperatorState.NONE));
+		
+		toggleElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATOR));
+		toggleElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));
+		
+		toggleIntake.whenPressed(new SetOperatorControl(OperatorState.INTAKE));
+		toggleIntake.whenReleased(new SetOperatorControl(OperatorState.NONE));
+		
+		flipControls.whenPressed(new FlipControls());
 	}
 	
 	public Joystick getLeftStick(){
@@ -74,6 +95,16 @@ public class OI {
 	
 	public Joystick getOperatorStick() {
 		return operatorStick;
+	}
+	
+	public void setOperatorCommand(OperatorState os)
+	{
+		this.os = os;
+	}
+	
+	public OperatorState getOS()
+	{
+		return os;
 	}
 	
 	//// CREATING BUTTONS
