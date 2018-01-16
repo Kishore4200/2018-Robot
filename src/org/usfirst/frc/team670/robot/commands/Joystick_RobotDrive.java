@@ -16,14 +16,7 @@ public class Joystick_RobotDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-			if(!Robot.oi.isControlsStandard)
-			{
-				Robot.driveBase.drive(-Robot.oi.getLeftStick().getY(),-Robot.oi.getRightStick().getY());
-			}
-			else
-			{
-				Robot.driveBase.drive(Robot.oi.getRightStick().getY(),Robot.oi.getLeftStick().getY());
-			}
+			Robot.driveBase.drive(-Robot.oi.getLeftStick().getY(),-Robot.oi.getRightStick().getY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
