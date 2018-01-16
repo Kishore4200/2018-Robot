@@ -54,6 +54,7 @@ public class OI {
 	
 	private Button powerCubeVision = new JoystickButton(arcadeStick, 6);
 
+	//For deploying the climber
 	//private Button deployClimber = new JoystickButton(arcadeStick, 6);
 	
 	private Button cancelCommand = new JoystickButton(arcadeStick, 10);
