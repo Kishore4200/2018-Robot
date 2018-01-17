@@ -23,7 +23,6 @@ public class NavX_Pivot extends Command {
 		this.angle = angle;
 		numTimesIsFinished = 0;
 		requires(Robot.driveBase);
-		// Use requires() here to declare subsystem dependencies
 	}
 
 	// Called just before this Command runs the first time
@@ -31,14 +30,10 @@ public class NavX_Pivot extends Command {
 		this.startAngle = getYaw();
 		this.finalAngle = startAngle + angle;
 		this.numTimesIsFinished = 0;
-//		System.out.println("started: Pivot");
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		// Percent of the turn left
-		// double speed = (0.8) - ((2.8)*(Math.pow(percent-0.5, 2)));
-
 		double speed = 0;
 		percentComplete = Math.abs((angle - yawRemaining()) / (angle));
 
@@ -55,27 +50,13 @@ public class NavX_Pivot extends Command {
 //			speed = -speed; //Changing speed to reverse if it is over
 //		}
 		
-		// speed = -3.6 * (percentComplete - .5) * (p/ercentComplete - .5) + 1;
-
-		// double percentComplete = Math.abs((Math.abs(finalAngle) -
-		// Math.abs(currentAngle))/angle);
-		// if(percentComplete < .5)
-		// speed = percentComplete * 2 + 0.09;
-		// else
-		// speed = 1 - percentComplete + 0.09;
-
-		// double speed = 0.1;
 		if (angle > 0){
 			Robot.driveBase.drive(speed, -speed);
 		}
 		else{
 			Robot.driveBase.drive(-speed, speed);
 		}
-					
-		
-//		System.out.println("Start: " + startAngle);
-//		System.out.println("Yaw: " + getYaw());
-//		System.out.println("Percent Complete: " + percentComplete);
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -83,7 +64,7 @@ public class NavX_Pivot extends Command {
 		if (isInThreshold()) {
 			numTimesIsFinished++;
 //			if (numTimesIsFinished > 4) {
-//				System.out.println("Finished");
+				System.out.println("Finished");
 				return true;
 //			}
 		} else if (numTimesIsFinished > 0) {

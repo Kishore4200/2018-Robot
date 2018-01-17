@@ -9,11 +9,13 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Time_DriveStraight extends Command {
 
-    private double speed = 0, seconds = 0;
+    private double lSpeed = 0, rSpeed = 0, seconds = 0, startAngle;
     
     public Time_DriveStraight(double seconds, double speed) {
-        this.speed = speed;
+        this.lSpeed = speed;
+        this.rSpeed = speed;
         this.seconds = seconds;
+        startAngle = Robot.sensors.getYaw();
         requires(Robot.driveBase);
     }
 
@@ -25,7 +27,20 @@ public class Time_DriveStraight extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//Drive seven feet to baseline
-    	Robot.driveBase.drive(speed, speed);
+    	
+    	/*
+    	 * This if-else chain will make the robot compensate for drift from weight or motors
+    	 */
+    	if(startAngle - getYaw() > 0.5) { 
+    		lSpeed += 0.01;
+    		rSpeed -= 0.01;
+    	}
+    	else if(startAngle - getYaw() < 0.5) {
+    		rSpeed += 0.01;
+    		lSpeed -= 0.01;
+    	}
+    	
+    	Robot.driveBase.drive(lSpeed, rSpeed);
     	
     }
 
@@ -42,6 +57,10 @@ public class Time_DriveStraight extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.driveBase.drive(0, 0);
+    	end();
     }
+    
+	private double getYaw() {
+		return Robot.sensors.getYaw() + 180;
+	}
 }

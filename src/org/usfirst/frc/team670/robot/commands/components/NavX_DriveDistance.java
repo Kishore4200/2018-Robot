@@ -79,15 +79,14 @@ public class NavX_DriveDistance extends Command{
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		Robot.driveBase.drive(0, 0);
-
+		end();
 	}
 	
 	/**
 	 * Gets Displacement in feet
 	 */
 	private double getDisplacement() {
-		return Math.abs(Robot.sensors.getDisplacementY()) * 1/3.28084;
+		return Math.abs(Robot.sensors.getDisplacementY()) * 3.28084;
 	}
 	
 }
