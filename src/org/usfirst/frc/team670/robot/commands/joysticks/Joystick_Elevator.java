@@ -23,6 +23,10 @@ public class Joystick_Elevator extends Command {
     protected void execute() {
     	if(Robot.oi.getOS().equals(OperatorState.ELEVATOR))
     		Robot.elevator.moveElevator(Robot.oi.getOperatorStick().getY());
+    	else if(Robot.oi.getOS().equals(OperatorState.ELEVATORPOT))
+    	{
+    		double percentToMoveTo = (Robot.oi.getPotentiometerValues());
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -44,6 +44,7 @@ public class OI {
 	private Button toggleElevator = new JoystickButton(operatorStick, 3);
 	private Button toggleIntake = new JoystickButton(operatorStick, 4);
 	private Button toggleClimber = new JoystickButton(operatorStick, 5);
+	private Button togglePotElevator = new JoystickButton(operatorStick, 6);
 	
 	private Button runClimb = new JoystickButton(arcadeStick, 1);
 	private Button reverseClimb = new JoystickButton(arcadeStick, 2);
@@ -77,6 +78,9 @@ public class OI {
 		toggleClimber.whenPressed(new SetOperatorControl(OperatorState.CLIMBER));
 		toggleClimber.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		
+		togglePotElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATORPOT));
+		togglePotElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));
+		
 		toggleElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATOR));
 		toggleElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		
@@ -106,6 +110,10 @@ public class OI {
 	public OperatorState getOS()
 	{
 		return os;
+	}
+
+	public double getPotentiometerValues() {
+		return arcadeStick.getY();
 	}
 	
 	//// CREATING BUTTONS
