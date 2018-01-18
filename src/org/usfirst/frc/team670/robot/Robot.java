@@ -80,17 +80,13 @@ public class Robot extends TimedRobot {
 			m_chooser.addObject("Turn Left 90 degrees", new NavX_Pivot(-90));
 			
 			m_chooser.addObject("Turn Right 60 degrees", new NavX_Pivot(60));
-<<<<<<< HEAD
 			m_chooser.addObject("Turn Left 60 degrees", new NavX_Pivot(-60));
 						
 			m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
+			
 			m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(12, 0.1));
-			m_chooser.addObject("4ft_encoders", new Encoders_DriveDistance(12*4, 0.1));
-=======
-			m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
-			m_chooser.addObject("Drive 1 Foot Encoders", new Encoders_DriveDistance(12));
->>>>>>> 2481396541e3ef222278f8cccf0c16673e0302f6
-
+			m_chooser.addObject("4ft_encoders", new Encoders_DriveDistance(12*4, 0.1));			m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
+			
 			m_chooser.addObject("Locate Cube", new Vision_LocatePowerUp());
 
 		//	m_chooser.addObject("Center Switch Auto", new Auto_Center());
