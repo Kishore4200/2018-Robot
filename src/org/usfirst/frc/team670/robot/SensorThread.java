@@ -95,9 +95,21 @@ public class SensorThread extends Thread{
 			return navXMicro.getVelocityY();
 		return -1;	}
 
-	public double getDisplacementY() {
+	public double getDisplacementX() {
 		if (isNavXConnected())
 			return navXMicro.getDisplacementX();
+		return -1;
+	}
+	
+	public double getDisplacementY() {
+		if (isNavXConnected())
+			return navXMicro.getDisplacementY();
+		return -1;
+	}
+	
+	public double getDisplacementZ() {
+		if (isNavXConnected())
+			return navXMicro.getDisplacementZ();
 		return -1;
 	}
 	

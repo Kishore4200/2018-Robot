@@ -17,7 +17,7 @@ public class NavX_DriveDistance extends Command{
 	private double distance, finalDistance, initialDisplacement;
     private double integral, derivative, previous_error = 0;
     private double startYaw;
-    private double P = 1, I = 0.1, D = 0.1;
+    private double P = 0.5, I = 0, D = 0;
     private double lSpeed, rSpeed;
 
 	public NavX_DriveDistance(double feet) {
@@ -31,8 +31,11 @@ public class NavX_DriveDistance extends Command{
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		initialDisplacement = getDisplacement();
-		finalDistance = getDisplacement() + distance;
+		finalDistance = initialDisplacement + distance;
 		startYaw = getYaw();
+		integral = 0;
+		previous_error = 0;
+		derivative = 0;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -44,15 +47,17 @@ public class NavX_DriveDistance extends Command{
         lSpeed = P*error + I*this.integral + D*derivative;
         rSpeed = P*error + I*this.integral + D*derivative;
         previous_error = error;
-        
-    	if(startYaw - getYaw() > 0.5) { 
-    		lSpeed += 0.01;
-    		rSpeed -= 0.01;
-    	}
-    	else if(startYaw - getYaw() < 0.5) {
-    		rSpeed += 0.01;
-    		lSpeed -= 0.01;
-    	}        
+        System.out.println("Displacement: " + getDisplacement());
+        System.out.println("Y: " + Robot.sensors.getDisplacementY());
+        System.out.println("X: " + Robot.sensors.getDisplacementX());
+//    	if(startYaw - getYaw() > 0.5) { 
+//    		lSpeed += 0.01;
+//    		rSpeed -= 0.01;
+//    	}
+//    	else if(startYaw - getYaw() < 0.5) {
+//    		rSpeed += 0.01;
+//    		lSpeed -= 0.01;
+//    	}        
 //        if(percentComplete < 0.5){
 //        	lSpeed = 2*percentComplete;
 //        	rSpeed = 2*percentComplete;
@@ -102,7 +107,7 @@ public class NavX_DriveDistance extends Command{
 	 * Gets Displacement in feet
 	 */
 	private double getDisplacement() {
-		return Math.abs(Robot.sensors.getDisplacementY()) * 3.28084;
+		return Robot.sensors.getDisplacementX() * 3.28084;
 	}
 	
 	private double getYaw() {

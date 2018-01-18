@@ -17,6 +17,7 @@ import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Center;
 import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Left;
 import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Right;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_Pivot;
 import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
@@ -82,7 +83,8 @@ public class Robot extends TimedRobot {
 			m_chooser.addObject("Turn 180 degrees", new NavX_Pivot(180));
 
 			m_chooser.addObject("Turn Right 60 degrees", new NavX_Pivot(60));
-			m_chooser.addObject("Drive 1 Foot", new NavX_DriveDistance(1));
+			m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
+			m_chooser.addObject("Drive 1 Foot Encoders", new Encoders_DriveDistance(12));
 
 
 		//	m_chooser.addObject("Center Switch Auto", new Auto_Center());
@@ -183,5 +185,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Is NavXConnected:", sensors.isNavXConnected()+"");
 		SmartDashboard.putString("Angle:", sensors.getYaw()+"");
 		SmartDashboard.putString("Distance read by Arduino:", sensors.getDistanceIntake()+"");
+		SmartDashboard.putString("DisplacementX: ", (sensors.getDisplacementX() * 3.28084) + "");
+		SmartDashboard.putString("DisplacementY: ", (sensors.getDisplacementY() * 3.28084) + "");
+		SmartDashboard.putString("DisplacementZ: ", (sensors.getDisplacementZ() * 3.28084) + "");
 	}
 }
