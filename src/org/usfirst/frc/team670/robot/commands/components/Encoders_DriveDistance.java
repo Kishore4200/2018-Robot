@@ -102,7 +102,7 @@ public class Encoders_DriveDistance extends Command {
 	// private char direction;
 	private double distanceToTravel;
 	private final double PPR = 1440;
-	private final double DIAMETER = 0;
+	private final double DIAMETER = 6;
 	private double encoderTicksToTravel;
 	private Encoder encoder;
 	private double speed;
@@ -110,32 +110,28 @@ public class Encoders_DriveDistance extends Command {
 	public Encoders_DriveDistance(double inches) {
 		// Use requires() here to declare subsystem dependencies
 		encoder = new Encoder(3, 4);
-		encoder.reset();
-		requires(Robot.driveBase);
 		distanceToTravel = inches;
-		encoderTicksToTravel = (360 / (Math.PI * DIAMETER)) * distanceToTravel;
-		speed = 0;
+		requires(Robot.driveBase);
 	}
 
 	// Called just before this Command runs the first time
-	protected void initialize(double inches) {
-
+	protected void initialize() {
+		encoder.reset();
+		encoder.setDistancePerPulse(PPR);
+		encoderTicksToTravel = (360 / (Math.PI * DIAMETER)) * distanceToTravel;
+		speed = 0.5;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		while (encoder.getDistance() < encoderTicksToTravel) {
 			Robot.driveBase.drive(speed, speed);
-		}
-		
-		Robot.driveBase.drive(0,  0);
-		
+			System.out.println(encoder.getDistance());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-
 		if (encoder.getDistance() >= encoderTicksToTravel) {
+			System.out.println("finished");
 			return true;
 		} else {
 			return false;
