@@ -59,7 +59,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 		sensors = new SensorThread();
-		vision_subsystem = new Camera();
+		//vision_subsystem = new Camera();
 		//		try {
 //			navXMicro = new AHRS(SerialPort.Port.kUSB);
 //		}
@@ -84,8 +84,9 @@ public class Robot extends TimedRobot {
 						
 			m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
 			
-			m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(12, 0.1));
-			m_chooser.addObject("4ft_encoders", new Encoders_DriveDistance(12*4, 0.1));			m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
+			m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
+			//m_chooser.addObject("4ft_encoders", new Encoders_DriveDistance(12*4.0);
+			m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
 			
 			m_chooser.addObject("Locate Cube", new Vision_LocatePowerUp());
 
