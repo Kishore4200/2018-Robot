@@ -6,6 +6,7 @@ import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_Intake;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -13,18 +14,37 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Intake extends Subsystem {
 
-	private TalonSRX intakeMotor1;
+	private Solenoid intakeSolLeft, intakeSolRight, intakeDeploy;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
 	public Intake()
 	{
-		intakeMotor1 = new TalonSRX(RobotMap.intakeMotor1);
+		intakeSolLeft = new Solenoid(RobotMap.intakeSolLeft);
+		intakeSolRight = new Solenoid(RobotMap.intakeSolRight);
+		intakeDeploy = new Solenoid(RobotMap.intakeSolDeploy);
 	}
 	
-	public void intake(double speed)
+	public void grab()
 	{
-		intakeMotor1.set(ControlMode.PercentOutput, speed);
+		intakeSolLeft.set(false);
+		intakeSolRight.set(false);
+	}
+	
+	public void release()
+	{
+		intakeSolLeft.set(true);
+		intakeSolRight.set(true);
+	}
+	
+	public void deploy()
+	{
+		intakeDeploy.set(true);
+	}
+	
+	public void retract()
+	{
+		intakeDeploy.set(false);
 	}
 	
     public void initDefaultCommand() {

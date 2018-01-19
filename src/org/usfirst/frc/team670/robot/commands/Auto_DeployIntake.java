@@ -5,15 +5,18 @@ import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Command to automatically deploy the climber
- * 
- * @author vsharma
+ *
  */
-public class DeployClimber extends Command {
+public class Auto_DeployIntake extends Command {
 
-    public DeployClimber() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.climber);
+	private boolean isDeploy;
+	
+	/*
+	 * @param isDeploy true if it is the deploy, false if it is to pick up
+	 */
+    public Auto_DeployIntake(boolean isDeploy) {
+    	this.isDeploy = isDeploy;
+        requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +25,10 @@ public class DeployClimber extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.climber.deployForklifts();
+    	if(isDeploy)
+    		Robot.intake.deploy();
+    	else
+    		Robot.intake.retract();
     }
 
     // Make this return true when this Command no longer needs to run execute()

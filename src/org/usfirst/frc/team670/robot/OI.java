@@ -10,6 +10,8 @@ package org.usfirst.frc.team670.robot;
 import java.awt.Point;
 
 import org.opencv.core.Scalar;
+import org.usfirst.frc.team670.robot.commands.Auto_DeployIntake;
+import org.usfirst.frc.team670.robot.commands.Auto_Intake;
 import org.usfirst.frc.team670.robot.commands.DeployClimber;
 import org.usfirst.frc.team670.robot.commands.FlipControls;
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
@@ -44,21 +46,19 @@ public class OI {
 	
 	//Operator Controls
 	private Button toggleElevator = new JoystickButton(operatorStick, 3);
-	private Button toggleIntake = new JoystickButton(operatorStick, 4);
 	private Button toggleClimber = new JoystickButton(operatorStick, 5);
 	private Button togglePotElevator = new JoystickButton(operatorStick, 6);
 	
-	private Button runClimb = new JoystickButton(arcadeStick, 1);
-	private Button reverseClimb = new JoystickButton(arcadeStick, 2);
-	private Button deployClimber = new JoystickButton(arcadeStick, 3);	
+	//private Button runClimb = new JoystickButton(arcadeStick, 1);
+	//private Button reverseClimb = new JoystickButton(arcadeStick, 2);
+	//private Button deployClimber = new JoystickButton(arcadeStick, 3);	
 	
-	private Button intake = new JoystickButton(arcadeStick, 4);
-	private Button outake = new JoystickButton(arcadeStick, 5);
+	private Button intakedeploy = new JoystickButton(arcadeStick, 1);
+	private Button intakeretract = new JoystickButton(arcadeStick, 2);
+	private Button intake = new JoystickButton(arcadeStick, 3);
+	private Button outake = new JoystickButton(arcadeStick, 4);
 	
-	private Button powerCubeVision = new JoystickButton(arcadeStick, 6);
-
-	
-	//private Button deployClimber = new JoystickButton(arcadeStick, 6);
+	//private Button powerCubeVision = new JoystickButton(arcadeStick, 6);
 	
 	private Button cancelCommand = new JoystickButton(arcadeStick, 10);
 	
@@ -66,15 +66,12 @@ public class OI {
 	
 	public OI()
 	{
-		//runClimb.whileHeld(new Climber_Auto());
-		//reverseClimb.whenPressed(new Climber_Auto());
-		deployClimber.whenPressed(new DeployClimber());
+		intakedeploy.whenPressed(new Auto_DeployIntake(true));
+		intakeretract.whenPressed(new Auto_DeployIntake(false));
 		
-		//intake.whenPressed(new AutoIntake(true, 0.6));
-		//outake.whenPressed(new AutoIntake(false, 0.6));
-		
-		powerCubeVision.whenPressed(new Vision_LocatePowerUp());
-		
+		intake.whenPressed(new Auto_Intake(true));
+		outake.whenPressed(new Auto_Intake(false));
+				
 		cancelCommand.whenPressed(new CancelCommand());
 		
 		toggleClimber.whenPressed(new SetOperatorControl(OperatorState.CLIMBER));
@@ -85,9 +82,6 @@ public class OI {
 		
 		toggleElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATOR));
 		toggleElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));
-		
-		toggleIntake.whenPressed(new SetOperatorControl(OperatorState.INTAKE));
-		toggleIntake.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		
 		flipControls.whenPressed(new FlipControls());
 	}

@@ -30,8 +30,9 @@ public class RobotMap {
     public static final int elevatorMotor = 5;
     
     //Intake
-    public static final int intakeMotor1 = 6;
-    public static final int intakeMotor2 = 9;
+    public static final int intakeSolLeft = 1;
+    public static final int intakeSolRight = 0;
+    public static final int intakeSolDeploy = 2;
     
     //Climber
     public static final int leftWinch = 7;

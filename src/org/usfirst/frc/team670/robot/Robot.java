@@ -47,7 +47,6 @@ public class Robot extends TimedRobot {
 	
 	public static SensorThread sensors;
 	public static OI oi;
-	public static String gameLayout;
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -60,36 +59,22 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 		sensors = new SensorThread();
-		//vision_subsystem = new Camera();
-		//		try {
-//			navXMicro = new AHRS(SerialPort.Port.kUSB);
-//		}
-//		catch (RuntimeException ex ) {
-//			DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
-//			navXMicro = null;
-//		}
-//		
+		
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
-//		
-//		if(navXMicro == null)
-//		{
-//			
-//		}
-//		else
-//		{
-			m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));
-			m_chooser.addObject("Turn Left 90 degrees", new NavX_Pivot(-90));
-			
-			m_chooser.addObject("Turn Right 60 degrees", new NavX_Pivot(60));
-			m_chooser.addObject("Turn Left 60 degrees", new NavX_Pivot(-60));
-						
-			m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
-			
-			m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
 
-			m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
-			
-			m_chooser.addObject("Locate Cube", new Vision_LocatePowerUp());
+		m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));
+		m_chooser.addObject("Turn Left 90 degrees", new NavX_Pivot(-90));
+		
+		m_chooser.addObject("Turn Right 60 degrees", new NavX_Pivot(60));
+		m_chooser.addObject("Turn Left 60 degrees", new NavX_Pivot(-60));
+					
+		m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
+		
+		m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
+
+		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
+		
+		m_chooser.addObject("Locate Cube", new Vision_LocatePowerUp());
 
 		//	m_chooser.addObject("Center Switch Auto", new Auto_Center());
 			//m_chooser.addObject("Left Auto", new Auto_Left());
@@ -128,11 +113,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		
-		String gameData;
-		//gameData = DriverStation.getInstance().getGameSpecificMessage();
-		//gameLayout = gameData;
-		
 		m_autonomousCommand = m_chooser.getSelected();
 
 		/*
