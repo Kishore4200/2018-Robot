@@ -6,7 +6,9 @@ import org.usfirst.frc.team670.robot.utilities.OperatorState;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Sets operator control to a different value
+ * 
+ * @author vsharma
  */
 public class SetOperatorControl extends Command {
 

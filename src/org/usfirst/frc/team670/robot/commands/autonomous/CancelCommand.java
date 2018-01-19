@@ -4,8 +4,9 @@ import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+
 /**
- *
+ *@author vsharma
  */
 public class CancelCommand extends Command {
 

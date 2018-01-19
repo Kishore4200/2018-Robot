@@ -4,7 +4,9 @@ import org.usfirst.frc.team670.robot.OI;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Flips controls for the driver when called
+ * 
+ * @author vsharma
  */
 public class FlipControls extends Command {
 

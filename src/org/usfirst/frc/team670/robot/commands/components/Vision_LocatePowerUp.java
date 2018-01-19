@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Vision_LocatePowerUp extends CommandGroup {
 
     public Vision_LocatePowerUp() {
-    	SmartDashboard.putString("IS Vision", Robot.vision_subsystem + "");
     	//double angle = Robot.vision_subsystem.getAngle();
     	double angle = 0;
     	addSequential(new NavX_Pivot(angle));

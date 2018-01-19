@@ -5,7 +5,9 @@ import org.usfirst.frc.team670.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Command to automatically deploy the climber
+ * 
+ * @author vsharma
  */
 public class DeployClimber extends Command {
 

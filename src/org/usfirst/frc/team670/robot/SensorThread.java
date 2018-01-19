@@ -6,6 +6,13 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Ultrasonic;
 
+/**
+ * 
+ * Program to consolidate all sensor information - one class to retrieve information from
+ * 
+ * @author vsharma
+ *
+ */
 public class SensorThread extends Thread{
 	
 	// Sensors

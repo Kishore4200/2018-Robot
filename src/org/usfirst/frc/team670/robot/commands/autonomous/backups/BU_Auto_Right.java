@@ -3,8 +3,9 @@ package org.usfirst.frc.team670.robot.commands.autonomous.backups;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
+
 /**
- *
+ *@author vsharma
  */
 public class BU_Auto_Right extends CommandGroup {
 	

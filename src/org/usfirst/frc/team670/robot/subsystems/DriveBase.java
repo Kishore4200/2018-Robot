@@ -26,12 +26,6 @@ public class DriveBase extends Subsystem {
 	public static final double GEAR_RATIO = 1.0;
 	
 	//PID VALUES
-	public final double leftP = 0.1,
-			leftI = 0,
-			leftD = 0.5;
-	public final double rightP = 0.1,
-			rightI = 0,
-			rightD = 0.5;	
 	/**
 	 * Creates the drivetrain, assuming that there are four talons.
 	 * 
@@ -176,19 +170,13 @@ public class DriveBase extends Subsystem {
 
 	}
 	
-	private void setPIDValues() {
+/*	private void setPIDValues() {
 		getLeft().config_kP(0, leftP, 0); //Lets Set this to 1 for testing to see if it works
 		getLeft().config_kI(0, leftI, 0);
 		getLeft().config_kD(0, leftD, 0);
 		getRight().config_kP(0, rightP, 0);
 		getRight().config_kI(0, rightI, 0);
 		getRight().config_kD(0, rightD, 0);
-	}
-	
-	public void drivePID(double endPosL, double endPosR, double percentVoltage) {
-		getLeft().set(ControlMode.Position, endPosL);
-		getRight().set(ControlMode.Position, endPosR);
-	}
-	
+	}*/
 	
 }

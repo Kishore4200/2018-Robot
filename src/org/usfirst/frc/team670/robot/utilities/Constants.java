@@ -18,4 +18,19 @@ public class Constants {
 	 * and report to DS if action fails.
 	 */
 	public static final int kTimeoutMs = 10;
-}
+	
+	/**
+	 * Number of ticks per rotation for the encoder type
+	 */
+	
+	public static final double ticksPerRotation = 1440;
+
+	public static final double DIAMETERinInches = 6;
+	
+	public static final double leftP = 0.1,
+			leftI = 0,
+			leftD = 0.5;
+	public static final double rightP = 0.1,
+			rightI = 0,
+			rightD = 0.5;	
+	}

@@ -1,49 +1,51 @@
 package org.usfirst.frc.team670.robot.commands.components;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.utilities.Constants;
 
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  * 
  * Uses a PID control loop plus the navX getDisplacement to move a given distance in feet
  * 
- * @author shayl
+ * @author vsharma8363
  *
  */
-public class OLD_Encoders_DriveDistance extends Command{
-
-	private double distanceToTravel;
-	private final double PPR = 1440;
-	private final double DIAMETER = 6;
-	private double encoderTicksToTravel;
-	private double speed;
-	private SensorCollection quadEncoderLeft;
-	private SensorCollection quadEncoderRight;
+public class PID_Encoders_DriveDistance extends Command{
 
 	private double distance, finalDistance, initialDisplacement;
     private double integral, derivative, previous_error = 0;
-    private double startYaw;
-    private double P = 0.5, I = 0, D = 0;
     private double lSpeed, rSpeed;
+        
+ 	private SensorCollection quadEncoderLeft;
+ 	private SensorCollection quadEncoderRight;
 
-	public OLD_Encoders_DriveDistance(double feet) {
+ 	private TalonSRX leftMotor1;
+ 	private TalonSRX rightMotor1;
+
+	public PID_Encoders_DriveDistance(double feet) {
 		// Use requires() here to declare subsystem dependencies
-		distance = feet;
 		lSpeed = 0;
 		rSpeed = 0;
+		
+		leftMotor1 = Robot.driveBase.getLeft();
+ 		rightMotor1 = Robot.driveBase.getRight();
+ 		quadEncoderLeft = new SensorCollection(leftMotor1);
+ 		quadEncoderRight = new SensorCollection(rightMotor1);
+ 		distance = ((feet*12.0)/(Math.PI*Constants.DIAMETERinInches)) * Constants.ticksPerRotation;
+ 		
 		requires(Robot.driveBase);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		initialDisplacement = getDisplacement();
+		initialDisplacement = 0;
+ 		quadEncoderLeft.setQuadraturePosition(0, 0);
+ 		quadEncoderRight.setQuadraturePosition(0, 0);
 		finalDistance = initialDisplacement + distance;
-		startYaw = getYaw();
 		integral = 0;
 		previous_error = 0;
 		derivative = 0;
@@ -55,20 +57,14 @@ public class OLD_Encoders_DriveDistance extends Command{
 		double error = finalDistance - getDisplacement(); // Error = Target - Actual
         this.integral += (error*.02); // Integral is increased by the error*time (which is .02 seconds using normal IterativeRobot)
         derivative = (error - this.previous_error) / .02;
-        lSpeed = P*error + I*this.integral + D*derivative;
-        rSpeed = P*error + I*this.integral + D*derivative;
+        lSpeed = Constants.leftP*error + Constants.leftI*this.integral + Constants.leftD*derivative;
+        rSpeed = Constants.rightP*error + Constants.rightI*this.integral + Constants.rightD*derivative;
         previous_error = error;
-
-        	
 		
 		if(distance > 0)
 			Robot.driveBase.drive(lSpeed, rSpeed);
 		else if(distance < 0) 
 			Robot.driveBase.drive(-lSpeed, -rSpeed);
-		
-		SmartDashboard.putString("final distance", finalDistance + "");
-		SmartDashboard.putString("displacement", getDisplacement() + "");
-
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -100,11 +96,6 @@ public class OLD_Encoders_DriveDistance extends Command{
 	 * Gets Displacement in feet
 	 */
 	private double getDisplacement() {
-		return Robot.sensors.getDisplacementX() * 3.28084;
+		return (quadEncoderLeft.getQuadraturePosition() + quadEncoderRight.getQuadraturePosition())/2.0;
 	}
-	
-	private double getYaw() {
-		return Robot.sensors.getYaw() + 180;
-	}
-	
 }
