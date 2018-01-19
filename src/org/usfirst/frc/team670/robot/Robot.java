@@ -18,6 +18,7 @@ import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Left;
 import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Right;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
+import org.usfirst.frc.team670.robot.commands.components.OLD_Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_Pivot;
 import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
@@ -84,7 +85,7 @@ public class Robot extends TimedRobot {
 						
 			m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
 			
-			m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
+			m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1, 0.5));
 			//m_chooser.addObject("4ft_encoders", new Encoders_DriveDistance(12*4.0);
 			m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
 			

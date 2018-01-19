@@ -18,11 +18,11 @@ public class Joystick_RobotDrive extends Command {
 	protected void execute() {
 			if(!Robot.oi.isControlsStandard)
 			{
-				Robot.driveBase.drive(-Robot.oi.getLeftStick().getY(),-Robot.oi.getRightStick().getY());
+				Robot.driveBase.drive(-Robot.oi.getLeftStick().getY(),Robot.oi.getRightStick().getY());
 			}
 			else
 			{
-				Robot.driveBase.drive(Robot.oi.getRightStick().getY(),Robot.oi.getLeftStick().getY());
+				Robot.driveBase.drive(Robot.oi.getRightStick().getY(),-Robot.oi.getLeftStick().getY());
 			}
 	}
 
