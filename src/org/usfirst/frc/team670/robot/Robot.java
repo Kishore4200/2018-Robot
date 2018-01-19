@@ -85,7 +85,7 @@ public class Robot extends TimedRobot {
 						
 			m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
 			
-			m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1, 0.5));
+			m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
 			//m_chooser.addObject("4ft_encoders", new Encoders_DriveDistance(12*4.0);
 			m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
 			
