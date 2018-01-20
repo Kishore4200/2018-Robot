@@ -20,9 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class PID_Encoders_DriveDistance extends Command{
 
 	private double ticksToTravel;
-
+	
 	public PID_Encoders_DriveDistance(double feet) {
-		// Use requires() here to declare subsystem dependencies
 		
  		this.ticksToTravel = ((feet*12.0)/(Math.PI*Constants.DIAMETERinInches)) * Constants.ticksPerRotation;
  		System.out.println("ticks to travel: " + ticksToTravel);
@@ -44,7 +43,8 @@ public class PID_Encoders_DriveDistance extends Command{
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
-	protected boolean isFinished() {
+	protected boolean isFinished() 
+	{
 			return false;
 	}
 
