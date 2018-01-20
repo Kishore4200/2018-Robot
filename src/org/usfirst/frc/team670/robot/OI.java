@@ -12,7 +12,6 @@ import java.awt.Point;
 import org.opencv.core.Scalar;
 import org.usfirst.frc.team670.robot.commands.Auto_DeployIntake;
 import org.usfirst.frc.team670.robot.commands.Auto_Intake;
-import org.usfirst.frc.team670.robot.commands.DeployClimber;
 import org.usfirst.frc.team670.robot.commands.FlipControls;
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;

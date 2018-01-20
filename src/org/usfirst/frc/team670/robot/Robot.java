@@ -20,6 +20,7 @@ import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_Pivot;
+import org.usfirst.frc.team670.robot.commands.components.PID_Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
 import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_Elevator;
 import org.usfirst.frc.team670.robot.subsystems.Camera;
@@ -44,10 +45,10 @@ public class Robot extends TimedRobot {
 	public static final DriveBase driveBase = new DriveBase();
 	public static final Intake intake = new Intake();
 	public static final Climber climber = new Climber();
-	
+
 	public static SensorThread sensors;
 	public static OI oi;
-	
+
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -59,30 +60,30 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 		sensors = new SensorThread();
-		
+
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 
 		m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));
 		m_chooser.addObject("Turn Left 90 degrees", new NavX_Pivot(-90));
-		
+
 		m_chooser.addObject("Turn Right 60 degrees", new NavX_Pivot(60));
 		m_chooser.addObject("Turn Left 60 degrees", new NavX_Pivot(-60));
-					
+
 		m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
-		
+
 		m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
 
 		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
-		
+
 		m_chooser.addObject("Locate Cube", new Vision_LocatePowerUp());
 
-		//	m_chooser.addObject("Center Switch Auto", new Auto_Center());
-			//m_chooser.addObject("Left Auto", new Auto_Left());
-			//m_chooser.addObject("Right Auto", new Auto_Right());
-//		}
-		
+		// m_chooser.addObject("Center Switch Auto", new Auto_Center());
+		// m_chooser.addObject("Left Auto", new Auto_Left());
+		// m_chooser.addObject("Right Auto", new Auto_Right());
+		// }
+
 		SmartDashboard.putData("Auto mode", m_chooser);
-}
+	}
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -107,15 +108,16 @@ public class Robot extends TimedRobot {
 	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
 	 * getString code to get the auto name from the text box below the Gyro
 	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
+	 * <p>
+	 * You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
-	 */
+	 */ 
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = m_chooser.getSelected();
 
-		/*
+		/*	 
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
@@ -163,12 +165,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 	}
-	
-	public void putData()
-	{
-		SmartDashboard.putString("Is NavXConnected:", sensors.isNavXConnected()+"");
-		SmartDashboard.putString("Angle:", sensors.getYaw()+"");
-		SmartDashboard.putString("Distance read by Arduino:", sensors.getDistanceIntake()+"");
+
+	public void putData() {
+		SmartDashboard.putString("Is NavXConnected:", sensors.isNavXConnected() + "");
+		SmartDashboard.putString("Angle:", sensors.getYaw() + "");
+		SmartDashboard.putString("Distance read by Arduino:", sensors.getDistanceIntake() + "");
 		SmartDashboard.putString("DisplacementX: ", (sensors.getDisplacementX() * 3.28084) + "");
 		SmartDashboard.putString("DisplacementY: ", (sensors.getDisplacementY() * 3.28084) + "");
 		SmartDashboard.putString("DisplacementZ: ", (sensors.getDisplacementZ() * 3.28084) + "");
