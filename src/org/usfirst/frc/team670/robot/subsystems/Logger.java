@@ -24,8 +24,14 @@ public class Logger{
 
 	public void logData()
 	{
-		String data = "[" + DriverStation.getInstance().getMatchTime() + "]: " + Robot.sensors.toString();
-		logger.putString("data", data);
+		new Thread("Log Data") 
+		{
+		      public void run()
+		      {		
+		    	String data = "[" + DriverStation.getInstance().getMatchTime() + "]: " + Robot.sensors.toString();
+		  		logger.putString("data", data);
+		      }
+		}.start();
 	}
 
 	public boolean shouldLogData() {
