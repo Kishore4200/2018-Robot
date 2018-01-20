@@ -120,32 +120,8 @@ public class SensorThread extends Thread{
 		return -1;
 	}
 	
-	public void instantiateLogger()
+	public String toString()
 	{
-		//Write string Match info to file
-		String eventName = DriverStation.getInstance().getEventName();
-		double matchNum = DriverStation.getInstance().getMatchNumber();
-    	String matchInfo = eventName + ", Match Number:" + matchNum;
-    	writeToLogFile(matchInfo);
+		return "";
 	}
-	
-	private void writeToLogFile(String info) {
-		String fileName = "log.txt";
-		//Write on a new line
-	}
-
-	public void logData()
-	{
-		new Thread(new Runnable() {
-
-		    @Override
-		    public void run() {
-		    	double time = DriverStation.getInstance().getMatchTime();
-		    	String data = "[" + time + "]: " +"Intake Distance->" + getDistanceIntake() + ", Yaw->" + getYaw();
-		    	writeToLogFile(data);
-		    }
-		            
-		}).start();
-	}
-
 }

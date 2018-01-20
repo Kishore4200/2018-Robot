@@ -20,14 +20,15 @@ import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_Pivot;
-import org.usfirst.frc.team670.robot.commands.components.PID_Encoders_DriveDistance;
+import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
 import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_Elevator;
-import org.usfirst.frc.team670.robot.subsystems.Camera;
+import org.usfirst.frc.team670.robot.subsystems.Vision;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Elevator;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
+import org.usfirst.frc.team670.robot.subsystems.Logger;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -45,6 +46,8 @@ public class Robot extends TimedRobot {
 	public static final DriveBase driveBase = new DriveBase();
 	public static final Intake intake = new Intake();
 	public static final Climber climber = new Climber();
+	public static Vision visionCuboid;
+	public static Logger logger;
 
 	public static SensorThread sensors;
 	public static OI oi;
@@ -60,7 +63,9 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 		sensors = new SensorThread();
-
+		visionCuboid = new Vision();
+		logger = new Logger();
+		
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 
 		m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));
@@ -71,8 +76,8 @@ public class Robot extends TimedRobot {
 
 		m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
 
-		m_chooser.addObject("1ft_encoders", new PID_Encoders_DriveDistance(1));
-		m_chooser.addObject("1ft_encoders_back", new PID_Encoders_DriveDistance(-1));
+		m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
+		m_chooser.addObject("1ft_encoders_back", new Encoders_DriveDistance(-1));
 
 		
 		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
@@ -137,6 +142,15 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		putData();
 		Scheduler.getInstance().run();
+		
+		new Thread("Log Data") 
+		{
+		      public void run()
+		      {		
+		    	  if(logger.shouldLogData())
+		    	  	logger.logData();
+		      }
+		}.start();
 	}
 
 	@Override
@@ -157,6 +171,15 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		putData();
 		Scheduler.getInstance().run();
+		
+		new Thread("Log Data") 
+		{
+		      public void run()
+		      {		
+		    	  if(logger.shouldLogData())
+		    	  	logger.logData();
+		      }
+		}.start();
 	}
 
 	/**
@@ -167,11 +190,7 @@ public class Robot extends TimedRobot {
 	}
 
 	public void putData() {
-		SmartDashboard.putString("Is NavXConnected:", sensors.isNavXConnected() + "");
-		SmartDashboard.putString("Angle:", sensors.getYaw() + "");
-		SmartDashboard.putString("Distance read by Arduino:", sensors.getDistanceIntake() + "");
-		SmartDashboard.putString("DisplacementX: ", (sensors.getDisplacementX() * 3.28084) + "");
-		SmartDashboard.putString("DisplacementY: ", (sensors.getDisplacementY() * 3.28084) + "");
-		SmartDashboard.putString("DisplacementZ: ", (sensors.getDisplacementZ() * 3.28084) + "");
+		double angle = visionCuboid.getAngle();
+		SmartDashboard.putString("Angle:", angle+"");
 	}
 }

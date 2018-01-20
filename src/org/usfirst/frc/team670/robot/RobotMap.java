@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
  * @author vsharma
  */
 public class RobotMap {
-	
+		
 	//DriveBase
 	public static final int rightMotor1 = 3;
     public static final int rightMotor2 = 4;

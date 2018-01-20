@@ -3,7 +3,6 @@ package org.usfirst.frc.team670.robot.commands.components;
 import org.usfirst.frc.team670.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * 
@@ -47,9 +46,6 @@ public class NavX_DriveDistance extends Command{
         lSpeed = P*error + I*this.integral + D*derivative;
         rSpeed = P*error + I*this.integral + D*derivative;
         previous_error = error;
-        System.out.println("Displacement: " + getDisplacement());
-        System.out.println("Y: " + Robot.sensors.getDisplacementY());
-        System.out.println("X: " + Robot.sensors.getDisplacementX());
 //    	if(startYaw - getYaw() > 0.5) { 
 //    		lSpeed += 0.01;
 //    		rSpeed -= 0.01;
@@ -72,10 +68,6 @@ public class NavX_DriveDistance extends Command{
 			Robot.driveBase.drive(lSpeed, rSpeed);
 		else if(distance < 0) 
 			Robot.driveBase.drive(-lSpeed, -rSpeed);
-		
-		SmartDashboard.putString("final distance", finalDistance + "");
-		SmartDashboard.putString("displacement", getDisplacement() + "");
-
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

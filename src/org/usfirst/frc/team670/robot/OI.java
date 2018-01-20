@@ -13,6 +13,7 @@ import org.opencv.core.Scalar;
 import org.usfirst.frc.team670.robot.commands.Auto_DeployIntake;
 import org.usfirst.frc.team670.robot.commands.Auto_Intake;
 import org.usfirst.frc.team670.robot.commands.FlipControls;
+import org.usfirst.frc.team670.robot.commands.FlipElevatorControls;
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
@@ -32,16 +33,12 @@ public class OI {
 	
 	private OperatorState os = OperatorState.NONE;
 	public static boolean isControlsStandard = true;
+	public static boolean isElevatorPot = true;
 	
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
 	private Joystick arcadeStick = new Joystick(RobotMap.arcadeStick);
-	
-	public final Scalar upperHSV = new Scalar(110,101,30);
-	public final Scalar lowerHSV = new Scalar(180,255,255);
-	//The targetPoint of where the powercube needs to be
-	public final Point targetPoint = new Point(640, 360);
 	
 	//Operator Controls
 	private Button toggleElevator = new JoystickButton(operatorStick, 3);
@@ -75,12 +72,8 @@ public class OI {
 		
 		toggleClimber.whenPressed(new SetOperatorControl(OperatorState.CLIMBER));
 		toggleClimber.whenReleased(new SetOperatorControl(OperatorState.NONE));
-		
-		togglePotElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATORPOT));
-		togglePotElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));
-		
-		toggleElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATOR));
-		toggleElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));
+
+		toggleElevator.whenPressed(new FlipElevatorControls());
 		
 		flipControls.whenPressed(new FlipControls());
 	}
@@ -107,13 +100,8 @@ public class OI {
 		return os;
 	}
 
-	public double getPotentiometerValues() {
+	public double getPotentiometerPercent() {
 		return arcadeStick.getY();
-	}
-
-	public Joystick getArcadeStick() {
-		// TODO Auto-generated method stub
-		return arcadeStick;
 	}
 	
 	//// CREATING BUTTONS

@@ -1,21 +1,19 @@
 package org.usfirst.frc.team670.robot.commands.components;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.commands.Auto_Intake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 /**
  *
  */
 public class Vision_LocatePowerUp extends CommandGroup {
 
     public Vision_LocatePowerUp() {
-    	//double angle = Robot.vision_subsystem.getAngle();
-    	double angle = 0;
+    	double angle = Robot.visionCuboid.getAngle();
     	addSequential(new NavX_Pivot(angle));
         //Number is the distance to begin intaking at
         addSequential(new Ultrasonic_ObjectDrive(0.1, 10));
-       // addSequential(new AutoIntake(true, 0.6));
+        addSequential(new Auto_Intake(true));
     }
 }

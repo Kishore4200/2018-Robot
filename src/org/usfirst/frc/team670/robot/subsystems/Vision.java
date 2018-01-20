@@ -1,37 +1,66 @@
 package org.usfirst.frc.team670.robot.subsystems;
 
-import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.MatOfPoint2f;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
-import org.opencv.core.Size;
-import org.opencv.imgproc.Imgproc;
-import org.usfirst.frc.team670.robot.Robot;
-
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
-/**
- *
- */
-public class Camera extends Subsystem {
+@SuppressWarnings("deprecation")
+public class Vision extends Subsystem {
+	
+	private NetworkTable vision;
+	
+	public Vision()
+	{
+		vision = NetworkTable.getTable("vision");
+	}
+	
+	public double getAngle()
+	{
+		if(vision == null)
+		{
+			vision = NetworkTable.getTable("vision");
+			return -1;
+		}
+		else
+			return vision.getNumber("angle", -1);
+	}
+	
+	public double getWidth()
+	{
+		if(vision == null)
+		{
+			vision = NetworkTable.getTable("vision");
+			return -1;
+		}
+		else
+			return vision.getNumber("width", -1);
+	}
 
-	private Mat source;
+	public double getHeight()
+	{
+		if(vision == null)
+		{
+			vision = NetworkTable.getTable("vision");
+			return -1;
+		}
+		else
+			return vision.getNumber("height", -1);
+	}
+	
+	public void initDefaultCommand() 
+	{
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
+    }
+}
+
+
+/*
+ * 	private Mat source;
 	private boolean capture = false, stream = false;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	public Camera()
+	public Vision()
 	{
 		source = new Mat();
 		
@@ -57,18 +86,6 @@ public class Camera extends Subsystem {
 		      }
 			}.start();
 	}
-
-	//Get angle to powercube
-	/*public Vector getVector()
-	{
-		Point targetPoint = Robot.oi.targetPoint;
-		Rect r = getPowerCube(source, Robot.oi.lowerHSV, Robot.oi.upperHSV);
-		double angle = getAngle(r, new Point(640, 360));
-		Point currentBox = new Point(r.x+(r.width/2),r.y+(r.height/2));
-		double magnitude = Math.sqrt(Math.pow((currentBox.getX()-targetPoint.getX()),2) + Math.pow((currentBox.getY()-targetPoint.getY()),2));
-		Vector v = new Vector(magnitude, angle);
-		return v;
-	}*/
 	
 	public double getAngle()
 	{
@@ -125,5 +142,4 @@ public class Camera extends Subsystem {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
-}
-
+}*/
