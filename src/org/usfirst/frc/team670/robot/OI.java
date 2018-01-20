@@ -110,6 +110,11 @@ public class OI {
 	public double getPotentiometerValues() {
 		return arcadeStick.getY();
 	}
+
+	public Joystick getArcadeStick() {
+		// TODO Auto-generated method stub
+		return arcadeStick;
+	}
 	
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

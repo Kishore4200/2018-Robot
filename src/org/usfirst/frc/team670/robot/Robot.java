@@ -71,11 +71,11 @@ public class Robot extends TimedRobot {
 
 		m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
 
-		m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
+		m_chooser.addObject("1ft_encoders", new PID_Encoders_DriveDistance(1));
+		m_chooser.addObject("1ft_encoders_back", new PID_Encoders_DriveDistance(-1));
 
+		
 		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
-
-		m_chooser.addObject("Locate Cube", new Vision_LocatePowerUp());
 
 		// m_chooser.addObject("Center Switch Auto", new Auto_Center());
 		// m_chooser.addObject("Left Auto", new Auto_Left());
