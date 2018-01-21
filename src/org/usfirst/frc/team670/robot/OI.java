@@ -42,21 +42,20 @@ public class OI {
 	
 	//Operator Controls
 	private Button toggleElevator = new JoystickButton(operatorStick, 3);
-	private Button toggleClimber = new JoystickButton(operatorStick, 5);
-	private Button togglePotElevator = new JoystickButton(operatorStick, 6);
+	private Button toggleClimber = new JoystickButton(operatorStick, 4);
 	
 	//private Button runClimb = new JoystickButton(arcadeStick, 1);
 	//private Button reverseClimb = new JoystickButton(arcadeStick, 2);
 	//private Button deployClimber = new JoystickButton(arcadeStick, 3);	
 	
 	private Button intakedeploy = new JoystickButton(arcadeStick, 1);
-	private Button intakeretract = new JoystickButton(arcadeStick, 2);
-	private Button intake = new JoystickButton(arcadeStick, 3);
-	private Button outake = new JoystickButton(arcadeStick, 4);
+	private Button intakeretract = new JoystickButton(arcadeStick, 10);
+	private Button intake = new JoystickButton(arcadeStick, 2);
+	private Button outake = new JoystickButton(arcadeStick, 9);
 	
 	//private Button powerCubeVision = new JoystickButton(arcadeStick, 6);
 	
-	private Button cancelCommand = new JoystickButton(arcadeStick, 10);
+	private Button cancelCommand = new JoystickButton(arcadeStick, 6);
 	
 	private Button flipControls = new JoystickButton(leftDriveStick, 2);
 	
@@ -67,13 +66,11 @@ public class OI {
 		
 		intake.whenPressed(new Auto_Intake(true));
 		outake.whenPressed(new Auto_Intake(false));
-				
-		cancelCommand.whenPressed(new CancelCommand());
+						
+		toggleElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATOR));
+		toggleElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		
-		toggleClimber.whenPressed(new SetOperatorControl(OperatorState.CLIMBER));
-		toggleClimber.whenReleased(new SetOperatorControl(OperatorState.NONE));
-
-		toggleElevator.whenPressed(new FlipElevatorControls());
+		cancelCommand.whenPressed(new CancelCommand());
 		
 		flipControls.whenPressed(new FlipControls());
 	}
@@ -98,10 +95,6 @@ public class OI {
 	public OperatorState getOS()
 	{
 		return os;
-	}
-
-	public double getPotentiometerPercent() {
-		return arcadeStick.getY();
 	}
 	
 	//// CREATING BUTTONS

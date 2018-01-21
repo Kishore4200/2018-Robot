@@ -3,6 +3,7 @@ package org.usfirst.frc.team670.robot.commands.joysticks;
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.components.Encoders_Elevator;
 import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -22,14 +23,7 @@ public class Joystick_Elevator extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.isElevatorPot)
-    	{
-    		double goalHeight = (Robot.oi.getPotentiometerPercent()) * Constants.elevatorMaxInFeet * 12.0;
-    		double currentHeight = (Constants.DIAMETERinInchesElevator * Math.PI) * (Robot.elevator.getCurrentPosition()/(Constants.ticksPerRotation));
-    		double heightToMove = goalHeight - currentHeight;
-    		new Encoders_Elevator(heightToMove, 0.25);
-    	}
-    	else
+    	if(Robot.oi.getOS().equals(OperatorState.ELEVATOR))
     		Robot.elevator.moveElevator(Robot.oi.getOperatorStick().getY());
     }
 
