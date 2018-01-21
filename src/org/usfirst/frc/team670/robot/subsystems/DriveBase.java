@@ -16,7 +16,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveBase extends Subsystem {
@@ -165,6 +165,50 @@ public class DriveBase extends Subsystem {
 		talon.config_kP(Constants.kPIDLoopIdx, Constants.Proportion, Constants.kTimeoutMs);
 		talon.config_kI(Constants.kPIDLoopIdx, Constants.Integral, Constants.kTimeoutMs);
 		talon.config_kD(Constants.kPIDLoopIdx, Constants.Derivative, Constants.kTimeoutMs);
+	}
+
+	public void singleStickDrive(Joystick joy) {
+		double rSpeed, lSpeed;
+		rSpeed = -joy.getX() - joy.getY();
+		lSpeed = -joy.getX() + joy.getY();
+		lSpeed = 0.5*Math.pow(lSpeed,3) + (1-0.5)*lSpeed;
+		rSpeed = 0.5*Math.pow(rSpeed,3) + (1-0.5)*rSpeed;
+		if(!Robot.oi.isControlsStandard) {
+			drive(-lSpeed, -rSpeed);
+		} else {
+			drive(lSpeed, rSpeed);
+		
+		}
+	}
+	
+	public void singleStickEther(Joystick joy)
+	{
+		double lSpeed = 0, rSpeed = 0;
+		
+		if(joy.getY()<=0)
+		{
+			lSpeed = -joy.getY() + joy.getX(); 
+			rSpeed = -joy.getY()-joy.getX();
+		}
+		else 
+		{
+			lSpeed = -joy.getY() - joy.getX(); 
+			rSpeed = -joy.getY() + joy.getX();
+		}
+
+		double max = Math.abs(lSpeed); 
+		
+		if(max < Math.abs(rSpeed))
+			max=Math.abs(rSpeed);
+
+		if(max>1)
+		{
+			lSpeed/=max;
+			rSpeed/=max;
+		}
+	
+		drive(lSpeed, rSpeed);
+		
 	}
 	
 }
