@@ -97,7 +97,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		if(logger != null)
+		{
+			logger.init();
+		}
 	}
 
 	@Override
