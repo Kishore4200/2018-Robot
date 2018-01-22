@@ -81,7 +81,7 @@ public class Robot extends TimedRobot {
 
 		
 		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
-
+		
 		// m_chooser.addObject("Center Switch Auto", new Auto_Center());
 		// m_chooser.addObject("Left Auto", new Auto_Left());
 		// m_chooser.addObject("Right Auto", new Auto_Right());
@@ -145,15 +145,7 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		putData();
 		Scheduler.getInstance().run();
-		
-		new Thread("Log Data") 
-		{
-		      public void run()
-		      {		
-		    	  if(logger.shouldLogData())
-		    	  	logger.logData();
-		      }
-		}.start();
+		logger.logData();
 	}
 
 	@Override
@@ -174,15 +166,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		putData();
 		Scheduler.getInstance().run();
-		
-		new Thread("Log Data") 
-		{
-		      public void run()
-		      {		
-		    	  if(logger.shouldLogData())
-		    	  	logger.logData();
-		      }
-		}.start();
+		logger.logData();
 	}
 
 	/**
