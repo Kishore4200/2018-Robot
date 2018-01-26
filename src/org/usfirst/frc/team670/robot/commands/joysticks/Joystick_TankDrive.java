@@ -1,13 +1,11 @@
 package org.usfirst.frc.team670.robot.commands.joysticks;
 
 import org.usfirst.frc.team670.robot.Robot;
-
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Joystick_RobotDrive extends Command {
-
-	public Joystick_RobotDrive() {
+public class Joystick_TankDrive extends Command {
+	
+	public Joystick_TankDrive() {
 		requires(Robot.driveBase);
 	}
 
@@ -16,8 +14,9 @@ public class Joystick_RobotDrive extends Command {
 	}
 
 	// Called repeatedly when this Command is scheduled to run
-	protected void execute() {
-			Robot.driveBase.singleStickEther(Robot.oi.getLeftStick());
+	protected void execute() 
+	{
+			Robot.driveBase.drive(Robot.oi.getLeftStick().getY(), Robot.oi.getRightStick().getY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

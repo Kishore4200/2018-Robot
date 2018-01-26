@@ -16,10 +16,6 @@ public class Logger{
 	public Logger()
 	{
 		logger = NetworkTable.getTable("logger");	
-	}
-	
-	public void init()
-	{
 		String eventName = DriverStation.getInstance().getEventName();
 		double matchNum = DriverStation.getInstance().getMatchNumber();
     	String matchInfo = eventName + ", Match Number:" + matchNum;

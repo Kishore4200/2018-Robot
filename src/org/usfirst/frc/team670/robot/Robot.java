@@ -97,10 +97,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		if(logger != null)
-		{
-			logger.init();
-		}
+
 	}
 
 	@Override
@@ -177,7 +174,6 @@ public class Robot extends TimedRobot {
 	}
 
 	public void putData() {
-		double angle = visionCuboid.getAngle();
-		SmartDashboard.putString("Angle:", angle+"");
+		SmartDashboard.putString("Elevator Encoders:", ""+elevator.getCurrentPosition());
 	}
 }
