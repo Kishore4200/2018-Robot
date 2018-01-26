@@ -1,22 +1,15 @@
 package org.usfirst.frc.team670.robot.commands.joysticks;
 
-import java.awt.Point;
-
-import org.usfirst.frc.team670.robot.OI;
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.SensorThread;
-
-import com.kauailabs.navx.frc.AHRS;
-
+import org.usfirst.frc.team670.robot.utilities.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class Joystick_SingleDrive extends Command {
 
 	private double rSpeed;
-	private double lSpeed;
-	private double angle, newX, newY, centerX, centerY;
-	private Point joyPoint;
+	private double lSpeed, scalar;
+	private double angle, newX, newY, centerX, centerY, previousAngle, finalAngle, deadZONE;
 	private Joystick joy;
 
 	public Joystick_SingleDrive() {
@@ -27,15 +20,28 @@ public class Joystick_SingleDrive extends Command {
 	protected void initialize() {
 		joy = Robot.oi.getLeftStick();
 		centerX = 0;
-		centerY = centerX;
+		centerY = 0;
+		deadZONE = 0.05;
+		scalar = 1.5;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		angle = -joy.getTwist();
-		newX = centerX + (joy.getX()-centerX)*Math.cos(angle) - (joy.getY()-centerY)*Math.sin(angle);
-		newY = centerY + (joy.getX()-centerX)*Math.sin(angle) + (joy.getY()-centerY)*Math.cos(angle);
-		singleStickDrive(newX, newY);
+		angle = scalar*joy.getTwist();
+		
+		previousAngle = angle;
+		
+		if(joy.getY() < deadZONE && joy.getX() < deadZONE)
+		{
+			newX = centerX + (joy.getX()-centerX)*Math.cos(-finalAngle) - (joy.getY()-centerY)*Math.sin(-finalAngle);
+			newY = centerY + (joy.getX()-centerX)*Math.sin(-finalAngle) + (joy.getY()-centerY)*Math.cos(-finalAngle);
+			singleStickDrive(newX, newY);
+		}
+		else
+		{
+			double percent = (angle/scalar)/(Constants.joyStickMaxTwist);
+			Robot.driveBase.drive(percent, -percent);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

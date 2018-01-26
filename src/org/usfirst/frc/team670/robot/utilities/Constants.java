@@ -31,6 +31,8 @@ public class Constants {
 	public static final double Proportion = 0.5, //Make P higher --> Set to 0.05 yesterday
 			Integral = 0.0,
 			Derivative = 0.0;
+
+	public static final double joyStickMaxTwist = 90;
 	
 	public static double elevatorMaxInFeet = 10;
 	}
