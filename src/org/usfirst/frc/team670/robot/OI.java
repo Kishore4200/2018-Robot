@@ -16,6 +16,7 @@ import org.usfirst.frc.team670.robot.commands.FlipControls;
 import org.usfirst.frc.team670.robot.commands.FlipElevatorControls;
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.components.Encoders_Test;
 import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
@@ -58,6 +59,7 @@ public class OI {
 	private Button cancelCommand = new JoystickButton(arcadeStick, 6);
 	
 	private Button flipControls = new JoystickButton(leftDriveStick, 1);
+	private Button encoderTest = new JoystickButton(leftDriveStick, 9);
 	
 	public OI()
 	{
@@ -74,6 +76,8 @@ public class OI {
 		
 		flipControls.whenPressed(new FlipControls());
 		flipControls.whenReleased(new FlipControls());
+		
+		encoderTest.whenPressed(new Encoders_Test());
 	}
 	
 	public Joystick getLeftStick(){

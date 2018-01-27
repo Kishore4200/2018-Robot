@@ -174,6 +174,6 @@ public class Robot extends TimedRobot {
 	}
 
 	public void putData() {
-		SmartDashboard.putString("Elevator Encoders:", ""+elevator.getCurrentPosition());
+
 	}
 }

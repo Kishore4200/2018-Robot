@@ -2,16 +2,23 @@ package org.usfirst.frc.team670.robot.commands.components;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.utilities.Constants;
-import edu.wpi.first.wpilibj.command.Command;
 
-public class Encoders_Elevator extends Command {
+import com.ctre.phoenix.motorcontrol.SensorCollection;
+
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+public class Encoders_Test extends Command {
 
 	// private char direction;
-	private double feet, speed;
+
+	private SensorCollection leftE, rightE;
 	
-	public Encoders_Elevator(double feet, double speed) {
-		this.speed = speed;
-		this.feet = feet;
+	public Encoders_Test() {
+		leftE = new SensorCollection(Robot.driveBase.getLeft());
+		rightE = new SensorCollection(Robot.driveBase.getRight());
+		leftE.setPulseWidthPosition(0, 0);
+		rightE.setPulseWidthPosition(0, 0);
 		requires(Robot.driveBase);
 	}
 
@@ -22,26 +29,13 @@ public class Encoders_Elevator extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveBase.drive(speed, speed);
+		SmartDashboard.putString("Left Encoders", ""+leftE.getPulseWidthPosition());
+		SmartDashboard.putString("Right Encoders", ""+rightE.getPulseWidthPosition());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if(feet > 0)
-		{
-			if (Robot.elevator.getCurrentPosition() >= (this.feet/Constants.DIAMETERinInchesElevator)*Constants.ticksPerRotation)
-				return true;
-			else
-				return false;
-		}
-		else
-		{
-			if (Robot.elevator.getCurrentPosition() <= (this.feet/Constants.DIAMETERinInchesElevator)*Constants.ticksPerRotation)
-				return true;
-			else
-				return false;
-		}	
-
+		return false;
 	}
 
 	// Called once after isFinished returns true

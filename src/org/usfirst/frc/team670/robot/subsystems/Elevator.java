@@ -19,18 +19,10 @@ public class Elevator extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	private TalonSRX elevator;
-	private SensorCollection Encoder;
 	
 	public Elevator()
 	{
 		elevator = new TalonSRX(RobotMap.elevatorMotor);
-		Encoder = new SensorCollection(elevator);
-		Encoder.setQuadraturePosition(0, 0);
-	}
-	
-	public double getCurrentPosition()
-	{
-		return Encoder.getQuadraturePosition();
 	}
 	
 	public void moveElevator(double speed)
@@ -44,7 +36,6 @@ public class Elevator extends Subsystem {
     }
 
 	public TalonSRX getTalon() {
-		// TODO Auto-generated method stub
 		return elevator;
 	}
 }
