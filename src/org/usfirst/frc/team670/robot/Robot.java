@@ -103,7 +103,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		putData();
+		//putData();
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		putData();
 		Scheduler.getInstance().run();
-		logger.logData();
+		//logger.logData();
 	}
 
 	@Override
@@ -163,7 +163,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		putData();
 		Scheduler.getInstance().run();
-		logger.logData();
+		//logger.logData();
 	}
 
 	/**

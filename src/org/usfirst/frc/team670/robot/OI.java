@@ -16,6 +16,7 @@ import org.usfirst.frc.team670.robot.commands.FlipControls;
 import org.usfirst.frc.team670.robot.commands.FlipElevatorControls;
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.Encoders_Test;
 import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
@@ -54,7 +55,7 @@ public class OI {
 	private Button intake = new JoystickButton(arcadeStick, 2);
 	private Button outake = new JoystickButton(arcadeStick, 9);
 	
-	//private Button powerCubeVision = new JoystickButton(arcadeStick, 6);
+	private Button powerCubeVision = new JoystickButton(getRightStick(), 2);
 	
 	private Button cancelCommand = new JoystickButton(arcadeStick, 6);
 	
@@ -76,6 +77,8 @@ public class OI {
 		
 		flipControls.whenPressed(new FlipControls());
 		flipControls.whenReleased(new FlipControls());
+		
+		powerCubeVision.whenPressed(new Encoders_DriveDistance(10));
 		
 		encoderTest.whenPressed(new Encoders_Test());
 	}

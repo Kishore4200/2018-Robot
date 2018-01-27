@@ -18,7 +18,6 @@ public class Joystick_SingleDrive extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		joy = Robot.oi.getLeftStick();
 		centerX = 0;
 		centerY = 0;
 		deadZONE = 0.05;
@@ -27,6 +26,7 @@ public class Joystick_SingleDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		joy = Robot.oi.getLeftStick();
 		angle = scalar*joy.getTwist();
 		
 		previousAngle = angle;

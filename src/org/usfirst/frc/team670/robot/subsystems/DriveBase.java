@@ -10,6 +10,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_SingleDrive;
+import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_TankDrive;
 import org.usfirst.frc.team670.robot.utilities.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -111,7 +112,7 @@ public class DriveBase extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new Joystick_SingleDrive());
+		setDefaultCommand(new Joystick_TankDrive());
 	}
 	
 	public double getLeftEncPositionInFeet() {
