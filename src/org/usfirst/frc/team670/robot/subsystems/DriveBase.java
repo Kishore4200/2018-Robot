@@ -112,7 +112,7 @@ public class DriveBase extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new Joystick_TankDrive());
+		setDefaultCommand(new Joystick_SingleDrive());
 	}
 	
 	public double getLeftEncPositionInFeet() {

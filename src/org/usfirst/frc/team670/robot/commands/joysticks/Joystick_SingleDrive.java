@@ -11,7 +11,7 @@ public class Joystick_SingleDrive extends Command {
 	private double lSpeed, scalar;
 	private double angle, newX, newY, centerX, centerY, previousAngle, finalAngle, deadZONE;
 	private Joystick joy;
-
+ 
 	public Joystick_SingleDrive() {
 		requires(Robot.driveBase);
 	}
@@ -20,28 +20,36 @@ public class Joystick_SingleDrive extends Command {
 	protected void initialize() {
 		centerX = 0;
 		centerY = 0;
-		deadZONE = 0.05;
+		deadZONE = 1.1;
 		scalar = 1.5;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		joy = Robot.oi.getLeftStick();
+		joy = Robot.oi.getTwistStick();
+		double twist = joy.getTwist();
 		angle = scalar*joy.getTwist();
-		
 		previousAngle = angle;
-		
-		if(joy.getY() < deadZONE && joy.getX() < deadZONE)
-		{
-			newX = centerX + (joy.getX()-centerX)*Math.cos(-finalAngle) - (joy.getY()-centerY)*Math.sin(-finalAngle);
-			newY = centerY + (joy.getX()-centerX)*Math.sin(-finalAngle) + (joy.getY()-centerY)*Math.cos(-finalAngle);
+		System.out.println("twist: " + twist + " x: " + joy.getX() + " y: " + joy.getY());
+		if(Math.abs(joy.getY()) < 0.2 && Math.abs(joy.getX()) < 0.2 && Math.abs(twist) > 0.15){
+			System.out.println(twist);
+			newX =twist;
+			newY = 0;
 			singleStickDrive(newX, newY);
 		}
-		else
+		else if(joy.getY() < deadZONE && joy.getX() < deadZONE)
 		{
-			double percent = (angle/scalar)/(Constants.joyStickMaxTwist);
-			Robot.driveBase.drive(percent, -percent);
+			newX = centerX + (joy.getX()-centerX)*Math.cos(-finalAngle);
+			newY = centerY + (joy.getY()-centerY)*Math.cos(-finalAngle);
+			singleStickDrive(newX, newY);
 		}
+//		//The code below never runs because deadzone is 1.1 so the above code always runs
+//		else
+//		{
+//			//percent is a very small number, around 0.001 so the math is screwed up
+//			double percent = (angle/scalar)/(Constants.joyStickMaxTwist);
+//			Robot.driveBase.drive(percent, -percent);
+//		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

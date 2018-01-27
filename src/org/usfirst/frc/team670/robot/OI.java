@@ -41,6 +41,7 @@ public class OI {
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
 	private Joystick arcadeStick = new Joystick(RobotMap.arcadeStick);
+	private Joystick twistStick = new Joystick(RobotMap.twistStick);
 	
 	//Operator Controls
 	private Button toggleElevator = new JoystickButton(operatorStick, 3);
@@ -93,6 +94,10 @@ public class OI {
 	
 	public Joystick getOperatorStick() {
 		return operatorStick;
+	}
+	
+	public Joystick getTwistStick(){
+		return twistStick;
 	}
 	
 	public void setOperatorCommand(OperatorState os)
