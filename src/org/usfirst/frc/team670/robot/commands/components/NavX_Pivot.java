@@ -37,24 +37,32 @@ public class NavX_Pivot extends Command {
 		double speed = 0;
 		percentComplete = Math.abs((angle - yawRemaining()) / (angle));
 
-		if (percentComplete <= 0.363) {
-			speed = -2.3 * 2.3 * (percentComplete * percentComplete) + 0.8;
-		} else {
-			speed = 0.1;
+		if (percentComplete <= 0.6) {
+//			speed = -2.3 * 2.3 * (percentComplete * percentComplete) + 0.8;
+			speed = 1.0 - percentComplete;
+		} 
+		else if(Math.abs(1.0-percentComplete) < 0.05){
+			speed = 0.12;
+		}
+		else {
+			speed = 0.15;
 		} 
 		if (percentComplete > 1.0){
-			speed = -speed;
+			speed = -1.2 * speed;
 		}
+		System.out.println("PercentComplete: " + percentComplete);
 		System.out.println("YawRemaining: " + yawRemaining());
+		System.out.println("Yaw: " + getYaw());
+		System.out.println("Final Angle: " + finalAngle);
 //		if(checkOverRotation()){
 //			speed = -speed; //Changing speed to reverse if it is over
 //		}
-		
+		System.out.println("Speed: " + speed);
 		if (angle > 0){
-			Robot.driveBase.drive(speed, -speed);
+			Robot.driveBase.drive(-speed, -speed);
 		}
 		else{
-			Robot.driveBase.drive(-speed, speed);
+			Robot.driveBase.drive(speed, speed);
 		}
 
 	}
@@ -63,10 +71,10 @@ public class NavX_Pivot extends Command {
 	protected boolean isFinished() {
 		if (isInThreshold()) {
 			numTimesIsFinished++;
-//			if (numTimesIsFinished > 4) {
+			if (numTimesIsFinished > 4) {
 				System.out.println("Finished");
 				return true;
-//			}
+			}
 		} else if (numTimesIsFinished > 0) {
 			numTimesIsFinished = 0;
 		}
@@ -75,7 +83,7 @@ public class NavX_Pivot extends Command {
 
 	private boolean isInThreshold(){
 //		System.out.println(Math.abs(finalAngle - getYaw()));
-		return (Math.abs(finalAngle - getYaw()) <= 0.5);
+		return (Math.abs(yawRemaining()) <= 0.5);
 	}
 	
 	// Called once after isFinished returns true

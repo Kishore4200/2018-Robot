@@ -73,6 +73,12 @@ public class Robot extends TimedRobot {
 
 		m_chooser.addObject("Turn Right 60 degrees", new NavX_Pivot(60));
 		m_chooser.addObject("Turn Left 60 degrees", new NavX_Pivot(-60));
+		
+		m_chooser.addObject("Turn Right 15 degrees", new NavX_Pivot(15));
+		m_chooser.addObject("Turn Left 15s degrees", new NavX_Pivot(-15));
+		
+		m_chooser.addObject("Turn Right 180 degrees", new NavX_Pivot(180));
+		m_chooser.addObject("Turn Left 180 degrees", new NavX_Pivot(-180));
 
 		m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
 
@@ -142,6 +148,7 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		putData();
 		Scheduler.getInstance().run();
+		SmartDashboard.putString("Yaw:", ""+(sensors.getYaw() +180));
 		//logger.logData();
 	}
 
