@@ -15,6 +15,7 @@ import org.usfirst.frc.team670.robot.commands.components.Ultrasonic_ObjectDrive;
 import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
@@ -31,7 +32,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AutoReader{
 
-	private ArrayList<Command> commands;
+//	private ArrayList<Command> commands;
+	private CommandGroup commands;
 	/**
 	 * The keywords for the commands. Change this to match any auto commands.
 	 */
@@ -39,12 +41,12 @@ public class AutoReader{
 			"TimePivot", "UltrasonicDrive", "LocatePowerUp"};	
 	
     public AutoReader(String fileName) {
-    		commands = new ArrayList<Command>();
-    		readData(fileName, commands);
+//    		commands = new ArrayList<Command>();
+    		readData(fileName);
     }
     
  // Reads in array data from a simple text file containing asterisks (*)
- 	private void readData (String filename, ArrayList<Command> commands) {
+ 	private void readData (String filename) {
  		File dataFile = new File(filename);
 
  		if (dataFile.exists()) {
@@ -85,13 +87,13 @@ public class AutoReader{
  					}
  					com = line.substring(0, commandInd); //Check if this takes in the /n character at 0
  					switch(com) {
- 					case "EncDrive": commands.add(new Encoders_DriveDistance(args[0]));
- 					case "NavXDrive": commands.add(new NavX_DriveDistance(args[0]));
- 					case "NavXPivot": commands.add(new NavX_Pivot(args[0]));
- 					case "TimeDrive": commands.add(new Time_DriveStraight(args[0], args[1]));
- 					case "TimePivot": commands.add(new Time_Pivot(args[0], args[1]));
- 					case "UltrasonicDrive": commands.add(new Ultrasonic_ObjectDrive(args[0], args[1]));
- 					case "LocatePowerUp": commands.add(new Vision_LocatePowerUp());
+ 					case "EncDrive": commands.addSequential(new Encoders_DriveDistance(args[0]));
+ 					case "NavXDrive": commands.addSequential(new NavX_DriveDistance(args[0]));
+ 					case "NavXPivot": commands.addSequential(new NavX_Pivot(args[0]));
+ 					case "TimeDrive": commands.addSequential(new Time_DriveStraight(args[0], args[1]));
+ 					case "TimePivot": commands.addSequential(new Time_Pivot(args[0], args[1]));
+ 					case "UltrasonicDrive": commands.addSequential(new Ultrasonic_ObjectDrive(args[0], args[1]));
+ 					case "LocatePowerUp": commands.addSequential(new Vision_LocatePowerUp());
  					}
  					
  				}
@@ -107,8 +109,13 @@ public class AutoReader{
  		}
  	}
  	
- 	public ArrayList<Command> getCommands() {
+// 	public ArrayList<Command> getCommands() {
+// 		return commands;
+// 	}
+ 	
+ 	public CommandGroup getCommandGroup() {
  		return commands;
  	}
+ 	
     
 }
