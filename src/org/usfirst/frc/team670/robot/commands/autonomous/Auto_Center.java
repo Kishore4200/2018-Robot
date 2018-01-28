@@ -1,5 +1,8 @@
 package org.usfirst.frc.team670.robot.commands.autonomous;
 
+import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.utilities.Target;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -10,6 +13,7 @@ public class Auto_Center extends CommandGroup {
 
     public Auto_Center() {
     	String gameLayout = DriverStation.getInstance().getGameSpecificMessage();
+    	
     	
     	//Checking and going for the Switch
     	if(gameLayout.charAt(0) == 'L')

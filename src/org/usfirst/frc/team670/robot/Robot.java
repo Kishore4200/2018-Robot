@@ -24,6 +24,7 @@ import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
 import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_Elevator;
 import org.usfirst.frc.team670.robot.subsystems.Vision;
+import org.usfirst.frc.team670.robot.utilities.TargetList;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Elevator;
@@ -46,6 +47,7 @@ public class Robot extends TimedRobot {
 	public static final DriveBase driveBase = new DriveBase();
 	public static final Intake intake = new Intake();
 	public static final Climber climber = new Climber();
+	public static TargetList leftTeam, rightTeam;
 	public static Vision visionCuboid;
 	public static Logger logger;
 
@@ -65,6 +67,8 @@ public class Robot extends TimedRobot {
 		sensors = new SensorThread();
 		visionCuboid = new Vision();
 		logger = new Logger();
+		leftTeam = new TargetList();
+		rightTeam = new TargetList();
 		
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 
@@ -86,7 +90,7 @@ public class Robot extends TimedRobot {
 		// m_chooser.addObject("Left Auto", new Auto_Left());
 		// m_chooser.addObject("Right Auto", new Auto_Right());
 		// }
-
+		
 		SmartDashboard.putData("Auto mode", m_chooser);
 	}
 
