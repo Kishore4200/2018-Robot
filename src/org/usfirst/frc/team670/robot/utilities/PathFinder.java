@@ -4,12 +4,10 @@ import org.usfirst.frc.team670.robot.Robot;
 
 public class PathFinder 
 {	
-	private Target left, right;
 	
-	public PathFinder(Target leftTarget, Target rightTarget)
+	public PathFinder()
 	{
-		this.left = leftTarget;
-		this.right = rightTarget;
+		
 	}
 
 	public Target getLeftPositionTarget(String layout, DropDown data) 
