@@ -1,5 +1,9 @@
 package org.usfirst.frc.team670.robot.commands.autonomous;
 
+import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.commands.components.Time_Delay;
+import org.usfirst.frc.team670.robot.utilities.Target;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -10,37 +14,27 @@ public class Auto_Left extends CommandGroup {
 
     public Auto_Left() {
     	String gameLayout = DriverStation.getInstance().getGameSpecificMessage();
+    	Target t = Robot.finder.getLeftPositionTarget(gameLayout, Robot.ApproachType.getSelected());
+    	double delay = Robot.autonomousDelay.getSelected();
     	
-    	//Checking and going for the Switch
-    	if(gameLayout.charAt(0) == 'L')
-		{
-			//Put left auto code here for the switch
-		} 
-    	else if(gameLayout.charAt(1) == 'L'){
-			//Put left auto code here for the scale
+    	addSequential(new Time_Delay(delay));
+    	
+    	if(t.equals(Target.ScaleStraight)){
+			//Left Scale Auto
 		}
-		else if(gameLayout.charAt(2) == 'L'){
-			//Put left auto code here for the switch on the other team's side
+		else if(t.equals(Target.ScaleOnOtherSide)){
+			//Left opposite scale auto
+		}
+		else if(t.equals(Target.SwitchFromStraight)){
+			//Left switch straight auto
+		}
+		else if(t.equals(Target.SwitchFromSide))
+		{
+			//Left switch side auto
 		}
 		else
 		{
-			//Drive to baseline
+			//Baseline from left
 		}
-    	// Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
     }
 }

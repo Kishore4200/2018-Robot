@@ -2,6 +2,8 @@ package org.usfirst.frc.team670.robot.utilities;
 
 import org.usfirst.frc.team670.robot.Robot;
 
+import edu.wpi.first.wpilibj.Preferences;
+
 public class PathFinder 
 {	
 	
@@ -9,8 +11,8 @@ public class PathFinder
 	{
 		
 	}
-
-	public Target getLeftPositionTarget(String layout, DropDown data) 
+	
+	public Target getLeftPositionTarget(String layout, Boolean approach) 
 	{
 			if(layout.charAt(1) == 'L')
 			{
@@ -18,11 +20,11 @@ public class PathFinder
 			}
 			else if(layout.charAt(0) == 'L')
 			{
-				if(data.getSide() == "straight")
+				if(approach.equals(true))
 				{
 					return Target.SwitchFromStraight;
 				}
-				else if(data.getSide() == "side")
+				else if(approach.equals(false))
 				{
 					return Target.SwitchFromSide;
 				}
@@ -41,7 +43,7 @@ public class PathFinder
 			}
 	}
 	
-	public Target getRightPositionTarget(String layout, DropDown data) 
+	public Target getRightPositionTarget(String layout, Boolean approach) 
 	{
 			if(layout.charAt(1) == 'R')
 			{
@@ -49,11 +51,11 @@ public class PathFinder
 			}
 			else if(layout.charAt(0) == 'R')
 			{
-				if(data.getSide() == "straight")
+				if(approach.equals(true))
 				{
 					return Target.SwitchFromStraight;
 				}
-				else if(data.getSide() == "side")
+				else if(approach.equals(false))
 				{
 					return Target.SwitchFromSide;
 				}

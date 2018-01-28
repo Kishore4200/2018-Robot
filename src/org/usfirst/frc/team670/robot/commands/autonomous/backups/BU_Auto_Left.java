@@ -13,7 +13,6 @@ public class BU_Auto_Left extends CommandGroup {
 	
     public BU_Auto_Left() {
     	String gameLayout = DriverStation.getInstance().getGameSpecificMessage();
-    	
     	//Checking and going for the Switch
     	if(gameLayout.charAt(0) == 'L')
 		{

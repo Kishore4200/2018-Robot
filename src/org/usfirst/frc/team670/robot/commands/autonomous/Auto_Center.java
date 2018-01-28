@@ -14,7 +14,6 @@ public class Auto_Center extends CommandGroup {
     public Auto_Center() {
     	String gameLayout = DriverStation.getInstance().getGameSpecificMessage();
     	
-    	
     	//Checking and going for the Switch
     	if(gameLayout.charAt(0) == 'L')
 		{
