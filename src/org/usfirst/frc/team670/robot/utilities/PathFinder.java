@@ -1,9 +1,5 @@
 package org.usfirst.frc.team670.robot.utilities;
 
-import org.usfirst.frc.team670.robot.Robot;
-
-import edu.wpi.first.wpilibj.Preferences;
-
 public class PathFinder 
 {	
 	
@@ -74,10 +70,8 @@ public class PathFinder
 			}
 	}
 	
-	public Target getCenterPositionTarget(String layout, TargetList left, TargetList right)
+	public Target getCenterPositionTarget(String layout)
 	{
-    	Target leftTarget = left.getTarget(layout);
-    	Target rightTarget = right.getTarget(layout);
     	return Target.Baseline;
 	}
 	

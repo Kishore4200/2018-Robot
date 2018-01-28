@@ -24,7 +24,6 @@ import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Elevator;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
-import org.usfirst.frc.team670.robot.subsystems.Logger;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -40,7 +39,6 @@ public class Robot extends TimedRobot {
 	public static final Intake intake = new Intake();
 	public static final Climber climber = new Climber();
 	public static Vision visionCuboid;
-	public static Logger logger;
 	public static PathFinder finder = new PathFinder();
 
 	public static SensorThread sensors;
@@ -60,7 +58,6 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		sensors = new SensorThread();
 		visionCuboid = new Vision();
-		logger = new Logger();
 		
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 		m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));

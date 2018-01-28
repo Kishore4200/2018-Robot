@@ -17,10 +17,9 @@ public class SensorThread extends Thread{
 	
 	// Sensors
 	private AHRS navXMicro;
-	private SerialPort arduino;
+
 	//Booleans
 	private boolean isNavXConnected;
-	private boolean isArduinoConnected;
 	
 	public Ultrasonic ultrasonic;
 			
@@ -34,41 +33,13 @@ public class SensorThread extends Thread{
 			DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
 			navXMicro = null;
 		}
-	    
-	  /*  try {
-		    arduino = new SerialPort(19200, SerialPort.Port.kUSB1);
-			isArduinoConnected = true;
-		} 8catch (RuntimeException ex) {
-			isArduinoConnected = false;
-			DriverStation.reportError("Error instantiating Arduino:  " + ex.getMessage(), true);
-			arduino = null;
-		}*/
 		
-	}
-
-	//Example input: distance_powercube:124.5,distance_humanplayer:123.54
-	public String getValue(String key)
-	{
-		if(isArduinoConnected)
-		{
-			String data = arduino.readString();
-			String d1 = data.substring(data.indexOf(key)+key.length()+1);
-			String d2 = d1.substring(0, d1.indexOf(","));
-			return d2;
-		}
-		return "-1";
 	}
 	
 	/*@return The distance read in inches by the ultrasonic sensor inside the intake * */
 	public double getDistanceIntake()
 	{
-		if(isArduinoConnected)
-		{
-			double distance = Double.parseDouble(getValue("distance_powercube"));
-			return distance;
-		}
-		else
-			return -1;
+		return -1;
 	}
 	
 	public void reset() {

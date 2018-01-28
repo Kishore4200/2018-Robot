@@ -13,7 +13,6 @@ import org.opencv.core.Scalar;
 import org.usfirst.frc.team670.robot.commands.Auto_DeployIntake;
 import org.usfirst.frc.team670.robot.commands.Auto_Intake;
 import org.usfirst.frc.team670.robot.commands.FlipControls;
-import org.usfirst.frc.team670.robot.commands.FlipElevatorControls;
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
@@ -34,8 +33,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	
 	private OperatorState os = OperatorState.NONE;
-	public static boolean isControlsStandard = true;
-	public static boolean isElevatorPot = true;
+	public boolean isControlsStandard = true;
 	
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
@@ -77,7 +75,6 @@ public class OI {
 		cancelCommand.whenPressed(new CancelCommand());
 		
 		flipControls.whenPressed(new FlipControls());
-		flipControls.whenReleased(new FlipControls());
 		
 		powerCubeVision.whenPressed(new Encoders_DriveDistance(10));
 		
@@ -94,10 +91,6 @@ public class OI {
 	
 	public Joystick getOperatorStick() {
 		return operatorStick;
-	}
-	
-	public Joystick getTwistStick(){
-		return twistStick;
 	}
 	
 	public void setOperatorCommand(OperatorState os)

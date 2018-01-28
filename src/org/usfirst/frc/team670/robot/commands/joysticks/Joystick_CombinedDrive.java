@@ -5,14 +5,14 @@ import org.usfirst.frc.team670.robot.utilities.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Joystick_SingleDrive extends Command {
+public class Joystick_CombinedDrive extends Command {
 
 	private double rSpeed;
 	private double lSpeed, scalar;
-	private double angle, newX, newY, centerX, centerY, previousAngle, finalAngle, deadZONE;
+	private double angle, newX, newY, centerX, centerY, finalAngle, deadZONE;
 	private Joystick joy;
  
-	public Joystick_SingleDrive() {
+	public Joystick_CombinedDrive() {
 		requires(Robot.driveBase);
 	}
 
@@ -22,33 +22,34 @@ public class Joystick_SingleDrive extends Command {
 		centerY = 0;
 		deadZONE = 1.1;
 		scalar = 1.5;
+		joy = Robot.oi.getLeftStick();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		joy = Robot.oi.getTwistStick();
-		double twist = joy.getTwist();
-		angle = scalar*joy.getTwist();
-		previousAngle = angle;
-		if(Math.abs(joy.getY()) < 0.2 && Math.abs(joy.getX()) < 0.2 && Math.abs(twist) > 0.15){
-			System.out.println(twist);
-			newX =twist;
-			newY = 0;
-			singleStickDrive(newX, newY);
-		}
-		else if(joy.getY() < deadZONE && joy.getX() < deadZONE)
-		{
-			newX = centerX + (joy.getX()-centerX)*Math.cos(-finalAngle);
-			newY = centerY + (joy.getY()-centerY)*Math.cos(-finalAngle);
-			singleStickDrive(newX, newY);
-		}
-//		//The code below never runs because deadzone is 1.1 so the above code always runs
-//		else
-//		{
-//			//percent is a very small number, around 0.001 so the math is screwed up
-//			double percent = (angle/scalar)/(Constants.joyStickMaxTwist);
-//			Robot.driveBase.drive(percent, -percent);
-//		}
+		if(Robot.oi.isControlsStandard)
+    	{
+    		//Tank Drive
+			Robot.driveBase.drive(Robot.oi.getLeftStick().getY(), -Robot.oi.getRightStick().getY());
+    	}
+    	else
+    	{
+    		//Single Joystick Drive
+    		double twist = joy.getTwist();
+    		angle = scalar*joy.getTwist();
+    		if(Math.abs(joy.getY()) < 0.2 && Math.abs(joy.getX()) < 0.2 && Math.abs(twist) > 0.15){
+    			System.out.println(twist);
+    			newX =twist;
+    			newY = 0;
+    			singleStickDrive(newX, newY);
+    		}
+    		else
+    		{
+    			newX = centerX + (joy.getX()-centerX)*Math.cos(-angle);
+    			newY = centerY + (joy.getY()-centerY)*Math.cos(-angle);
+    			singleStickDrive(newX, newY);
+    		}
+    	}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
