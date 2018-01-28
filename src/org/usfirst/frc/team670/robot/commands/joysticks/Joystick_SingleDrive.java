@@ -30,7 +30,6 @@ public class Joystick_SingleDrive extends Command {
 		double twist = joy.getTwist();
 		angle = scalar*joy.getTwist();
 		previousAngle = angle;
-		System.out.println("twist: " + twist + " x: " + joy.getX() + " y: " + joy.getY());
 		if(Math.abs(joy.getY()) < 0.2 && Math.abs(joy.getX()) < 0.2 && Math.abs(twist) > 0.15){
 			System.out.println(twist);
 			newX =twist;
