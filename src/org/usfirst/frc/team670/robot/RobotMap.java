@@ -30,13 +30,10 @@ public class RobotMap {
     public static final int elevatorMotor = 5;
     
     //Intake
-    public static final int intakeSolLeft = 1;
-    public static final int intakeSolRight = 0;
-    public static final int intakeSolDeploy = 2;
-    
-    //Climber
-    public static final int leftWinch = 7;
-    public static final int rightWinch = 8;
+    public static final int intakeDeploy = 1;
+    public static final int clawDeploy = 2;
+    public static final int intakeLeftTalon = 3;
+    public static final int intakeRightTalon = 4;
     
     //Sensor Ports
     public final static Port navXPort = SerialPort.Port.kUSB;

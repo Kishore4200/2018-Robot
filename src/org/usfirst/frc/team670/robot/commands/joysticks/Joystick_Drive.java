@@ -2,41 +2,44 @@ package org.usfirst.frc.team670.robot.commands.joysticks;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.utilities.DriverState;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Joystick_CombinedDrive extends Command {
+public class Joystick_Drive extends Command {
 
 	private double rSpeed;
-	private double lSpeed, scalar;
-	private double angle, newX, newY, centerX, centerY, finalAngle, deadZONE;
+	private double lSpeed;
+	private double angle, newX, newY, centerX, centerY;
 	private Joystick joy;
  
-	public Joystick_CombinedDrive() {
+	public Joystick_Drive() {
 		requires(Robot.driveBase);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		centerX = 0;
-		centerY = 0;
-		deadZONE = 1.1;
-		scalar = 1.5;
 		joy = Robot.oi.getLeftStick();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(Robot.oi.isControlsStandard)
+		if(Robot.oi.getDS().equals(DriverState.TANK))
     	{
     		//Tank Drive
 			Robot.driveBase.drive(Robot.oi.getLeftStick().getY(), -Robot.oi.getRightStick().getY());
+    	}
+		else if(Robot.oi.getDS().equals(DriverState.TANKREVERSE))
+    	{
+    		//Tank Drive
+			Robot.driveBase.drive(-Robot.oi.getRightStick().getY(), Robot.oi.getLeftStick().getY());
     	}
     	else
     	{
     		//Single Joystick Drive
     		double twist = joy.getTwist();
-    		angle = scalar*joy.getTwist();
+    		angle = joy.getTwist();
     		if(Math.abs(joy.getY()) < 0.2 && Math.abs(joy.getX()) < 0.2 && Math.abs(twist) > 0.15){
     			System.out.println(twist);
     			newX =twist;
@@ -65,6 +68,7 @@ public class Joystick_CombinedDrive extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		Robot.driveBase.drive(0, 0);
 	}
 
 	public void singleStickDrive(double x, double y) {

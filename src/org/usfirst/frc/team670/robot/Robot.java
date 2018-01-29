@@ -13,16 +13,12 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Center;
-import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Left;
-import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Right;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_Pivot;
+import org.usfirst.frc.team670.robot.sensors.Aggregator;
 import org.usfirst.frc.team670.robot.utilities.PathFinder;
-import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Elevator;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
@@ -39,10 +35,9 @@ public class Robot extends TimedRobot {
 	public static final Elevator elevator = new Elevator();
 	public static final DriveBase driveBase = new DriveBase();
 	public static final Intake intake = new Intake();
-	public static final Climber climber = new Climber();
 	public static PathFinder finder = new PathFinder();
-
-	public static SensorThread sensors;
+	
+	public static Aggregator sensors;
 	public static OI oi;
 	public static Preferences pathList;
 	
@@ -57,7 +52,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		sensors = new SensorThread();
+		sensors = new Aggregator();
 		
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 		m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));

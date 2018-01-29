@@ -26,9 +26,15 @@ public class Auto_DeployIntake extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(isDeploy)
-    		Robot.intake.deploy();
+    	{
+    		Robot.intake.deploySupport(isDeploy);
+    		Robot.intake.deployIntake(isDeploy);
+    	}
     	else
-    		Robot.intake.retract();
+    	{
+    		Robot.intake.deployIntake(isDeploy);
+    		Robot.intake.deploySupport(isDeploy);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

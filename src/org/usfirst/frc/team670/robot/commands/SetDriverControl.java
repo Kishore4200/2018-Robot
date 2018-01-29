@@ -1,19 +1,23 @@
 package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.utilities.DriverState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Flips controls for the driver when called
+ * 
+ * @author vsharma
  */
-public class Auto_Intake extends Command {
-
-	private boolean intake;
+public class SetDriverControl extends Command {
 	
-    public Auto_Intake(boolean intake) {
-    	this.intake = intake;
-        requires(Robot.intake);
+	private DriverState ds;
+	
+    public SetDriverControl(DriverState ds) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	this.ds = ds;
     }
 
     // Called just before this Command runs the first time
@@ -22,10 +26,7 @@ public class Auto_Intake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(intake)
-    		Robot.intake.grab();
-    	else
-    		Robot.intake.release();
+    	Robot.oi.setDriverState(ds);
     }
 
     // Make this return true when this Command no longer needs to run execute()

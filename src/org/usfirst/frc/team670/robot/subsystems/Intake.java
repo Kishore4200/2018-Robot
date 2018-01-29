@@ -2,6 +2,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.Auto_DeployIntake;
+import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_Intake;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -14,42 +15,38 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Intake extends Subsystem {
 
-	//private Solenoid intakeSolLeft, intakeSolRight, intakeDeploy;
-    // Put methods for controlling this subsystem
+	private Solenoid deployIntakeElevator, deployGrabber;
+	private TalonSRX leftIntake, rightIntake;
+	// Put methods for controlling this subsystem
     // here. Call these from Commands.
 
 	public Intake()
 	{
-	/*	intakeSolLeft = new Solenoid(RobotMap.intakeSolLeft);
-		intakeSolRight = new Solenoid(RobotMap.intakeSolRight);
-		intakeDeploy = new Solenoid(RobotMap.intakeSolDeploy);*/
+		leftIntake = new TalonSRX(RobotMap.intakeLeftTalon);
+		rightIntake = new TalonSRX(RobotMap.intakeRightTalon);
+		deployIntakeElevator = new Solenoid(RobotMap.intakeDeploy);
+		deployGrabber = new Solenoid(RobotMap.clawDeploy);
 	}
 	
-	public void grab()
+	public void driveIntake(double speed)
 	{
-	/*	intakeSolLeft.set(false);
-		intakeSolRight.set(false);
-	*/}
-	
-	public void release()
-	{
-		//intakeSolLeft.set(true);
-		//intakeSolRight.set(true);
+		leftIntake.set(ControlMode.PercentOutput, speed);
+		leftIntake.set(ControlMode.PercentOutput, speed);
 	}
 	
-	public void deploy()
+	public void deploySupport(boolean deploy)
 	{
-		//intakeDeploy.set(true);
+		deployIntakeElevator.set(deploy);
 	}
 	
-	public void retract()
+	public void deployIntake(boolean deploy)
 	{
-		//intakeDeploy.set(false);
+		deployGrabber.set(deploy);
 	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new Auto_DeployIntake());
+        setDefaultCommand(new Joystick_Intake());
     }
 }
 

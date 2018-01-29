@@ -9,7 +9,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.RobotMap;
-import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_CombinedDrive;
+import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_Drive;
 import org.usfirst.frc.team670.robot.utilities.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -111,7 +111,7 @@ public class DriveBase extends Subsystem {
 	}
 
 	public void initDefaultCommand() {
-		setDefaultCommand(new Joystick_CombinedDrive());
+		setDefaultCommand(new Joystick_Drive());
 	}
 	
 	public double getLeftEncPositionInFeet() {
@@ -173,12 +173,7 @@ public class DriveBase extends Subsystem {
 		lSpeed = -joy.getX() + joy.getY();
 		lSpeed = 0.5*Math.pow(lSpeed,3) + (1-0.5)*lSpeed;
 		rSpeed = 0.5*Math.pow(rSpeed,3) + (1-0.5)*rSpeed;
-		if(!Robot.oi.isControlsStandard) {
-			drive(-lSpeed, -rSpeed);
-		} else {
-			drive(lSpeed, rSpeed);
-		
-		}
+		drive(lSpeed, rSpeed);
 	}
 	
 	public void singleStickEther(Joystick joy)

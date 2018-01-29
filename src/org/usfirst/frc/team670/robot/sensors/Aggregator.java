@@ -1,4 +1,6 @@
-package org.usfirst.frc.team670.robot;
+package org.usfirst.frc.team670.robot.sensors;
+
+import org.usfirst.frc.team670.robot.RobotMap;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -14,17 +16,16 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  * @author vsharma
  *
  */
-public class SensorThread extends Thread{
+public class Aggregator extends Thread{
 	
 	// Sensors
 	private AHRS navXMicro;
-	private Ultrasonic ultrasonic;
 	private NetworkTable vision;
 	
 	//Booleans
 	private boolean isNavXConnected;
 			
-	public SensorThread(){
+	public Aggregator(){
 		//Check the navXMicro is plugged in
 	    try {
 			navXMicro = new AHRS(RobotMap.navXPort);
@@ -34,19 +35,14 @@ public class SensorThread extends Thread{
 			DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
 			navXMicro = null;
 		}
-	    
-	    ultrasonic = new Ultrasonic(RobotMap.UltrasonicIntakeOutput, RobotMap.UltrasonicIntakeInput);
-		
+	    		
 	    vision = NetworkTable.getTable("vision");
 	}
 	
 	/*@return The distance read in inches by the ultrasonic sensor inside the intake * */
 	public double getDistanceIntake()
 	{
-		if(ultrasonic != null)
-			return ultrasonic.getRangeInches();
-		else
-			return -1;
+		return -1;
 	}
 	
 	public void reset() {
