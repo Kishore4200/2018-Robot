@@ -1,8 +1,6 @@
 package org.usfirst.frc.team670.robot.commands.components;
 
 import org.usfirst.frc.team670.robot.Robot;
-
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -12,8 +10,8 @@ public class Ultrasonic_ObjectDrive extends Command {
 
 	private double limit, speed;
 	
-    public Ultrasonic_ObjectDrive(double speed, double limit) {
-        this.limit = limit;
+    public Ultrasonic_ObjectDrive(double speed, double inchesLimit) {
+        this.limit = inchesLimit;
         this.speed = speed;
     	requires(Robot.driveBase);
     }

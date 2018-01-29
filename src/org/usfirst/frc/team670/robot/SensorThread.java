@@ -5,6 +5,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 /**
  * 
@@ -17,11 +18,11 @@ public class SensorThread extends Thread{
 	
 	// Sensors
 	private AHRS navXMicro;
-
+	private Ultrasonic ultrasonic;
+	private NetworkTable vision;
+	
 	//Booleans
 	private boolean isNavXConnected;
-	
-	public Ultrasonic ultrasonic;
 			
 	public SensorThread(){
 		//Check the navXMicro is plugged in
@@ -33,13 +34,19 @@ public class SensorThread extends Thread{
 			DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
 			navXMicro = null;
 		}
+	    
+	    ultrasonic = new Ultrasonic(RobotMap.UltrasonicIntakeOutput, RobotMap.UltrasonicIntakeInput);
 		
+	    vision = NetworkTable.getTable("vision");
 	}
 	
 	/*@return The distance read in inches by the ultrasonic sensor inside the intake * */
 	public double getDistanceIntake()
 	{
-		return -1;
+		if(ultrasonic != null)
+			return ultrasonic.getRangeInches();
+		else
+			return -1;
 	}
 	
 	public void reset() {
@@ -89,6 +96,40 @@ public class SensorThread extends Thread{
 		if (isNavXConnected())
 			return navXMicro.getDisplacementZ();
 		return -1;
+	}
+	
+	@SuppressWarnings("deprecation")
+	public double getAngle()
+	{
+		if(vision == null)
+		{
+			vision = NetworkTable.getTable("vision");
+			return -1;
+		}
+		else
+			return vision.getNumber("angle", -1);
+	}
+	
+	public double getWidth()
+	{
+		if(vision == null)
+		{
+			vision = NetworkTable.getTable("vision");
+			return -1;
+		}
+		else
+			return vision.getNumber("width", -1);
+	}
+
+	public double getHeight()
+	{
+		if(vision == null)
+		{
+			vision = NetworkTable.getTable("vision");
+			return -1;
+		}
+		else
+			return vision.getNumber("height", -1);
 	}
 	
 	public String toString()

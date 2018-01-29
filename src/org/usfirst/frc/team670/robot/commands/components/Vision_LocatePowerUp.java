@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Vision_LocatePowerUp extends CommandGroup {
 
     public Vision_LocatePowerUp() {
-    	double angle = Robot.visionCuboid.getAngle();
+    	double angle = Robot.sensors.getAngle();
     	addSequential(new NavX_Pivot(angle));
         //Number is the distance to begin intaking at
         addSequential(new Ultrasonic_ObjectDrive(0.1, 10));

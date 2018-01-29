@@ -21,7 +21,6 @@ import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_Pivot;
-import org.usfirst.frc.team670.robot.subsystems.Vision;
 import org.usfirst.frc.team670.robot.utilities.PathFinder;
 import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
@@ -41,7 +40,6 @@ public class Robot extends TimedRobot {
 	public static final DriveBase driveBase = new DriveBase();
 	public static final Intake intake = new Intake();
 	public static final Climber climber = new Climber();
-	public static Vision visionCuboid;
 	public static PathFinder finder = new PathFinder();
 
 	public static SensorThread sensors;
@@ -60,7 +58,6 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 		sensors = new SensorThread();
-		visionCuboid = new Vision();
 		
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 		m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));
