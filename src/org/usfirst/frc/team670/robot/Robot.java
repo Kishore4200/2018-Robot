@@ -14,6 +14,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Center;
+import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Left;
+import org.usfirst.frc.team670.robot.commands.autonomous.Auto_Right;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_DriveDistance;
@@ -68,6 +71,13 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
 		m_chooser.addObject("1ft_encoders_back", new Encoders_DriveDistance(-1));
 		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
+		
+		/*
+		m_chooser.addDefault("Do Nothing", new CancelCommand());
+		m_chooser.addObject("Right Position", new Auto_Right());
+		m_chooser.addObject("Center Position", new Auto_Center());
+		m_chooser.addObject("Left Position", new Auto_Left());
+		*/
 		
 		autonomousDelay.addDefault("0 Second", 0.0);
 		autonomousDelay.addObject("1 Second", 1.0);
@@ -135,7 +145,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		putData();
 		Scheduler.getInstance().run();
 		//logger.logData();
 	}
@@ -156,7 +165,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		putData();
 		Scheduler.getInstance().run();
 		//logger.logData();
 	}
@@ -166,9 +174,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-	}
-
-	public void putData() {
-
+		
 	}
 }

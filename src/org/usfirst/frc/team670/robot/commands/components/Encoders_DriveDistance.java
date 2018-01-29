@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Encoders_DriveDistance extends Command{
 
-	private double ticksToTravel;
+	private double ticksToTravel, minPercentOutput = 0.05;
+	private int numTimesMotorOutput;
 	
 	public Encoders_DriveDistance(double feet) {
 		
@@ -37,7 +38,10 @@ public class Encoders_DriveDistance extends Command{
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() 
 	{
-		return false;
+		if (Math.abs(Robot.driveBase.getLeft().getMotorOutputPercent()) <= minPercentOutput && Math.abs(Robot.driveBase.getRight().getMotorOutputPercent()) <= minPercentOutput)
+			numTimesMotorOutput++;
+
+		return (numTimesMotorOutput >= 100);
 	}
 
 	// Called once after isFinished returns true
