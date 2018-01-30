@@ -37,21 +37,7 @@ public class Joystick_Drive extends Command {
     	}
     	else
     	{
-    		//Single Joystick Drive
-    		double twist = joy.getTwist();
-    		angle = joy.getTwist();
-    		if(Math.abs(joy.getY()) < 0.2 && Math.abs(joy.getX()) < 0.2 && Math.abs(twist) > 0.15){
-    			System.out.println(twist);
-    			newX =twist;
-    			newY = 0;
-    			singleStickDrive(newX, newY);
-    		}
-    		else
-    		{
-    			newX = centerX + (joy.getX()-centerX)*Math.cos(-angle);
-    			newY = centerY + (joy.getY()-centerY)*Math.cos(-angle);
-    			singleStickDrive(newX, newY);
-    		}
+    		singleStickDrive(Robot.oi.getLeftStick().getX(), Robot.oi.getLeftStick().getY());
     	}
 	}
 

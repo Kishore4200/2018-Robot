@@ -22,13 +22,8 @@ import org.usfirst.frc.team670.robot.utilities.PathFinder;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Elevator;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
+
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to each mode, as described in the TimedRobot
- * documentation. If you change the name of this class or the package after
- * creating this project, you must also update the build.properties file in the
- * project.
- * 
  * @author vsharma
  */
 public class Robot extends TimedRobot {
