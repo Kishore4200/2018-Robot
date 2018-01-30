@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.components.Center;
 import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.components.NavX_Pivot;
@@ -68,13 +69,14 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
 		m_chooser.addObject("1ft_encoders_back", new Encoders_DriveDistance(-1));
 		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
+		m_chooser.addObject("Center", new Center());
 		
-		autonomousDelay.addDefault("0 Second", 0.0);
-		autonomousDelay.addObject("1 Second", 1.0);
-		autonomousDelay.addObject("2 Second", 2.0);
-		autonomousDelay.addObject("3 Second", 3.0);
-		autonomousDelay.addObject("4 Second", 4.0);
-		autonomousDelay.addObject("5 Second", 5.0);
+//		autonomousDelay.addDefault("0 Second", 0.0);
+//		autonomousDelay.addObject("1 Second", 1.0);
+//		autonomousDelay.addObject("2 Second", 2.0);
+//		autonomousDelay.addObject("3 Second", 3.0);
+//		autonomousDelay.addObject("4 Second", 4.0);
+//		autonomousDelay.addObject("5 Second", 5.0);
 		
 		ApproachType.addDefault("Straight", true);
 		ApproachType.addObject("Side", false);
