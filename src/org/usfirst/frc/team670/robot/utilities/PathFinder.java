@@ -176,6 +176,10 @@ public class PathFinder
 				}
 			}
 		}
+		else
+		{
+			return Target.Baseline;
+		}
 	}
 	
 }
