@@ -70,116 +70,24 @@ public class PathFinder
 			}
 	}
 	
-	public Target getCenterPositionTarget(String orientation, String leftTeam, String rightTeam) {
-		if (orientation.equals("RR")) {
-			if (leftTeam.toLowerCase().equals("scale")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			} else if (leftTeam.toLowerCase().equals("switch")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			} else if (leftTeam.toLowerCase().equals("baseline")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			}
-		} else if (orientation.equals("LL")) {
-			if (leftTeam.toLowerCase().equals("scale")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			} else if (leftTeam.toLowerCase().equals("switch")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			} else if (leftTeam.toLowerCase().equals("baseline")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			}
-		} else if (orientation.equals("RL")) {
-			if (leftTeam.toLowerCase().equals("scale")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			} else if (leftTeam.toLowerCase().equals("switch")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			} else if (leftTeam.toLowerCase().equals("baseline")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			}
-		} else if (orientation.equals("LR")) {
-			if (leftTeam.toLowerCase().equals("scale")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			} else if (leftTeam.toLowerCase().equals("switch")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			} else if (leftTeam.toLowerCase().equals("baseline")) {
-				if (rightTeam.toLowerCase().equals("scale")) {
-					
-				} else if (rightTeam.toLowerCase().equals("switch")) {
-					
-				} else if (rightTeam.toLowerCase().equals("baseline")) {
-					
-				}
-			}
+	public Target getCenterPositionTarget(String layout, Boolean shouldTryLeft, Boolean shouldTryRight, Boolean approach)
+	{
+		if(layout.charAt(0) == 'L' && shouldTryLeft)
+		{
+			if(approach.equals(true))
+				return Target.LeftSwitchStraight;
+			else
+				return Target.LeftSwitchSide;
+		}
+		else if(layout.charAt(0) == 'R' && shouldTryRight)
+		{
+			if(approach.equals(true))
+				return Target.RightSwitchStraight;
+			else
+				return Target.RightSwitchSide;
 		}
 		else
-		{
 			return Target.Baseline;
-		}
 	}
 	
 }

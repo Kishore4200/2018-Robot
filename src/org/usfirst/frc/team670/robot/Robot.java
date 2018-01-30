@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
 	
 	public static Aggregator sensors;
 	public static OI oi;
-	public static Preferences pathList;
+	public static Preferences prefs;
 	
 	Command m_autonomousCommand;
 	public static SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -53,6 +53,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 		sensors = new Aggregator();
+		prefs = Preferences.getInstance();
 		
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 		m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));
@@ -80,6 +81,11 @@ public class Robot extends TimedRobot {
 		
 		ApproachType.addDefault("Straight", true);
 		ApproachType.addObject("Side", false);
+		
+		prefs.remove("tryLeft");
+		prefs.remove("tryRight");
+		prefs.putBoolean("tryLeft", false);
+		prefs.putBoolean("tryRight", false);
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SmartDashboard.putData("Auton Delay", autonomousDelay);
