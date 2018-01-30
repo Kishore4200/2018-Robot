@@ -13,15 +13,15 @@ Code for Team 670's PowerUp Robot
 		- [ ] Communication with NetworkTables
 		- [ ] Pivot and drive to cube
 - [ ] Arduino - RoboRIO communication (USB Serial connection)
- 	-[ ] LiDar connection with Arduino and communication of values
-	-[ ] LiDar DriveDistance until certain distance from cube
- -[ ] Testing Procedures:
- 	-[ ] Combined Joystick Drive
-	-[ ] Testing all Operator Stick controls + Buttons
-	-[ ] All autonomous commands
- -[ ] Calibration Procedures:
- 	-[ ] PID Values for encoder distance
-	-[ ] NavX Calibration + PID Control loop
+ 	- [ ] LiDar connection with Arduino and communication of values
+	- [ ] LiDar DriveDistance until certain distance from cube
+- [ ] Testing Procedures:
+	- [ ] Combined Joystick Drive
+	- [ ] Testing all Operator Stick controls + Buttons
+	- [ ] All autonomous commands
+- [ ] Calibration Procedures:
+ 	- [ ] PID Values for encoder distance
+	- [ ] NavX Calibration + PID Control loop
 
 --------------------------
 Guides
