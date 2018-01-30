@@ -17,11 +17,11 @@ public class Auto_Center extends CommandGroup {
 	prefs = Preferences.getInstance();
     	String gameLayout = DriverStation.getInstance().getGameSpecificMessage();
 	gameLayout = gameLayout.substring(0, 2);
-
-	//Look for the left, and right values for the parsed gamelayout
-	//Pass left and right into a pathfinding logic sequence
-	//Get the target
+	String leftTarget = prefs.getString(gameLayout+"_left", "switch");
+	String rightTarget = prefs.getString(gameLayout+"_right", "switch");
+	Target target = Robot.finder.getCenterPositionTarget(gameLayout, leftTarget, rightTarget);
 	//Go for target inside this command group using the path retrieval program
+	
 	
     }
 }
