@@ -16,7 +16,8 @@ public class Auto_Center extends CommandGroup {
     public Auto_Center() {
 	prefs = Preferences.getInstance();
     	String gameLayout = DriverStation.getInstance().getGameSpecificMessage();
-    	//Parse the gamelayout string so it only has the first two
+	gameLayout = gameLayout.substring(0, 2);
+
 	//Look for the left, and right values for the parsed gamelayout
 	//Pass left and right into a pathfinding logic sequence
 	//Get the target
