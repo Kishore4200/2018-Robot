@@ -71,7 +71,7 @@ public class PathFinder
 	}
 	
 	public Target getCenterPositionTarget(String orientation, String leftTeam, String rightTeam) {
-		if (orientation == "RR") {
+		if (orientation.equals("RR")) {
 			if (leftTeam.toLowerCase().equals("scale")) {
 				if (rightTeam.toLowerCase().equals("scale")) {
 					
@@ -97,7 +97,7 @@ public class PathFinder
 					
 				}
 			}
-		} else if (orientation == "LL") {
+		} else if (orientation.equals("LL")) {
 			if (leftTeam.toLowerCase().equals("scale")) {
 				if (rightTeam.toLowerCase().equals("scale")) {
 					
@@ -123,7 +123,7 @@ public class PathFinder
 					
 				}
 			}
-		} else if (orientation == "RL") {
+		} else if (orientation.equals("RL")) {
 			if (leftTeam.toLowerCase().equals("scale")) {
 				if (rightTeam.toLowerCase().equals("scale")) {
 					
@@ -149,7 +149,7 @@ public class PathFinder
 					
 				}
 			}
-		} else if (orientation == "LR") {
+		} else if (orientation.equals("LR")) {
 			if (leftTeam.toLowerCase().equals("scale")) {
 				if (rightTeam.toLowerCase().equals("scale")) {
 					
