@@ -70,9 +70,112 @@ public class PathFinder
 			}
 	}
 	
-	public Target getCenterPositionTarget(String layout)
-	{
-    	return Target.Baseline;
+	public Target getCenterPositionTarget(String orientation, String leftTeam, String rightTeam) {
+		if (orientation == "RR") {
+			if (leftTeam.toLowerCase().equals("scale")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			} else if (leftTeam.toLowerCase().equals("switch")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			} else if (leftTeam.toLowerCase().equals("baseline")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			}
+		} else if (orientation == "LL") {
+			if (leftTeam.toLowerCase().equals("scale")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			} else if (leftTeam.toLowerCase().equals("switch")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			} else if (leftTeam.toLowerCase().equals("baseline")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			}
+		} else if (orientation == "RL") {
+			if (leftTeam.toLowerCase().equals("scale")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			} else if (leftTeam.toLowerCase().equals("switch")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			} else if (leftTeam.toLowerCase().equals("baseline")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			}
+		} else if (orientation == "LR") {
+			if (leftTeam.toLowerCase().equals("scale")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			} else if (leftTeam.toLowerCase().equals("switch")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			} else if (leftTeam.toLowerCase().equals("baseline")) {
+				if (rightTeam.toLowerCase().equals("scale")) {
+					
+				} else if (rightTeam.toLowerCase().equals("switch")) {
+					
+				} else if (rightTeam.toLowerCase().equals("baseline")) {
+					
+				}
+			}
+		}
 	}
 	
 }
