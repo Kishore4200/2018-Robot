@@ -3,7 +3,7 @@ Code for Team 670's PowerUp Robot
 --------------------------
 **Things Left to Do:**
 
- -[ ] Creation of all Autonomous paths
+ -[] Creation of all Autonomous paths
  	-[ ] Left
 	-[ ] Right
 	-[ ] Center
