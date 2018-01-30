@@ -1,0 +1,10 @@
+{
+  "commands": [
+    {"command": "drive", "distance": 8.0},
+    {"command": "pivot", "angle": 90.0},
+    {"command": "drive", "distance": 3.0},
+    {"command" : "pivot", "angle": -90.0},
+    {"command": "dumpCubeAtSwitch"}
+  ]
+}
+

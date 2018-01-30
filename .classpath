@@ -11,5 +11,8 @@
 	<classpathentry kind="var" path="USERLIBS_DIR/CTRE_Phoenix.jar"/>
 	<classpathentry kind="var" path="navx-map"/>
 	<classpathentry kind="var" path="USERLIBS_DIR/navx_frc.jar"/>
+	<classpathentry kind="lib" path="build/jars/jackson-core-2.9.4.jar"/>
+	<classpathentry kind="lib" path="build/jars/jackson-databind-2.9.4.jar"/>
+	<classpathentry kind="lib" path="build/jars/jackson-annotations-2.9.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
