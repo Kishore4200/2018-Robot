@@ -1,61 +1,28 @@
 # Power Up!
 Code for Team 670's PowerUp Robot
 --------------------------
-**Sensors/Inputs**
-NOTE: Remember your try catches, in case the robot sensor is unplugged
+**Things Left to Do:**
 
-- [ ] Elevator
-  - [ ] Choose sensor (Laser/Ultrasonic/BNO055)
-  - [ ] Once chosen, program in Elevator subsystem
-- [ ] navXMicro
-  - [ ] DriveStraight
-  - [ ] Pivoting procedures
-- [ ] Vision
-    - If offboard processor:
-        - [ ] Detect box location, and pickup
-        - [ ] Do 3d modeling
-        - [ ] Send command to network tables to the robot/serial connection
-    - If Onboard Roborio (as command)
-        - [ ] Detect box location, and pickup
+ -[ ] Creation of all Autonomous paths
+ 	-[ ] Left
+	-[ ] Right
+	-[ ] Center
+ -[ ] Driving Camera Software
+ 	-[ ] Using GStreamer on RPI + DriverStation
+	-[ ] Using Raspberry Pi for vision processing
+		-[ ] Communication with NetworkTables
+		-[ ] Pivot and drive to cube
+ -[ ] Arduino - RoboRIO communication (USB Serial connection)
+ 	-[ ] LiDar connection with Arduino and communication of values
+	-[ ] LiDar DriveDistance until certain distance from cube
+ -[ ] Testing Procedures:
+ 	-[ ] Combined Joystick Drive
+	-[ ] Testing all Operator Stick controls + Buttons
+	-[ ] All autonomous commands
+ -[ ] Calibration Procedures:
+ 	-[ ] PID Values for encoder distance
+	-[ ] NavX Calibration + PID Control loop
 
-**Autonomous Code**
-
-- [X] Do Nothing Command
-- [ ] Left Side
-  - [ ] Logic Portion (Decisioning process)
-  - [ ] Complete schematic to approach, and place box, with ultrasonic input
-- [ ] Right Side
-  - [ ] Logic Portion (Decisioning process)
-  - [ ] Complete schematic to approach, and place box, with ultrasonic input
-- [ ] Center
-  - [ ] Go for baseline
-  - [ ] ~~IF navXMicro works~~
-       - [ ] ~~Complete schematic to approach, and place box, with ultrasonic input~~
-	-[ ] ~After Everything~ Waypoint Pathfinding
-
---------------------------
-**Need to have**
-	*Robot Code*
-	- [ ] DriveBase
-	  - [ ] Drive With Joystick
-	    - [ ] Driver Centric
-	  - [ ] Four TalonSRX (Follower control)
-	- [ ] Elevator
-	  - [ ] Up/Down movement
-	  - [ ]	Sensor to record position
-	  - [ ] Reset position to 0
-	  - [ ] Position Control
-	- [ ] Intake/Shooter
-	  - [ ] Basic motor activation (Control from operator joystick)
-	- [ ] Climber
-	  - [ ] Motor Activation (Controlling from operator joystick)
-	  - [ ] Vision alignment with the central position
-	- [ ] Camera
-	  - [ ] Program subsystem from robot (On roborio)
-	  - [ ] Align with the climber using vision processing 
-	  
-**Want to have**
-**Dream to have**
 --------------------------
 Guides
 
