@@ -3,16 +3,16 @@ Code for Team 670's PowerUp Robot
 --------------------------
 **Things Left to Do:**
 
-[ ]Creation of all Autonomous paths
-	[ ] Left
-	-[ ] Right
-	-[ ] Center
- -[ ] Driving Camera Software
- 	-[ ] Using GStreamer on RPI + DriverStation
-	-[ ] Using Raspberry Pi for vision processing
-		-[ ] Communication with NetworkTables
-		-[ ] Pivot and drive to cube
- -[ ] Arduino - RoboRIO communication (USB Serial connection)
+- [ ]Creation of all Autonomous paths
+	- [ ] Left
+	- [ ] Right
+	- [ ] Center
+- [ ] Driving Camera Software
+	- [ ] Using GStreamer on RPI + DriverStation
+	- [ ] Using Raspberry Pi for vision processing
+		- [ ] Communication with NetworkTables
+		- [ ] Pivot and drive to cube
+- [ ] Arduino - RoboRIO communication (USB Serial connection)
  	-[ ] LiDar connection with Arduino and communication of values
 	-[ ] LiDar DriveDistance until certain distance from cube
  -[ ] Testing Procedures:
