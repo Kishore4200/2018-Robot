@@ -25,25 +25,25 @@ public class Auto_Center extends CommandGroup {
 		
 		if(t.equals(Target.LeftSwitchSide)){
 			//right Scale Auto
-			movePath = new Path("paths/center/center_switch_left_side");
+			movePath = new Path(Robot.oi.homePath + "paths/center/center_switch_left_side");
 		}
 		else if(t.equals(Target.LeftSwitchStraight)){
 			//right opposite scale auto
-			movePath = new Path("paths/center/center_switch_left_straight");
+			movePath = new Path(Robot.oi.homePath +"paths/center/center_switch_left_straight");
 		}
 		else if(t.equals(Target.RightSwitchSide)){
 			//right switch straight auto
-			movePath = new Path("paths/center/center_switch_right_side");
+			movePath = new Path(Robot.oi.homePath +"paths/center/center_switch_right_side");
 		}
 		else if(t.equals(Target.RightSwitchStraight))
 		{
 			//right switch side auto
-			movePath = new Path("paths/center/center_switch_right_straight");
+			movePath = new Path(Robot.oi.homePath +"paths/center/center_switch_right_straight");
 		}
 		else
 		{
 			//Baseline from right
-			movePath = new Path("paths/center/center_baseline");
+			movePath = new Path(Robot.oi.homePath +"paths/center/center_baseline");
 		}
 		
 		addSequential(new Time_Delay(delay));

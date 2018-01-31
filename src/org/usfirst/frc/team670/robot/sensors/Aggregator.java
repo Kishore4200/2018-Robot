@@ -21,6 +21,7 @@ public class Aggregator extends Thread{
 	// Sensors
 	private AHRS navXMicro;
 	private NetworkTable vision;
+	private ArduinoUSB ard;
 	
 	//Booleans
 	private boolean isNavXConnected;
@@ -35,14 +36,22 @@ public class Aggregator extends Thread{
 			DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
 			navXMicro = null;
 		}
-	    		
+	    
+	    ard = new ArduinoUSB(19200, 1);
+	    
 	    vision = NetworkTable.getTable("vision");
 	}
 	
 	/*@return The distance read in inches by the ultrasonic sensor inside the intake * */
 	public double getDistanceIntake()
 	{
-		return -1;
+		double d = 0;
+		
+		if(ard.isConnected())
+			d = Double.parseDouble(getVal(ard.read()));
+		else
+			d = -1;
+		return d;
 	}
 	
 	public void reset() {
@@ -132,4 +141,20 @@ public class Aggregator extends Thread{
 	{
 		return "";
 	}
+	
+	public String getVal(String data) {
+
+		int lastLessThan = data.lastIndexOf('<');
+		int lastGreaterThan = data.lastIndexOf('>');
+
+		if (lastGreaterThan != -1 && lastLessThan != -1) {
+			if (lastLessThan < lastGreaterThan) {
+				return data.substring(lastLessThan + 1, lastGreaterThan);
+			} else if (data.lastIndexOf('<', lastGreaterThan) != -1) {
+				return data.substring(data.lastIndexOf('<', lastGreaterThan) + 1, data.lastIndexOf('>'));
+			}
+		}
+		return "-1";
+	}
 }
+

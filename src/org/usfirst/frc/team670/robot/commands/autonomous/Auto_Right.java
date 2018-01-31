@@ -22,25 +22,25 @@ public class Auto_Right extends CommandGroup {
     	
     	if(t.equals(Target.ScaleStraight)){
 			//right Scale Auto
-    		movePath = new Path("paths/right/right_scale_straight");
+    		movePath = new Path(Robot.oi.homePath +"paths/right/right_scale_straight");
     	}
 		else if(t.equals(Target.ScaleOnOtherSide)){
 			//right opposite scale auto
-    		movePath = new Path("paths/right/right_scale_opposite");
+    		movePath = new Path(Robot.oi.homePath +"paths/right/right_scale_opposite");
 		}
 		else if(t.equals(Target.SwitchFromStraight)){
 			//right switch straight auto
-    		movePath = new Path("paths/right/right_switch_straight");
+    		movePath = new Path(Robot.oi.homePath +"paths/right/right_switch_straight");
 		}
 		else if(t.equals(Target.SwitchFromSide))
 		{
 			//right switch side auto
-    		movePath = new Path("paths/right/right_switch_side");
+    		movePath = new Path(Robot.oi.homePath +"paths/right/right_switch_side");
 		}
 		else
 		{
 			//Baseline from right
-    		movePath = new Path("paths/right/right_baseline");
+    		movePath = new Path(Robot.oi.homePath +"paths/right/right_baseline");
 		}
     	
     	addSequential(new Time_Delay(delay));

@@ -16,6 +16,7 @@ import org.usfirst.frc.team670.robot.commands.components.Vision_LocatePowerUp;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -34,6 +35,7 @@ public class Path{
 
 //	private ArrayList<Command> commands;
 	private CommandGroup commands;
+	private String filename;
 	/**
 	 * The keywords for the commands. Change this to match any auto commands.
 	 */
@@ -42,13 +44,14 @@ public class Path{
 	
     public Path(String fileName) {
 //    		commands = new ArrayList<Command>();
-    		readData(fileName);
+    		this.filename = fileName;
+    		readData();
     }
     
  // Reads in array data from a simple text file containing asterisks (*)
- 	private void readData (String filename) {
+ 	private void readData() {
  		File dataFile = new File(filename);
-
+ 		System.out.println(dataFile.exists() + " THE FILE IS NOT IN NOT EXISTENCEQ!");
  		if (dataFile.exists()) {
 
  			FileReader reader = null;
@@ -70,42 +73,24 @@ public class Path{
 // 					}
  					
  					//Grab the command key and the args from the line
- 					for(int i = 0; i < line.length(); i++) {
- 						if(line.charAt(i) == ',') {
- 							if(commandInd == 0) {
- 								commandInd = i;
- 							}else {
- 								String num = "";
- 								for(int j = i+1; j < line.length(); j++) {
- 									if(line.charAt(j)!=',')
- 										num+= line.charAt(i);
- 								}
- 								args[argInd] = Double.parseDouble(num);
- 								argInd++;
- 							}
- 						}
- 					}
+ 					args[argInd] = Double.parseDouble(line.substring(line.indexOf(",")+1, line.length()));
  					com = line.substring(0, commandInd); //Check if this takes in the /n character at 0
  					switch(com) {
  					case "EncDrive": commands.addSequential(new Encoders_DriveDistance(args[0]));
  					case "NavXDrive": commands.addSequential(new NavX_DriveDistance(args[0]));
  					case "NavXPivot": commands.addSequential(new NavX_Pivot(args[0]));
- 					case "TimeDrive": commands.addSequential(new Time_DriveStraight(args[0], args[1]));
- 					case "TimePivot": commands.addSequential(new Time_Pivot(args[0], args[1]));
- 					case "UltrasonicDrive": commands.addSequential(new Ultrasonic_ObjectDrive(args[0], args[1]));
- 					case "LocatePowerUp": commands.addSequential(new Vision_LocatePowerUp());
  					}
  					
  				}
  			} catch (IOException ex) {
- 				throw new IllegalArgumentException("Data file " + filename + " cannot be read.");
+ 				commands = null;
  			} finally {
  				if (in != null)
  					in.close();
  			}
 
  		} else {
- 			throw new IllegalArgumentException("Data file " + filename + " does not exist.");
+ 			commands = null;
  		}
  	}
  	
@@ -114,7 +99,10 @@ public class Path{
 // 	}
  	
  	public CommandGroup getCommandGroup() {
- 		return commands;
+ 		if(commands != null)
+ 			return commands;
+ 		else
+ 			return new CommandGroup();
  	}
  	
     

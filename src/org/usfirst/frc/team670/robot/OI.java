@@ -31,6 +31,8 @@ public class OI {
 	private OperatorState os = OperatorState.NONE;
 	private DriverState ds = DriverState.TANK;
 	
+	public static String homePath = "/home/lvuser/paths/";
+	
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
