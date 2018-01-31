@@ -1,19 +1,18 @@
-package org.usfirst.frc.team670.robot.commands.joysticks;
+package org.usfirst.frc.team670.robot.commands.autonomous.primary;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_Test;
-import org.usfirst.frc.team670.robot.utilities.Constants;
-import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class Joystick_Elevator extends Command {
 
-    public Joystick_Elevator() {
-        // Use requires() here to declare subsystem dependencies
+/**
+ *@author vsharma
+ */
+public class CancelCommand extends Command {
+
+    public CancelCommand() {
+        requires(Robot.driveBase);
+        requires(Robot.intake);
         requires(Robot.elevator);
     }
 
@@ -23,23 +22,25 @@ public class Joystick_Elevator extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.getOS().equals(OperatorState.ELEVATOR))
-    		Robot.elevator.moveElevator(Robot.oi.getOperatorStick().getY());
+    	Robot.driveBase.drive(0, 0);
+    	Robot.intake.driveIntake(0);
+    	Robot.elevator.moveElevator(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveBase.drive(0, 0);
+    	Robot.intake.driveIntake(0);
     	Robot.elevator.moveElevator(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.elevator.moveElevator(0);
     }
 }

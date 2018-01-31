@@ -12,7 +12,7 @@ import org.usfirst.frc.team670.robot.commands.Auto_RunIntake;
 import org.usfirst.frc.team670.robot.commands.Auto_StopIntake;
 import org.usfirst.frc.team670.robot.commands.SetDriverControl;
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
-import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.autonomous.primary.CancelCommand;
 import org.usfirst.frc.team670.robot.utilities.DriverState;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
 

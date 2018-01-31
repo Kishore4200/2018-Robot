@@ -1,20 +1,24 @@
-package org.usfirst.frc.team670.robot.commands.joysticks;
+package org.usfirst.frc.team670.robot.commands.autonomous.actions;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_Test;
-import org.usfirst.frc.team670.robot.utilities.Constants;
-import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class Joystick_Elevator extends Command {
+public class Time_Pivot extends Command {
 
-    public Joystick_Elevator() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.elevator);
+    private double speed = 0, seconds = 0;
+    
+    /*
+     * @param seconds The number of seconds the command should run
+     * @param speed The speed the omni wheel should run at
+     */
+    public Time_Pivot(double seconds, double speed) {
+        this.speed = speed;
+        this.seconds = seconds;
+        requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
@@ -23,23 +27,25 @@ public class Joystick_Elevator extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.getOS().equals(OperatorState.ELEVATOR))
-    		Robot.elevator.moveElevator(Robot.oi.getOperatorStick().getY());
+        setTimeout(seconds);
+    	//Drive seven feet to baseline
+    	Robot.driveBase.drive(-speed, speed);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevator.moveElevator(0);
+    	Robot.driveBase.drive(0,0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.elevator.moveElevator(0);
+    	Robot.driveBase.drive(0, 0);
     }
 }

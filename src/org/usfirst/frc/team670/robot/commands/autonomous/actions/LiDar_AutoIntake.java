@@ -1,20 +1,19 @@
-package org.usfirst.frc.team670.robot.commands.joysticks;
+package org.usfirst.frc.team670.robot.commands.autonomous.actions;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_Test;
-import org.usfirst.frc.team670.robot.utilities.Constants;
-import org.usfirst.frc.team670.robot.utilities.OperatorState;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Class that uses to ultrasonic sensor to continue driving until object is within certain limit
  */
-public class Joystick_Elevator extends Command {
+public class LiDar_AutoIntake extends Command {
 
-    public Joystick_Elevator() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.elevator);
+	private double limit, speed;
+	
+    public LiDar_AutoIntake(double speed, double inchesLimit) {
+        this.limit = inchesLimit;
+        this.speed = speed;
+    	requires(Robot.driveBase);
     }
 
     // Called just before this Command runs the first time
@@ -23,23 +22,23 @@ public class Joystick_Elevator extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.getOS().equals(OperatorState.ELEVATOR))
-    		Robot.elevator.moveElevator(Robot.oi.getOperatorStick().getY());
+    	Robot.driveBase.drive(speed, speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	if(Robot.sensors.getDistanceIntake() <= limit)
+    		return true;
+    	else
+    		return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevator.moveElevator(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.elevator.moveElevator(0);
     }
 }
