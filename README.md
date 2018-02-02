@@ -8,7 +8,6 @@ Code for Team 670's PowerUp Robot
 	- [ ] Right
 	- [ ] Center
 - [ ] Driving Camera Software
-	- [ ] Using GStreamer on RPI + DriverStation
 	- [ ] Using Raspberry Pi for vision processing
 		- [ ] Communication with NetworkTables
 		- [ ] Pivot and drive to cube
