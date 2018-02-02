@@ -7,7 +7,6 @@
 
 package org.usfirst.frc.team670.robot;
 
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -36,12 +35,13 @@ public class Robot extends TimedRobot {
 	
 	public static Aggregator sensors;
 	public static OI oi;
-	public static Preferences prefs;
 	
 	Command m_autonomousCommand;
 	public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 	public static SendableChooser<Double> autonomousDelay = new SendableChooser<>();
 	public static SendableChooser<Boolean> ApproachType = new SendableChooser<>();
+	public static SendableChooser<Boolean> tryLeft = new SendableChooser<>();
+	public static SendableChooser<Boolean> tryRight = new SendableChooser<>();
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -50,8 +50,7 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 		sensors = new Aggregator();
-		prefs = Preferences.getInstance();
-				
+		
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 		m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));
 		m_chooser.addObject("Turn Left 90 degrees", new NavX_Pivot(-90));
@@ -79,14 +78,21 @@ public class Robot extends TimedRobot {
 		ApproachType.addDefault("Straight", true);
 		ApproachType.addObject("Side", false);
 		
-		prefs.remove("tryLeft");
-		prefs.remove("tryRight");
-		prefs.putBoolean("tryLeft", false);
-		prefs.putBoolean("tryRight", false);
+		tryLeft.addDefault("Try left", true);
+		tryLeft.addObject("Do not try left", false);
+		
+		tryRight.addDefault("Try right", true);
+		tryRight.addObject("Do not try right", false);
+		
+		m_chooser.setName("Auto mode");
+		ApproachType.setName("Approach Type");
+		autonomousDelay.setName("Auton Delay");
 		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SmartDashboard.putData("Auton Delay", autonomousDelay);
 		SmartDashboard.putData("Approach Type", ApproachType);
+		SmartDashboard.putData("Try Left from Center", tryLeft);
+		SmartDashboard.putData("Try Right from Center", tryRight);
 	}
 
 	/**

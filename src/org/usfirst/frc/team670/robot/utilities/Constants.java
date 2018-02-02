@@ -34,5 +34,7 @@ public class Constants {
 
 	public static final double joyStickMaxTwist = 90;
 	
-	public static final double elevatorMaxInFeet = 10;
+	public static final double elevatorPulseForExchange = 0;
+	public static final double elevatorPulseForSwitch = 0;
+	public static final double elevatorPulseForScale = 0;
 	}

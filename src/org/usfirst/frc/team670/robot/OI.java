@@ -12,6 +12,7 @@ import org.usfirst.frc.team670.robot.commands.Auto_RunIntake;
 import org.usfirst.frc.team670.robot.commands.Auto_StopIntake;
 import org.usfirst.frc.team670.robot.commands.SetDriverControl;
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
+import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_Elevator;
 import org.usfirst.frc.team670.robot.commands.autonomous.primary.CancelCommand;
 import org.usfirst.frc.team670.robot.utilities.DriverState;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
@@ -45,9 +46,15 @@ public class OI {
 	//Arcade Controls
 	private Button intakedeploy = new JoystickButton(arcadeStick, 1);
 	private Button intakeretract = new JoystickButton(arcadeStick, 10);
+	
 	private Button runIntake = new JoystickButton(arcadeStick, 2);
 	private Button stopIntake = new JoystickButton(arcadeStick, 9);
-		
+	
+	private Button elevatorExchange = new JoystickButton(arcadeStick, 3);
+	private Button elevatorSwitch = new JoystickButton(arcadeStick, 8);
+	
+	private Button elevatorScale = new JoystickButton(arcadeStick, 4);
+	
 	private Button cancelCommand = new JoystickButton(arcadeStick, 6);
 	
 	//Driver Controls
@@ -57,22 +64,26 @@ public class OI {
 	
 	public OI()
 	{
+		//Arcade buttons
 		intakedeploy.whenPressed(new Auto_DeployIntake(true));
 		intakeretract.whenPressed(new Auto_DeployIntake(false));
-		
 		runIntake.whenPressed(new Auto_RunIntake(1.0));
 		stopIntake.whenPressed(new Auto_StopIntake());
+		elevatorExchange.whenPressed(new Encoders_Elevator(1, 0.75));
+		elevatorSwitch.whenPressed(new Encoders_Elevator(2, 0.75));
+		elevatorScale.whenPressed(new Encoders_Elevator(3, 0.75));
+		cancelCommand.whenPressed(new CancelCommand());
 						
+		//Driver Controls
+		tankDrive.whenPressed(new SetDriverControl(DriverState.TANK));
+		reverseTankDrive.whenPressed(new SetDriverControl(DriverState.TANKREVERSE));
+		singleStickDrive.whenPressed(new SetDriverControl(DriverState.SINGLE));		
+		
+		//Operator buttons
 		toggleElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATOR));
 		toggleElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		toggleIntake.whenPressed(new SetOperatorControl(OperatorState.INTAKE));
 		toggleIntake.whenReleased(new SetOperatorControl(OperatorState.NONE));
-		
-		cancelCommand.whenPressed(new CancelCommand());
-		
-		tankDrive.whenPressed(new SetDriverControl(DriverState.TANK));
-		reverseTankDrive.whenPressed(new SetDriverControl(DriverState.TANKREVERSE));
-		singleStickDrive.whenPressed(new SetDriverControl(DriverState.SINGLE));
 	}
 	
 	public Joystick getLeftStick(){

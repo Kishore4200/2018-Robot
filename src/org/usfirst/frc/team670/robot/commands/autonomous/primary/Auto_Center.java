@@ -20,8 +20,8 @@ public class Auto_Center extends CommandGroup {
     public Auto_Center() {
     	
     	String gameLayout = DriverStation.getInstance().getGameSpecificMessage();
-		Boolean leftTarget = Robot.prefs.getBoolean("tryLeft", false);
-		Boolean rightTarget = Robot.prefs.getBoolean("tryRight", false);
+		Boolean leftTarget = Robot.tryLeft.getSelected();
+		Boolean rightTarget = Robot.tryRight.getSelected();
 		Target t = Robot.finder.getCenterPositionTarget(gameLayout, leftTarget, rightTarget, Robot.ApproachType.getSelected());
     	double delay = Robot.autonomousDelay.getSelected();
 		
