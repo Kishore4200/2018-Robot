@@ -5,30 +5,33 @@ import org.usfirst.frc.team670.robot.utilities.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
+
 /**
  * 
- * Uses a PID control loop plus the navX getDisplacement to move a given distance in feet
+ * Uses a PID control loop plus the navX getDisplacement to move a given
+ * distance in feet
  * 
  * @author vsharma8363
  *
  */
-public class Encoders_Elevator extends Command{
-	
+public class Encoders_Elevator extends Command {
+
 	/**
-	 * @param state 1-Exchange/Pickup, 2-Switch, 3-Scale
+	 * @param state
+	 *            1-Exchange/Pickup, 2-Switch, 3-Scale
 	 */
 	private double targetPulseHeight;
 	private boolean isGoingUp;
 	private double speed, tolerance;
-	
+
 	public Encoders_Elevator(int state, double speed) {
 		tolerance = speed * 100;
 		this.speed = speed;
-		if(state == 1)
+		if (state == 1)
 			targetPulseHeight = Constants.elevatorPulseForExchange;
-		if(state == 2)
+		if (state == 2)
 			targetPulseHeight = Constants.elevatorPulseForSwitch;
-		if(state == 3)
+		if (state == 3)
 			targetPulseHeight = Constants.elevatorPulseForScale;
 		else
 			targetPulseHeight = Constants.elevatorPulseForExchange;
@@ -44,20 +47,21 @@ public class Encoders_Elevator extends Command{
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(isGoingUp)
+		if (isGoingUp)
 			Robot.elevator.moveElevator(speed);
 		else
 			Robot.elevator.moveElevator(-speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
-	protected boolean isFinished() 
-	{
-		double delta = Math.abs(Math.abs(targetPulseHeight) - Math.abs(Robot.elevator.getCurrentPosition()));
-		if(delta < tolerance)
+	protected boolean isFinished() {
+
+		if (isGoingUp && Robot.elevator.getCurrentPosition() >= targetPulseHeight) {
 			return true;
-		else
-			return false;
+		} else if (!isGoingUp && Robot.elevator.getCurrentPosition() <= targetPulseHeight) {
+			return true;
+		}
+		return false;
 	}
 
 	// Called once after isFinished returns true
