@@ -167,7 +167,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		//logger.logData();
+		putData();
 	}
 
 	/**
@@ -176,5 +176,11 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 		
+	}
+	
+	public void putData()
+	{
+		if(sensors != null)
+			sensors.sendState();
 	}
 }

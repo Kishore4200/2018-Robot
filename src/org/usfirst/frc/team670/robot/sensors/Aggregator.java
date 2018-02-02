@@ -1,5 +1,6 @@
 package org.usfirst.frc.team670.robot.sensors;
 
+import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.RobotMap;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -20,7 +21,7 @@ public class Aggregator extends Thread{
 	
 	// Sensors
 	private AHRS navXMicro;
-	private NetworkTable vision;
+	private NetworkTable state;
 	private ArduinoUSB ard;
 	
 	//Booleans
@@ -39,7 +40,7 @@ public class Aggregator extends Thread{
 	    
 	    ard = new ArduinoUSB(19200, 1);
 	    
-	    vision = NetworkTable.getTable("vision");
+	    state = NetworkTable.getTable("state");
 	}
 	
 	/*@return The distance read in inches by the ultrasonic sensor inside the intake * */
@@ -103,38 +104,15 @@ public class Aggregator extends Thread{
 		return -1;
 	}
 	
-	@SuppressWarnings("deprecation")
-	public double getAngle()
+	public void sendState()
 	{
-		if(vision == null)
-		{
-			vision = NetworkTable.getTable("vision");
-			return -1;
-		}
-		else
-			return vision.getNumber("angle", -1);
-	}
-	
-	public double getWidth()
-	{
-		if(vision == null)
-		{
-			vision = NetworkTable.getTable("vision");
-			return -1;
-		}
-		else
-			return vision.getNumber("width", -1);
-	}
-
-	public double getHeight()
-	{
-		if(vision == null)
-		{
-			vision = NetworkTable.getTable("vision");
-			return -1;
-		}
-		else
-			return vision.getNumber("height", -1);
+		new Thread(new Runnable() {
+	        @Override
+	        public void run() {
+	        	state.putString("operator", Robot.oi.getOS().toString());
+	    		state.putString("drive", Robot.oi.getDS().toString());
+	        }
+	        }).start();
 	}
 	
 	public String toString()
