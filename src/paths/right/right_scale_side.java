@@ -2,6 +2,7 @@ package paths.right;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_DriveDistance;
+import org.usfirst.frc.team670.robot.commands.autonomous.actions.NavX_Pivot;
 import org.usfirst.frc.team670.robot.utilities.Field;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -9,13 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class right_switch_straight extends CommandGroup {
+public class right_scale_side extends CommandGroup {
 
-	/**
-	 * 
-	 * @pre Line up Robot with the switch
-	 */
-	public right_switch_straight() {
+	public right_scale_side() {
 		// Add Commands here:
 		// e.g. addSequential(new Command1());
 		// addSequential(new Command2());
@@ -32,8 +29,10 @@ public class right_switch_straight extends CommandGroup {
 		// e.g. if Command1 requires chassis, and Command2 requires arm,
 		// a CommandGroup containing them would require both the chassis and the
 		// arm.
-		addSequential(new Encoders_DriveDistance(Field.DSToSwitch - Robot.length));
-		//PLACE CUBE
-		addSequential(new Encoders_DriveDistance(-(Field.DSToSwitch)));
+		
+    	addSequential(new Encoders_DriveDistance(Field.DSToScale - Robot.length + Field.ScaleWidth/2));
+    	addSequential(new NavX_Pivot(-90));
+    	addSequential(new Encoders_DriveDistance(Field.SideToScale + Field.TOLERANCE - Field.SideTriangleWidth /* - ELEVATOR DISTANCE*/));
+    	//PLACE CUBE
 	}
 }

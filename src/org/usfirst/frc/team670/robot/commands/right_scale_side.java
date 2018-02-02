@@ -1,18 +1,13 @@
-package paths.center;
-
-import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_DriveDistance;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.NavX_Pivot;
-import org.usfirst.frc.team670.robot.utilities.Field;
+package org.usfirst.frc.team670.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class center_left_switch_side extends CommandGroup {
+public class right_scale_side extends CommandGroup {
 
-    public center_left_switch_side() {
+    public right_scale_side() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

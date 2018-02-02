@@ -17,9 +17,9 @@ public class Encoders_DriveDistance extends Command{
 	private double ticksToTravel, minPercentOutput = 0.05;
 	private int numTimesMotorOutput;
 	
-	public Encoders_DriveDistance(double feet) {
+	public Encoders_DriveDistance(double inches) {
 		
- 		this.ticksToTravel = ((feet*12.0)/(Math.PI*Constants.DIAMETERinInchesDriveBase)) * Constants.ticksPerRotation;
+ 		this.ticksToTravel = ((inches)/(Math.PI*Constants.DIAMETERinInchesDriveBase)) * Constants.ticksPerRotation;
 		requires(Robot.driveBase);
 	}
 
