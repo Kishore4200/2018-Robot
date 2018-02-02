@@ -5,20 +5,24 @@ import org.usfirst.frc.team670.robot.utilities.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
+
 /**
  * 
- * Uses a PID control loop plus the navX getDisplacement to move a given distance in feet
+ * Uses a PID control loop plus the navX getDisplacement to move a given
+ * distance in feet
  * 
  * @author vsharma8363
  *
  */
-public class Encoders_DriveDistance extends Command{
+public class Encoders_DriveDistance extends Command {
 
 	private double ticksToTravel;
-	
+	private int numTimesUnderOutput;
+
 	public Encoders_DriveDistance(double feet) {
-		
- 		this.ticksToTravel = ((feet*12.0)/(Math.PI*Constants.DIAMETERinInchesDriveBase)) * Constants.ticksPerRotation;
+
+		this.ticksToTravel = ((feet * 12.0) / (Math.PI * Constants.DIAMETERinInchesDriveBase))
+				* Constants.ticksPerRotation;
 		requires(Robot.driveBase);
 	}
 
@@ -30,13 +34,20 @@ public class Encoders_DriveDistance extends Command{
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveBase.getLeft().set(ControlMode.Position, ticksToTravel); 
-		Robot.driveBase.getRight().set(ControlMode.Position, ticksToTravel); /* 50 rotations in either direction */
+		Robot.driveBase.getLeft().set(ControlMode.Position, ticksToTravel);
+		Robot.driveBase.getRight().set(ControlMode.Position,
+				ticksToTravel); /* 50 rotations in either direction */
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
-	protected boolean isFinished() 
-	{
+	protected boolean isFinished() {
+
+		numTimesUnderOutput = (Math.abs(Robot.driveBase.getLeft().getMotorOutputPercent()) < .05)
+				? numTimesUnderOutput + 1 : numTimesUnderOutput;
+
+		if (numTimesUnderOutput > 10) {
+			return true;
+		}
 		return false;
 	}
 

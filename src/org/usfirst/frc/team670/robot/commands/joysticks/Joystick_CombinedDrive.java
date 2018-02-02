@@ -11,7 +11,7 @@ public class Joystick_CombinedDrive extends Command {
 	private double lSpeed, scalar;
 	private double angle, newX, newY, centerX, centerY, finalAngle, deadZONE;
 	private Joystick joy;
- 
+
 	public Joystick_CombinedDrive() {
 		requires(Robot.driveBase);
 	}
@@ -27,29 +27,24 @@ public class Joystick_CombinedDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(Robot.oi.isControlsStandard)
-    	{
-    		//Tank Drive
+		if (Robot.oi.isControlsStandard) {
+			// Tank Drive
 			Robot.driveBase.drive(Robot.oi.getLeftStick().getY(), -Robot.oi.getRightStick().getY());
-    	}
-    	else
-    	{
-    		//Single Joystick Drive
-    		double twist = joy.getTwist();
-    		angle = scalar*joy.getTwist();
-    		if(Math.abs(joy.getY()) < 0.2 && Math.abs(joy.getX()) < 0.2 && Math.abs(twist) > 0.15){
-    			System.out.println(twist);
-    			newX =twist;
-    			newY = 0;
-    			singleStickDrive(newX, newY);
-    		}
-    		else
-    		{
-    			newX = centerX + (joy.getX()-centerX)*Math.cos(-angle);
-    			newY = centerY + (joy.getY()-centerY)*Math.cos(-angle);
-    			singleStickDrive(newX, newY);
-    		}
-    	}
+		} else {
+			// Single Joystick Drive
+			double twist = joy.getTwist();
+			angle = scalar * joy.getTwist();
+			if (Math.abs(joy.getY()) < 0.2 && Math.abs(joy.getX()) < 0.2 && Math.abs(twist) > 0.15) {
+				System.out.println(twist);
+				newX = twist;
+				newY = 0;
+				singleStickDrive(newX, newY);
+			} else {
+				newX = centerX + (joy.getX() - centerX) * Math.cos(-angle);
+				newY = centerY + (joy.getY() - centerY) * Math.cos(-angle);
+				singleStickDrive(newX, newY);
+			}
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team670.robot.commands.ForwardThenRight;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.components.Center;
 import org.usfirst.frc.team670.robot.commands.components.Encoders_DriveDistance;
@@ -25,6 +26,7 @@ import org.usfirst.frc.team670.robot.subsystems.Climber;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Elevator;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -45,11 +47,12 @@ public class Robot extends TimedRobot {
 	public static SensorThread sensors;
 	public static OI oi;
 	public static Preferences pathList;
-	
+
 	Command m_autonomousCommand;
 	public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 	public static SendableChooser<Double> autonomousDelay = new SendableChooser<>();
 	public static SendableChooser<Boolean> ApproachType = new SendableChooser<>();
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -59,7 +62,7 @@ public class Robot extends TimedRobot {
 		oi = new OI();
 		sensors = new SensorThread();
 		visionCuboid = new Vision();
-		
+
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 		m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));
 		m_chooser.addObject("Turn Left 90 degrees", new NavX_Pivot(-90));
@@ -67,20 +70,21 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Turn Left 60 degrees", new NavX_Pivot(-60));
 		m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
 		m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
-		m_chooser.addObject("1ft_encoders_back", new Encoders_DriveDistance(-1));
+		m_chooser.addObject("3ft_encoders_back", new Encoders_DriveDistance(-3));
 		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
+		m_chooser.addObject("Drive 3 Foot Forward and Turn NavX", new ForwardThenRight());
 		m_chooser.addObject("Center", new Center());
-		
-//		autonomousDelay.addDefault("0 Second", 0.0);
-//		autonomousDelay.addObject("1 Second", 1.0);
-//		autonomousDelay.addObject("2 Second", 2.0);
-//		autonomousDelay.addObject("3 Second", 3.0);
-//		autonomousDelay.addObject("4 Second", 4.0);
-//		autonomousDelay.addObject("5 Second", 5.0);
-		
+
+		// autonomousDelay.addDefault("0 Second", 0.0);
+		// autonomousDelay.addObject("1 Second", 1.0);
+		// autonomousDelay.addObject("2 Second", 2.0);
+		// autonomousDelay.addObject("3 Second", 3.0);
+		// autonomousDelay.addObject("4 Second", 4.0);
+		// autonomousDelay.addObject("5 Second", 5.0);
+
 		ApproachType.addDefault("Straight", true);
 		ApproachType.addObject("Side", false);
-		
+
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SmartDashboard.putData("Auton Delay", autonomousDelay);
 		SmartDashboard.putData("Approach Type", ApproachType);
@@ -99,7 +103,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		//putData();
+		// putData();
 	}
 
 	/**
@@ -113,13 +117,13 @@ public class Robot extends TimedRobot {
 	 * You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
-	 */ 
+	 */
 	@Override
 	public void autonomousInit() {
-		
+
 		m_autonomousCommand = m_chooser.getSelected();
 
-		/*	 
+		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
@@ -131,7 +135,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.start();
 		}
 	}
-	
+
 	/**
 	 * This function is called periodically during autonomous.
 	 */
@@ -139,7 +143,7 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		putData();
 		Scheduler.getInstance().run();
-		//logger.logData();
+		// logger.logData();
 	}
 
 	@Override
@@ -160,7 +164,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		putData();
 		Scheduler.getInstance().run();
-		//logger.logData();
+		// logger.logData();
 	}
 
 	/**

@@ -142,6 +142,7 @@ public class DriveBase extends Subsystem {
 	public void initPID(TalonSRX talon) {
 		int absolutePosition = talon.getSelectedSensorPosition(Constants.kTimeoutMs)
 				& 0xFFF; /* mask out the bottom12 bits, we don't care about the wrap arounds */
+		
 		/* use the low level API to set the quad encoder signal */
 		talon.setSelectedSensorPosition(absolutePosition, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 

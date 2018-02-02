@@ -47,7 +47,7 @@ public class OI {
 	
 	//private Button runClimb = new JoystickButton(arcadeStick, 1);
 	//private Button reverseClimb = new JoystickButton(arcadeStick, 2);
-	//private Button deployClimber = new JoystickButton(arcadeStick, 3);	
+	//private Button deployClimber = new	 JoystickButton(arcadeStick, 3);	
 	
 	private Button intakedeploy = new JoystickButton(arcadeStick, 1);
 	private Button intakeretract = new JoystickButton(arcadeStick, 10);
