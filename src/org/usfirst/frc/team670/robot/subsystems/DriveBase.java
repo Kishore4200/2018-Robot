@@ -99,8 +99,8 @@ public class DriveBase extends Subsystem {
 	}
 
 	public void drive(double left, double right) {
-		left1.set(ControlMode.PercentOutput, left);
-		right1.set(ControlMode.PercentOutput, -right);
+		left1.set(ControlMode.PercentOutput, -left);
+		right1.set(ControlMode.PercentOutput, right);
 	}
 
 	public TalonSRX getLeft() {
@@ -146,8 +146,8 @@ public class DriveBase extends Subsystem {
 	 * public double feetToEncoderTicks(double feet)
 	 * </pre>
 	 * 
-	 * Returns a value in ticks based on a certain value in feet using the Magnetic
-	 * Encoder.
+	 * Returns a value in ticks based on a certain value in feet using the
+	 * Magnetic Encoder.
 	 * 
 	 * @param feet
 	 *            The value in feet
@@ -160,7 +160,8 @@ public class DriveBase extends Subsystem {
 	public void initPID(TalonSRX talon) {
 		int absolutePosition = talon.getSelectedSensorPosition(Constants.kTimeoutMs)
 				& 0xFFF; /*
-							 * mask out the bottom12 bits, we don't care about the wrap arounds
+							 * mask out the bottom12 bits, we don't care about
+							 * the wrap arounds
 							 */
 		/* use the low level API to set the quad encoder signal */
 		talon.setSelectedSensorPosition(absolutePosition, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
@@ -175,10 +176,13 @@ public class DriveBase extends Subsystem {
 		talon.configPeakOutputForward(1, Constants.kTimeoutMs);
 		talon.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 		/*
-		 * set the allowable closed-loop error, Closed-Loop output will be neutral
-		 * within this range. See Table in Section 17.2.1 for native units per rotation.
+		 * set the allowable closed-loop error, Closed-Loop output will be
+		 * neutral within this range. See Table in Section 17.2.1 for native
+		 * units per rotation.
 		 */
-		talon.configAllowableClosedloopError(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs); /* always servo */
+		talon.configAllowableClosedloopError(0, Constants.kPIDLoopIdx,
+				Constants.kTimeoutMs); /* always servo */
+		talon.configClosedloopRamp(1, 0);
 		/* set closed loop gains in slot0 */
 		talon.config_kF(Constants.kPIDLoopIdx, 0.0, Constants.kTimeoutMs);
 		talon.config_kP(Constants.kPIDLoopIdx, Constants.Proportion, Constants.kTimeoutMs);
@@ -186,10 +190,10 @@ public class DriveBase extends Subsystem {
 		talon.config_kD(Constants.kPIDLoopIdx, Constants.Derivative, Constants.kTimeoutMs);
 	}
 
-	public void initTMP(TalonSRX talon) {
+	public void initMotionMagic(TalonSRX talon) {
 		talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 		talon.setSensorPhase(true);
-		talon.setInverted(false);
+		// talon.setInverted(false);
 
 		/* Set relevant frame periods to be at least as fast as periodic rate */
 		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
@@ -203,13 +207,14 @@ public class DriveBase extends Subsystem {
 
 		/* set closed loop gains in slot0 - see documentation */
 		talon.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
-		talon.config_kF(0, 0.2, Constants.kTimeoutMs);
-		talon.config_kP(0, 0.2, Constants.kTimeoutMs);
+		// talon.config_kF(0, 0.2, Constants.kTimeoutMs);
+		talon.config_kP(0, .5, Constants.kTimeoutMs);
 		talon.config_kI(0, 0, Constants.kTimeoutMs);
-		talon.config_kD(0, 0, Constants.kTimeoutMs);
+		talon.config_kD(0, 0.5, Constants.kTimeoutMs);
 		/* set acceleration and vcruise velocity - see documentation */
-		talon.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
-		talon.configMotionAcceleration(6000, Constants.kTimeoutMs);
+		// talon.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
+		// talon.configMotionAcceleration(6000, Constants.kTimeoutMs);
+		talon.configClosedloopRamp(2, 0);
 		/* zero the sensor */
 		talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 	}

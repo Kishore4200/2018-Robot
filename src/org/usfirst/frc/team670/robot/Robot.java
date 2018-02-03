@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoder_TMP;
+import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoder_Motion_Magic;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.NavX_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.NavX_Pivot;
@@ -60,9 +60,9 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Turn Left 60 degrees", new NavX_Pivot(-60));
 		m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
 		m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(12));
-		m_chooser.addObject("1ft_encoders_back", new Encoders_DriveDistance(-12));
+		m_chooser.addObject("3ft_encoders_back", new Encoders_DriveDistance(-36));
+		m_chooser.addObject("10ft_encoders_back", new Encoders_DriveDistance(-120));
 		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(12));
-		m_chooser.addObject("Drive 1 Foot TMP", new Encoder_TMP(50));
 
 		/*
 		 * m_chooser.addDefault("Do Nothing", new CancelCommand());
@@ -107,7 +107,10 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		// putData();
+		System.out.println(sensors.getDistanceIntake());
+		// System.out.println("LiDAR: " + "" + (sensors.getDistanceIntake()));
+
+		// putData()
 	}
 
 	/**
@@ -145,7 +148,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
+		// Scheduler.getInstance().run();
 		// logger.logData();
 	}
 
@@ -174,7 +177,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-
 	}
 
 	public void putData() {
