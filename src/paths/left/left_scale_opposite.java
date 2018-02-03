@@ -34,6 +34,7 @@ public class left_scale_opposite extends CommandGroup {
     	// RAISE ELEVATOR
     	// DRIVE distance from front of robot to elevator arm
     	// PLACE CUBE
-    	// 
+    	addSequential(new Encoders_DriveDistance(-1.5 * Robot.length));
+    	// LOWER ELEVATOR
     }
 }
