@@ -84,10 +84,6 @@ public class Robot extends TimedRobot {
 		tryRight.addDefault("Try right", true);
 		tryRight.addObject("Do not try right", false);
 		
-		m_chooser.setName("Auto mode");
-		ApproachType.setName("Approach Type");
-		autonomousDelay.setName("Auton Delay");
-		
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SmartDashboard.putData("Auton Delay", autonomousDelay);
 		SmartDashboard.putData("Approach Type", ApproachType);
