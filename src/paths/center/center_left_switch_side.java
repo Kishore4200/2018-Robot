@@ -29,5 +29,16 @@ public class center_left_switch_side extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	
+    	addSequential(new Encoders_DriveDistance(0.5*Robot.length));
+    	addSequential(new NavX_Pivot(-90));
+    	addSequential(new Encoders_DriveDistance(0.5*Field.SwitchLength + 0.5*Robot.length));
+    	addSequential(new NavX_Pivot(90));
+    	addSequential(new Encoders_DriveDistance(Field.DSToSwitch + Field.SwitchWidth - 0.5*Robot.length));
+    	addSequential(new NavX_Pivot(90));
+    	addSequential(new Encoders_DriveDistance(0.5*Robot.length + Field.TOLERANCE));
+    	// PLACE CUBE
+    	addSequential(new Encoders_DriveDistance(-0.5*Robot.length));
+    	addSequential(new NavX_Pivot(-90));
     }
 }

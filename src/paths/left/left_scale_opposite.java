@@ -30,7 +30,7 @@ public class left_scale_opposite extends CommandGroup {
     	addSequential(new NavX_Pivot(90));
     	addSequential(new Encoders_DriveDistance(Field.SwitchLength));
     	addSequential(new NavX_Pivot(-90));
-    	addSequential(new Encoders_DriveDistance(Field.DSToScale - (Field.DSToSwitch + Field.SwitchWidth - Robot.length + 0.5*(Field.DSToPlatform - Field.DSToSwitch - Field.SwitchWidth)) - Robot.length));
+    	addSequential(new Encoders_DriveDistance(Field.DSToScale - (Field.DSToSwitch + Field.SwitchWidth - Robot.length + 0.5*(Field.DSToPlatform - Field.DSToSwitch - Field.SwitchWidth)) - Robot.length + Field.TOLERANCE));
     	// RAISE ELEVATOR
     	// DRIVE distance from front of robot to elevator arm
     	// PLACE CUBE
