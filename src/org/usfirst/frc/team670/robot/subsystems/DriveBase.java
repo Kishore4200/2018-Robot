@@ -14,6 +14,7 @@ import org.usfirst.frc.team670.robot.utilities.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -145,8 +146,8 @@ public class DriveBase extends Subsystem {
 	 * public double feetToEncoderTicks(double feet)
 	 * </pre>
 	 * 
-	 * Returns a value in ticks based on a certain value in feet using the
-	 * Magnetic Encoder.
+	 * Returns a value in ticks based on a certain value in feet using the Magnetic
+	 * Encoder.
 	 * 
 	 * @param feet
 	 *            The value in feet
@@ -159,8 +160,7 @@ public class DriveBase extends Subsystem {
 	public void initPID(TalonSRX talon) {
 		int absolutePosition = talon.getSelectedSensorPosition(Constants.kTimeoutMs)
 				& 0xFFF; /*
-							 * mask out the bottom12 bits, we don't care about
-							 * the wrap arounds
+							 * mask out the bottom12 bits, we don't care about the wrap arounds
 							 */
 		/* use the low level API to set the quad encoder signal */
 		talon.setSelectedSensorPosition(absolutePosition, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
@@ -175,12 +175,10 @@ public class DriveBase extends Subsystem {
 		talon.configPeakOutputForward(1, Constants.kTimeoutMs);
 		talon.configPeakOutputReverse(-1, Constants.kTimeoutMs);
 		/*
-		 * set the allowable closed-loop error, Closed-Loop output will be
-		 * neutral within this range. See Table in Section 17.2.1 for native
-		 * units per rotation.
+		 * set the allowable closed-loop error, Closed-Loop output will be neutral
+		 * within this range. See Table in Section 17.2.1 for native units per rotation.
 		 */
-		talon.configAllowableClosedloopError(0, Constants.kPIDLoopIdx,
-				Constants.kTimeoutMs); /* always servo */
+		talon.configAllowableClosedloopError(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs); /* always servo */
 		/* set closed loop gains in slot0 */
 		talon.config_kF(Constants.kPIDLoopIdx, 0.0, Constants.kTimeoutMs);
 		talon.config_kP(Constants.kPIDLoopIdx, Constants.Proportion, Constants.kTimeoutMs);
@@ -189,26 +187,31 @@ public class DriveBase extends Subsystem {
 	}
 
 	public void initTMP(TalonSRX talon) {
-		/* first choose the sensor */
-		talon.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		talon.reverseSensor(true);
-		// _talon.configEncoderCodesPerRev(XXX), // if using
-		// FeedbackDevice.QuadEncoder
-		// _talon.configPotentiometerTurns(XXX), // if using
-		// FeedbackDevice.AnalogEncoder or AnalogPot
+		talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+		talon.setSensorPhase(true);
+		talon.setInverted(false);
 
-		/* set the peak and nominal outputs, 12V means full */
-		talon.configNominalOutputVoltage(+0.0f, -0.0f);
-		talon.configPeakOutputVoltage(+12.0f, -12.0f);
+		/* Set relevant frame periods to be at least as fast as periodic rate */
+		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, 10, Constants.kTimeoutMs);
+		talon.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, 10, Constants.kTimeoutMs);
+
+		/* set the peak and nominal outputs */
+		talon.configNominalOutputForward(0, Constants.kTimeoutMs);
+		talon.configNominalOutputReverse(0, Constants.kTimeoutMs);
+		talon.configPeakOutputForward(1, Constants.kTimeoutMs);
+		talon.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+
 		/* set closed loop gains in slot0 - see documentation */
-		talon.setProfile(0);
-		talon.setF(0);
-		talon.setP(0);
-		talon.setI(0);
-		talon.setD(0);
+		talon.selectProfileSlot(Constants.kSlotIdx, Constants.kPIDLoopIdx);
+		talon.config_kF(0, 0.2, Constants.kTimeoutMs);
+		talon.config_kP(0, 0.2, Constants.kTimeoutMs);
+		talon.config_kI(0, 0, Constants.kTimeoutMs);
+		talon.config_kD(0, 0, Constants.kTimeoutMs);
 		/* set acceleration and vcruise velocity - see documentation */
-		talon.setMotionMagicCruiseVelocity(0);
-		talon.setMotionMagicAcceleration(0);
+		talon.configMotionCruiseVelocity(15000, Constants.kTimeoutMs);
+		talon.configMotionAcceleration(6000, Constants.kTimeoutMs);
+		/* zero the sensor */
+		talon.setSelectedSensorPosition(0, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 	}
 
 	public void singleStickDrive(Joystick joy) {
