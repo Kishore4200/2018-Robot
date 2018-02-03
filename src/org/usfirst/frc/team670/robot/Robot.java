@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoder_TMP;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.NavX_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.NavX_Pivot;
@@ -27,21 +28,22 @@ import org.usfirst.frc.team670.robot.subsystems.Intake;
  * @author vsharma
  */
 public class Robot extends TimedRobot {
-	public static final double length = 0, width = 0; //DEFINE LENGTH AND WIDTH
+	public static final double length = 0, width = 0; // DEFINE LENGTH AND WIDTH
 	public static final Elevator elevator = new Elevator();
 	public static final DriveBase driveBase = new DriveBase();
 	public static final Intake intake = new Intake();
 	public static PathFinder finder = new PathFinder();
-	
+
 	public static Aggregator sensors;
 	public static OI oi;
-	
+
 	Command m_autonomousCommand;
 	public static SendableChooser<Command> m_chooser = new SendableChooser<>();
 	public static SendableChooser<Double> autonomousDelay = new SendableChooser<>();
 	public static SendableChooser<Boolean> ApproachType = new SendableChooser<>();
 	public static SendableChooser<Boolean> tryLeft = new SendableChooser<>();
 	public static SendableChooser<Boolean> tryRight = new SendableChooser<>();
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -50,44 +52,41 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		oi = new OI();
 		sensors = new Aggregator();
-		
+
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
 		m_chooser.addObject("Turn Right 90 degrees", new NavX_Pivot(90));
 		m_chooser.addObject("Turn Left 90 degrees", new NavX_Pivot(-90));
 		m_chooser.addObject("Turn Right 60 degrees", new NavX_Pivot(60));
 		m_chooser.addObject("Turn Left 60 degrees", new NavX_Pivot(-60));
 		m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
-		m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
-		m_chooser.addObject("1ft_encoders_back", new Encoders_DriveDistance(-1));
-		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
-		
+		m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(12));
+		m_chooser.addObject("1ft_encoders_back", new Encoders_DriveDistance(-12));
+		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(12));
+		m_chooser.addObject("Drive 1 Foot TMP", new Encoder_TMP(50));
+
 		/*
-		m_chooser.addDefault("Do Nothing", new CancelCommand());
-		m_chooser.addObject("Right Position", new Auto_Right());
-		m_chooser.addObject("Center Position", new Auto_Center());
-		m_chooser.addObject("Left Position", new Auto_Left());
-		*/
-		
+		 * m_chooser.addDefault("Do Nothing", new CancelCommand());
+		 * m_chooser.addObject("Right Position", new Auto_Right());
+		 * m_chooser.addObject("Center Position", new Auto_Center());
+		 * m_chooser.addObject("Left Position", new Auto_Left());
+		 */
+
 		autonomousDelay.addDefault("0 Second", 0.0);
 		autonomousDelay.addObject("1 Second", 1.0);
 		autonomousDelay.addObject("2 Second", 2.0);
 		autonomousDelay.addObject("3 Second", 3.0);
 		autonomousDelay.addObject("4 Second", 4.0);
 		autonomousDelay.addObject("5 Second", 5.0);
-		
+
 		ApproachType.addDefault("Straight", true);
 		ApproachType.addObject("Side", false);
-		
+
 		tryLeft.addDefault("Try left", true);
 		tryLeft.addObject("Do not try left", false);
-		
+
 		tryRight.addDefault("Try right", true);
 		tryRight.addObject("Do not try right", false);
-		
-		m_chooser.setName("Auto mode");
-		ApproachType.setName("Approach Type");
-		autonomousDelay.setName("Auton Delay");
-		
+
 		SmartDashboard.putData("Auto mode", m_chooser);
 		SmartDashboard.putData("Auton Delay", autonomousDelay);
 		SmartDashboard.putData("Approach Type", ApproachType);
@@ -108,7 +107,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		//putData();
+		// putData();
 	}
 
 	/**
@@ -122,13 +121,13 @@ public class Robot extends TimedRobot {
 	 * You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
-	 */ 
+	 */
 	@Override
 	public void autonomousInit() {
-		
+
 		m_autonomousCommand = m_chooser.getSelected();
 
-		/*	 
+		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
@@ -140,14 +139,14 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.start();
 		}
 	}
-	
+
 	/**
 	 * This function is called periodically during autonomous.
 	 */
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		//logger.logData();
+		// logger.logData();
 	}
 
 	@Override
@@ -175,12 +174,11 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		
+
 	}
-	
-	public void putData()
-	{
-		if(sensors != null)
+
+	public void putData() {
+		if (sensors != null)
 			sensors.sendState();
 	}
 }

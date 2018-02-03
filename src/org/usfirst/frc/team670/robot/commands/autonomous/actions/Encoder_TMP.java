@@ -18,12 +18,12 @@ public class Encoder_TMP extends Command {
 	}
 
 	protected void initialize() {
-		Robot.driveBase.initPID(Robot.driveBase.getLeft());
-		Robot.driveBase.initPID(Robot.driveBase.getRight());
+		Robot.driveBase.initTMP(Robot.driveBase.getLeft());
+		Robot.driveBase.initTMP(Robot.driveBase.getRight());
 	}
 
 	protected void execute() {
-		Robot.driveBase.getLeft().set(ControlMode.Position, ticksToTravel);
+		Robot.driveBase.getLeft().set(ControlMode.Position, -ticksToTravel);
 		Robot.driveBase.getRight().set(ControlMode.Position, ticksToTravel);
 	}
 
