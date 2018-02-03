@@ -2,6 +2,7 @@ package paths.right;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_DriveDistance;
+import org.usfirst.frc.team670.robot.commands.autonomous.actions.Time_Delay;
 import org.usfirst.frc.team670.robot.utilities.Field;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -34,6 +35,7 @@ public class right_switch_straight extends CommandGroup {
 		// arm.
 		addSequential(new Encoders_DriveDistance(Field.DSToSwitch - Robot.length));
 		//PLACE CUBE
+		addSequential(new Time_Delay(2.5));
 		addSequential(new Encoders_DriveDistance(-(Field.DSToSwitch)));
 	}
 }

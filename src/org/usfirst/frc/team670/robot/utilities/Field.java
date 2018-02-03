@@ -32,13 +32,8 @@ public class Field {
 	public static final double DSToCubePile = 98.0;
 	public static final double CubePileWidth = 45.0;
 	public static final double SideToCubePile = SideToSwitch/2-CubePileWidth;
-
-
-
-
-
-
-
 	
+	public static final double EdgeToPlatform = 95.25;
+	public static final double DSToPlatform = 261.47;
 	
 }
