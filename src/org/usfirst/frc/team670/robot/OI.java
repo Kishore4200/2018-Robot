@@ -55,7 +55,7 @@ public class OI {
 	
 	private Button elevatorScale = new JoystickButton(arcadeStick, 4);
 	
-	private Button cancelCommand = new JoystickButton(arcadeStick, 6);
+	private Button cancelCommand = new JoystickButton(arcadeStick, 5);
 	
 	//Driver Controls
 	private Button tankDrive = new JoystickButton(leftDriveStick, 3);
