@@ -6,6 +6,7 @@ import org.usfirst.frc.team670.robot.RobotMap;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -22,12 +23,15 @@ public class Aggregator extends Thread{
 	// Sensors
 	private AHRS navXMicro;
 	private NetworkTable state;
+	private Relay camSwitch;
 	private ArduinoUSB ard;
 	
 	//Booleans
 	private boolean isNavXConnected;
 			
 	public Aggregator(){
+		camSwitch = new Relay(RobotMap.camRelay);
+		camSwitch.set(Relay.Value.kOff);
 		//Check the navXMicro is plugged in
 	    try {
 			navXMicro = new AHRS(RobotMap.navXPort);
@@ -41,6 +45,18 @@ public class Aggregator extends Thread{
 	    ard = new ArduinoUSB(19200, 1);
 	    
 	    state = NetworkTable.getTable("state");
+	}
+	
+	public void switchCam()
+	{
+		new Thread(new Runnable() {
+	        @Override
+	        public void run() {
+	        	camSwitch.set(Relay.Value.kOn);
+	        	for(int i = 0; i < 1000; i++){}
+	        	camSwitch.set(Relay.Value.kOff);
+	        }
+	        }).start();
 	}
 	
 	/*@return The distance read in inches by the ultrasonic sensor inside the intake * */

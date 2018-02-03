@@ -12,6 +12,7 @@ import org.usfirst.frc.team670.robot.commands.Auto_RunIntake;
 import org.usfirst.frc.team670.robot.commands.Auto_StopIntake;
 import org.usfirst.frc.team670.robot.commands.SetDriverControl;
 import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
+import org.usfirst.frc.team670.robot.commands.SwitchCamera;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_Elevator;
 import org.usfirst.frc.team670.robot.commands.autonomous.primary.CancelCommand;
 import org.usfirst.frc.team670.robot.utilities.DriverState;
@@ -62,6 +63,9 @@ public class OI {
 	private Button reverseTankDrive = new JoystickButton(leftDriveStick, 4);
 	private Button singleStickDrive = new JoystickButton(leftDriveStick, 5);
 	
+	private Button camSwitch = new JoystickButton(rightDriveStick, 2);
+
+	
 	public OI()
 	{
 		//Arcade buttons
@@ -78,6 +82,7 @@ public class OI {
 		tankDrive.whenPressed(new SetDriverControl(DriverState.TANK));
 		reverseTankDrive.whenPressed(new SetDriverControl(DriverState.TANKREVERSE));
 		singleStickDrive.whenPressed(new SetDriverControl(DriverState.SINGLE));		
+		camSwitch.whenPressed(new SwitchCamera());
 		
 		//Operator buttons
 		toggleElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATOR));

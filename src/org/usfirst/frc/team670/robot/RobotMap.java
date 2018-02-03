@@ -46,4 +46,6 @@ public class RobotMap {
     public final static int twistStick = 4;
     public final static int leftDriveStick = 2;
     public final static int rightDriveStick = 0;
+    
+	public static int camRelay = 1;
 }
