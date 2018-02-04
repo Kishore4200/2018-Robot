@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team670.robot.commands.autonomous.actions.Pivot;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.NavX_DriveDistance;
 import org.usfirst.frc.team670.robot.commands.autonomous.actions.NavX_Pivot;

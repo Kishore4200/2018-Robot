@@ -24,7 +24,9 @@ public class Constants {
 	 */
 	
 	public static final double ticksPerRotation = 1440.0;
-
+	public static final double elevatorGearRadius = -1;
+	
+	
 	public static final double DIAMETERinInchesDriveBase = 6;
 	public static final double DIAMETERinInchesElevator = 6;
 	
@@ -34,7 +36,17 @@ public class Constants {
 
 	public static final double joyStickMaxTwist = 90;
 	
-	public static final double elevatorPulseForExchange = 0;
+	public static final double elevatorPulseForExchange = 0; //SET THESE
 	public static final double elevatorPulseForSwitch = 0;
 	public static final double elevatorPulseForScale = 0;
+	
+	public static final double wheelVelocity = -1; //SET THIS
+	public static final double timeAutoSpeed = 0.8;
+	public static final double radius = -1; //SET THIS
+	
+	
+	public static final double elevatorMaxHeight = -1; // SET THESE
+	public static final double elevatorMinHeight = 0;
+	public static final double elevatorSafeSpeed = 0.5; // Set this for real
+
 	}
