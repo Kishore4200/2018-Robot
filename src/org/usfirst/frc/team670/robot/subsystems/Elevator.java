@@ -15,6 +15,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Elevator extends Subsystem {
 
+	/*
+	 * OTHER POSSIBLE WAY OF DOING MOVEMENT
+	 * Voltage Applied = Kv * velocity + Ka * acceleration + Ks
+	 * 
+	 * Ks = static friction and gravitational acceleration
+	 * Kv = velocity constant
+	 * Ka = acceleration constant, keep at zero and then use data from the other values to solve for it
+	 */
+	
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	private TalonSRX elevator;
@@ -50,8 +59,8 @@ public class Elevator extends Subsystem {
 	}
 
 	private boolean isMoveLegal(double speed) {
-		return (Constants.elevatorMaxHeight - encoder.getQuadraturePosition() * Constants.ticksPerRotation * Constants.elevatorGearRadius * 2 * Math.PI > 0.1 && speed > 0 || 
-				Constants.elevatorMinHeight - encoder.getQuadraturePosition() * Constants.ticksPerRotation * Constants.elevatorGearRadius * 2 * Math.PI < 0.1 && speed < 0 );
+		return ((Constants.elevatorMaxHeight - encoder.getQuadraturePosition() * Constants.ticksPerRotation * Constants.elevatorGearRadius * 2 * Math.PI > 0.1 && speed > 0) || 
+				(Constants.elevatorMinHeight - encoder.getQuadraturePosition() * Constants.ticksPerRotation * Constants.elevatorGearRadius * 2 * Math.PI < 0.1 && speed < 0) || speed == 0);
 	}
 
 	public void setSafeSpeed(boolean change) {

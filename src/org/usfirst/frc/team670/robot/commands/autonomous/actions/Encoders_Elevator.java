@@ -2,6 +2,7 @@ package org.usfirst.frc.team670.robot.commands.autonomous.actions;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.utilities.ElevatorState;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,15 +22,19 @@ public class Encoders_Elevator extends Command{
 	private boolean isGoingUp;
 	private double speed, tolerance;
 	
-	public Encoders_Elevator(int state, double speed) {
+	public Encoders_Elevator(ElevatorState state, double speed) {
 		tolerance = speed * 100;
 		this.speed = speed;
-		if(state == 1)
+		if(state == ElevatorState.EXCHANGE)
 			targetPulseHeight = Constants.elevatorPulseForExchange;
-		if(state == 2)
+		else if(state == ElevatorState.SWITCH)
 			targetPulseHeight = Constants.elevatorPulseForSwitch;
-		if(state == 3)
-			targetPulseHeight = Constants.elevatorPulseForScale;
+		else if(state == ElevatorState.MIDSCALE)
+			targetPulseHeight = Constants.elevatorPulseForMidScale;
+		else if(state == ElevatorState.HIGHSCALE)
+			targetPulseHeight = Constants.elevatorPulseForHighScale;
+		else if(state == ElevatorState.LOWSCALE)
+			targetPulseHeight = Constants.elevatorPulseForLowScale;
 		else
 			targetPulseHeight = Constants.elevatorPulseForExchange;
 	}

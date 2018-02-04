@@ -38,7 +38,9 @@ public class Constants {
 	
 	public static final double elevatorPulseForExchange = 0; //SET THESE
 	public static final double elevatorPulseForSwitch = 0;
-	public static final double elevatorPulseForScale = 0;
+	public static final double elevatorPulseForMidScale = 0;
+	public static final double elevatorPulseForLowScale = 0;
+	public static final double elevatorPulseForHighScale = 0;
 	
 	public static final double wheelVelocity = -1; //SET THIS
 	public static final double timeAutoSpeed = 0.8;
