@@ -15,8 +15,7 @@ public class ArduinoUSB {
 	 **/
 	public ArduinoUSB(int baud) {
 		isConnected = false;
-		if(!isConnected)
-		{
+		if (!isConnected) {
 			try {
 				usb = new SerialPort(baud, SerialPort.Port.kUSB);
 				isConnected = true;
@@ -25,8 +24,7 @@ public class ArduinoUSB {
 			}
 		}
 		System.out.println("SDFASDFSDFASDF");
-		if(!isConnected)
-		{
+		if (!isConnected) {
 			try {
 				usb = new SerialPort(baud, SerialPort.Port.kUSB1);
 				isConnected = true;
@@ -34,8 +32,7 @@ public class ArduinoUSB {
 				isConnected = false;
 			}
 		}
-		if(!isConnected)
-		{
+		if (!isConnected) {
 			try {
 				usb = new SerialPort(baud, SerialPort.Port.kUSB2);
 				isConnected = true;
@@ -43,7 +40,7 @@ public class ArduinoUSB {
 				isConnected = false;
 			}
 		}
-		
+
 	}
 
 	/**
@@ -63,7 +60,6 @@ public class ArduinoUSB {
 
 	public String read() {
 		if (isConnected) {
-			System.out.println("jhfgjg");
 			return usb.readString();
 		}
 		return "-1";

@@ -54,7 +54,7 @@ public class Aggregator extends Thread {
 		if (ard.isConnected()) {
 			d = Double.parseDouble(getVal(ard.read()));
 		} else {
-			d = -12;
+			d = -1;
 		}
 		return d;
 	}
