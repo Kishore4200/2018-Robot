@@ -35,6 +35,9 @@ public class Joystick_Drive extends Command {
     		//Tank Drive
 			Robot.driveBase.drive(-Robot.oi.getRightStick().getY(), Robot.oi.getLeftStick().getY());
     	}
+		else if(Robot.oi.getDS().equals(DriverState.FIELD)){
+			Robot.driveBase.fieldDrive(Robot.oi.getLeftStick());
+		}
     	else
     	{
     		singleStickDrive(Robot.oi.getLeftStick().getX(), Robot.oi.getLeftStick().getY());

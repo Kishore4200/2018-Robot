@@ -62,6 +62,8 @@ public class OI {
 	private Button tankDrive = new JoystickButton(leftDriveStick, 3);
 	private Button reverseTankDrive = new JoystickButton(leftDriveStick, 4);
 	private Button singleStickDrive = new JoystickButton(leftDriveStick, 5);
+	private Button fieldDrive = new JoystickButton(leftDriveStick, 2);
+
 	
 	private Button camSwitch = new JoystickButton(rightDriveStick, 2);
 
