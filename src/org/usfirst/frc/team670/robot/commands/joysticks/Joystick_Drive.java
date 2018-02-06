@@ -13,7 +13,7 @@ public class Joystick_Drive extends Command {
 	private double lSpeed;
 	private double angle, newX, newY, centerX, centerY;
 	private Joystick joy;
- 
+
 	public Joystick_Drive() {
 		requires(Robot.driveBase);
 	}
@@ -25,23 +25,19 @@ public class Joystick_Drive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if(Robot.oi.getDS().equals(DriverState.TANK))
-    	{
-    		//Tank Drive
+		if (Robot.oi.getDS().equals(DriverState.TANK)) {
+			// Tank Drive
 			Robot.driveBase.drive(Robot.oi.getLeftStick().getY(), -Robot.oi.getRightStick().getY());
-    	}
-		else if(Robot.oi.getDS().equals(DriverState.TANKREVERSE))
-    	{
-    		//Tank Drive
-			Robot.driveBase.drive(-Robot.oi.getRightStick().getY(), Robot.oi.getLeftStick().getY());
-    	}
-		else if(Robot.oi.getDS().equals(DriverState.FIELD)){
-			Robot.driveBase.fieldDrive(Robot.oi.getLeftStick());
+		} else if (Robot.oi.getDS().equals(DriverState.TANKREVERSE)) {
+			// Tank Drive
+			Robot.driveBase.drive(-Robot.oi.getLeftStick().getY(), Robot.oi.getRightStick().getY());
+		} else if (Robot.oi.getDS().equals(DriverState.FIELD)) {
+			Robot.driveBase.fieldDrive(Robot.oi.getLeftStick(), false);
+		} else if (Robot.oi.getDS().equals(DriverState.FIELDREVERSE)) {
+			Robot.driveBase.fieldDrive(Robot.oi.getLeftStick(), true);
+		} else {
+			singleStickDrive(-Robot.oi.getLeftStick().getX(), Robot.oi.getLeftStick().getY());
 		}
-    	else
-    	{
-    		singleStickDrive(Robot.oi.getLeftStick().getX(), Robot.oi.getLeftStick().getY());
-    	}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

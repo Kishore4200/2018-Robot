@@ -29,48 +29,46 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * @author vsharma
  */
 public class OI {
-	
+
 	private OperatorState os = OperatorState.NONE;
 	private DriverState ds = DriverState.TANK;
-	
+
 	public static String homePath = "/home/lvuser/paths/";
-	
+
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
 	private Joystick arcadeStick = new Joystick(RobotMap.arcadeStick);
-	
-	//Operator Controls
+
+	// Operator Controls
 	private Button toggleElevator = new JoystickButton(operatorStick, 3);
 	private Button toggleIntake = new JoystickButton(operatorStick, 4);
-	
-	//Arcade Controls
+
+	// Arcade Controls
 	private Button intakedeploy = new JoystickButton(arcadeStick, 1);
 	private Button intakeretract = new JoystickButton(arcadeStick, 10);
-	
+
 	private Button runIntake = new JoystickButton(arcadeStick, 2);
 	private Button stopIntake = new JoystickButton(arcadeStick, 9);
-	
+
 	private Button elevatorExchange = new JoystickButton(arcadeStick, 3);
 	private Button elevatorSwitch = new JoystickButton(arcadeStick, 8);
-	
+
 	private Button elevatorScale = new JoystickButton(arcadeStick, 4);
-	
+
 	private Button cancelCommand = new JoystickButton(arcadeStick, 5);
-	
-	//Driver Controls
+
+	// Driver Controls
 	private Button tankDrive = new JoystickButton(leftDriveStick, 3);
 	private Button reverseTankDrive = new JoystickButton(leftDriveStick, 4);
 	private Button singleStickDrive = new JoystickButton(leftDriveStick, 5);
 	private Button fieldDrive = new JoystickButton(leftDriveStick, 2);
+	private Button reverseFieldDrive = new JoystickButton(leftDriveStick, 10);
 
-	
 	private Button camSwitch = new JoystickButton(rightDriveStick, 2);
 
-	
-	public OI()
-	{
-		//Arcade buttons
+	public OI() {
+		// Arcade buttons
 		intakedeploy.whenPressed(new Auto_DeployIntake(true));
 		intakeretract.whenPressed(new Auto_DeployIntake(false));
 		runIntake.whenPressed(new Auto_RunIntake(1.0));
@@ -79,50 +77,48 @@ public class OI {
 		elevatorSwitch.whenPressed(new Encoders_Elevator(2, 0.75));
 		elevatorScale.whenPressed(new Encoders_Elevator(3, 0.75));
 		cancelCommand.whenPressed(new CancelCommand());
-						
-		//Driver Controls
+
+		// Driver Controls
 		tankDrive.whenPressed(new SetDriverControl(DriverState.TANK));
 		reverseTankDrive.whenPressed(new SetDriverControl(DriverState.TANKREVERSE));
-		singleStickDrive.whenPressed(new SetDriverControl(DriverState.SINGLE));		
+		singleStickDrive.whenPressed(new SetDriverControl(DriverState.SINGLE));
+		fieldDrive.whenPressed(new SetDriverControl(DriverState.FIELD));
+		reverseFieldDrive.whenPressed(new SetDriverControl(DriverState.FIELDREVERSE));
 		camSwitch.whenPressed(new SwitchCamera());
-		
-		//Operator buttons
+
+		// Operator buttons
 		toggleElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATOR));
 		toggleElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		toggleIntake.whenPressed(new SetOperatorControl(OperatorState.INTAKE));
 		toggleIntake.whenReleased(new SetOperatorControl(OperatorState.NONE));
 	}
-	
-	public Joystick getLeftStick(){
+
+	public Joystick getLeftStick() {
 		return leftDriveStick;
 	}
-	
-	public Joystick getRightStick(){
+
+	public Joystick getRightStick() {
 		return rightDriveStick;
 	}
-	
+
 	public Joystick getOperatorStick() {
 		return operatorStick;
 	}
-	
-	public OperatorState getOS()
-	{
+
+	public OperatorState getOS() {
 		return os;
 	}
-	
-	public void setOperatorCommand(OperatorState os)
-	{
+
+	public void setOperatorCommand(OperatorState os) {
 		this.os = os;
 	}
-	
-	public DriverState getDS()
-	{
+
+	public DriverState getDS() {
 		return ds;
 	}
-	
-	public void setDriverState(DriverState ds)
-	{
+
+	public void setDriverState(DriverState ds) {
 		this.ds = ds;
 	}
-	
+
 }

@@ -159,8 +159,8 @@ public class DriveBase extends Subsystem {
 	public void initPID(TalonSRX talon) {
 		int absolutePosition = talon.getSelectedSensorPosition(Constants.kTimeoutMs)
 				& 0xFFF; /*
-							 * mask out the bottom12 bits, we don't care about the
-							 * wrap arounds
+							 * mask out the bottom12 bits, we don't care about
+							 * the wrap arounds
 							 */
 		/* use the low level API to set the quad encoder signal */
 		talon.setSelectedSensorPosition(absolutePosition, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
@@ -196,15 +196,16 @@ public class DriveBase extends Subsystem {
 		rSpeed = 0.5 * Math.pow(rSpeed, 3) + (1 - 0.5) * rSpeed;
 		drive(lSpeed, rSpeed);
 	}
-	
-	public void fieldDrive(Joystick left){
+
+	public void fieldDrive(Joystick left, boolean reversed) {
+		int reverse = reversed ? -1 : 1;
 		double rcw = left.getTwist();
 		double forwrd = left.getY() * -1; /* Invert stick Y axis */
-		double strafe = left.getX();
+		double strafe = left.getX() * reverse;
 
 		/* Adjust Joystick X/Y inputs by navX MXP yaw angle */
 
-		double gyro_degrees = Robot.sensors.getYaw();
+		double gyro_degrees = Robot.sensors.getYaw() * reverse;
 		double gyro_radians = gyro_degrees * Math.PI / 180;
 		double temp = forwrd * Math.cos(gyro_radians) + strafe * Math.sin(gyro_radians);
 		strafe = -forwrd * Math.sin(gyro_radians) + strafe * Math.cos(gyro_radians);
@@ -214,7 +215,7 @@ public class DriveBase extends Subsystem {
 		/* rotated by the gyro angle, and can be sent to drive system */
 		singleStickDrive(strafe, forwrd);
 	}
-	
+
 	public void singleStickDrive(double x, double y) {
 		double rSpeed = 0;
 		double lSpeed = 0;
@@ -225,7 +226,7 @@ public class DriveBase extends Subsystem {
 		rSpeed = 0.5 * Math.pow(rSpeed, 3) + (1 - 0.5) * rSpeed;
 		Robot.driveBase.drive(lSpeed, rSpeed);
 	}
-	
+
 	public void singleDrive(Joystick joy) {
 		double rSpeed, lSpeed;
 		rSpeed = -joy.getX() - joy.getY();
@@ -234,7 +235,6 @@ public class DriveBase extends Subsystem {
 		rSpeed = 0.5 * Math.pow(rSpeed, 3) + (1 - 0.5) * rSpeed;
 		drive(lSpeed, rSpeed);
 	}
-	
 
 	public void singleStickEther(Joystick joy) {
 		double lSpeed = 0, rSpeed = 0;
