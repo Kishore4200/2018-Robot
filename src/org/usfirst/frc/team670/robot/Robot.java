@@ -13,10 +13,9 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_DriveDistance;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.NavX_DriveDistance;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.NavX_Pivot;
-import org.usfirst.frc.team670.robot.commands.autonomous.primary.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Drive;
+import org.usfirst.frc.team670.robot.commands.actions.components.NavX_Pivot;
+import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.sensors.Aggregator;
 import org.usfirst.frc.team670.robot.utilities.PathFinder;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
@@ -56,10 +55,8 @@ public class Robot extends TimedRobot {
 		m_chooser.addObject("Turn Left 90 degrees", new NavX_Pivot(-90));
 		m_chooser.addObject("Turn Right 60 degrees", new NavX_Pivot(60));
 		m_chooser.addObject("Turn Left 60 degrees", new NavX_Pivot(-60));
-		m_chooser.addObject("1ft_navX", new NavX_DriveDistance(1));
-		m_chooser.addObject("1ft_encoders", new Encoders_DriveDistance(1));
-		m_chooser.addObject("1ft_encoders_back", new Encoders_DriveDistance(-1));
-		m_chooser.addObject("Drive 1 Foot NavX", new NavX_DriveDistance(1));
+		m_chooser.addObject("1ft_encoders", new Encoders_Drive(1));
+		m_chooser.addObject("1ft_encoders_back", new Encoders_Drive(-1));
 		
 		/*
 		m_chooser.addDefault("Do Nothing", new CancelCommand());
@@ -176,6 +173,6 @@ public class Robot extends TimedRobot {
 	{
 		sensors.sendCount++;
 		if(sensors != null && sensors.sendCount > 500)
-			sensors.sendState();
+			sensors.transmitData();
 	}
 }

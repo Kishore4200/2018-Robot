@@ -1,8 +1,8 @@
 package paths.center;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_DriveDistance;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.NavX_Pivot;
+import org.usfirst.frc.team670.robot.commands.actions.Drive;
+import org.usfirst.frc.team670.robot.commands.actions.Pivot;
 import org.usfirst.frc.team670.robot.utilities.Field;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -30,12 +30,12 @@ public class center_right_switch_straight extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new Encoders_DriveDistance(Robot.length));
-    	addSequential(new NavX_Pivot(Math.atan((Field.DSToSwitch-1.5*Robot.length)/(0.5*(Field.SwitchLength-Robot.width-Field.ExchangeWidth)))));
-    	addSequential(new Encoders_DriveDistance(Math.sqrt((Math.pow(Field.DSToSwitch-1.5*Robot.length, 2)) + (Math.pow(0.5*(Field.SwitchLength-Robot.width-Field.ExchangeWidth), 2)))));
-    	addSequential(new NavX_Pivot(-Math.atan((Field.DSToSwitch-1.5*Robot.length)/(0.5*(Field.SwitchLength-Robot.width-Field.ExchangeWidth)))));
-    	addSequential(new Encoders_DriveDistance(0.5*Robot.length));
+    	addSequential(new Drive(Robot.length));
+    	addSequential(new Pivot(Math.atan((Field.DSToSwitch-1.5*Robot.length)/(0.5*(Field.SwitchLength-Robot.width-Field.ExchangeWidth)))));
+    	addSequential(new Drive(Math.sqrt((Math.pow(Field.DSToSwitch-1.5*Robot.length, 2)) + (Math.pow(0.5*(Field.SwitchLength-Robot.width-Field.ExchangeWidth), 2)))));
+    	addSequential(new Pivot(-Math.atan((Field.DSToSwitch-1.5*Robot.length)/(0.5*(Field.SwitchLength-Robot.width-Field.ExchangeWidth)))));
+    	addSequential(new Drive(0.5*Robot.length));
     	// PLACE CUBE
-    	addSequential(new Encoders_DriveDistance(-0.5*Robot.length));
+    	addSequential(new Drive(-0.5*Robot.length));
     }
 }

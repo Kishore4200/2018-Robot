@@ -11,7 +11,6 @@ public class Joystick_Drive extends Command {
 
 	private double rSpeed;
 	private double lSpeed;
-	private double angle, newX, newY, centerX, centerY;
 	private Joystick joy;
 
 	public Joystick_Drive() {
@@ -25,18 +24,15 @@ public class Joystick_Drive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (Robot.oi.getDS().equals(DriverState.TANK)) {
-			// Tank Drive
-			Robot.driveBase.drive(Robot.oi.getLeftStick().getY(), -Robot.oi.getRightStick().getY());
-		} else if (Robot.oi.getDS().equals(DriverState.TANKREVERSE)) {
+		if (Robot.oi.getDS().equals(DriverState.TANKREVERSE)) {
 			// Tank Drive
 			Robot.driveBase.drive(-Robot.oi.getLeftStick().getY(), Robot.oi.getRightStick().getY());
 		} else if (Robot.oi.getDS().equals(DriverState.FIELD)) {
-			Robot.driveBase.fieldDrive(Robot.oi.getLeftStick(), false);
+			PartyDrive(joy, true);
 		} else if (Robot.oi.getDS().equals(DriverState.FIELDREVERSE)) {
-			Robot.driveBase.fieldDrive(Robot.oi.getLeftStick(), true);
+			PartyDrive(joy, false);
 		} else {
-			singleStickDrive(-Robot.oi.getLeftStick().getX(), Robot.oi.getLeftStick().getY());
+			Robot.driveBase.drive(Robot.oi.getLeftStick().getY(), -Robot.oi.getRightStick().getY());
 		}
 	}
 
@@ -56,6 +52,29 @@ public class Joystick_Drive extends Command {
 		Robot.driveBase.drive(0, 0);
 	}
 
+	private void PartyDrive(Joystick left, boolean isNormal)
+	{
+		double rcw = left.getTwist();
+		double forwrd = left.getY() * -1; /* Invert stick Y axis */
+		double strafe = left.getX();
+		 
+		/* Adjust Joystick X/Y inputs by navX MXP yaw angle */
+		
+		double gyro_degrees = Robot.sensors.getYaw();
+		double gyro_radians = gyro_degrees * Math.PI/180; 
+		double temp = forwrd * Math.cos(gyro_radians) + 
+		strafe * Math.sin(gyro_radians);
+		strafe = -forwrd * Math.sin(gyro_radians) + strafe * Math.cos(gyro_radians);
+		forwrd = temp;
+
+		/* At this point, Joystick X/Y (strafe/forwrd) vectors have been */
+		/* rotated by the gyro angle, and can be sent to drive system */
+		if(isNormal)
+			singleStickDrive(strafe, forwrd); 
+		else
+			singleStickDrive(-strafe, -forwrd); 
+	}
+	
 	public void singleStickDrive(double x, double y) {
 		rSpeed = -x - y;
 		lSpeed = -x + y;

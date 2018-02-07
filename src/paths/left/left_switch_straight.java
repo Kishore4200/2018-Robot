@@ -1,8 +1,8 @@
 package paths.left;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_DriveDistance;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.Time_Delay;
+import org.usfirst.frc.team670.robot.commands.actions.Delay;
+import org.usfirst.frc.team670.robot.commands.actions.Drive;
 import org.usfirst.frc.team670.robot.utilities.Field;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -29,9 +29,9 @@ public class left_switch_straight extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new Encoders_DriveDistance(Field.DSToSwitch - Robot.length));
+    	addSequential(new Drive(Field.DSToSwitch - Robot.length));
 		//PLACE CUBE
-    	addSequential(new Time_Delay(2.5));
-		addSequential(new Encoders_DriveDistance(-(Field.DSToSwitch)));
+    	addSequential(new Delay(2.5));
+		addSequential(new Drive(-(Field.DSToSwitch)));
     }
 }

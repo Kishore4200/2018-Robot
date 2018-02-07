@@ -28,7 +28,7 @@ public class Aggregator extends Thread{
 	private ArduinoUSB ard;
 	
 	//Booleans
-	private boolean isNavXConnected;
+	private boolean isNavXConnected, encodersConnected;
 	public int sendCount = 0;
 			
 	public Aggregator(){
@@ -79,6 +79,14 @@ public class Aggregator extends Thread{
 	}
 
 	public boolean isNavXConnected() {
+		try {
+			navXMicro = new AHRS(RobotMap.navXPort);
+			isNavXConnected = true;
+		} catch (RuntimeException ex) {
+			isNavXConnected = false;
+			DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
+			navXMicro = null;
+		}
 		return isNavXConnected;
 	}
 
@@ -122,7 +130,7 @@ public class Aggregator extends Thread{
 		return -1;
 	}
 	
-	public void sendState()
+	public void transmitData()
 	{
 		new Thread(new Runnable() {
 	        @Override
@@ -132,6 +140,8 @@ public class Aggregator extends Thread{
 		        	driverstation.putDouble("time_left", DriverStation.getInstance().getMatchTime());
 		        	driverstation.putString("alliance", DriverStation.getInstance().getAlliance().toString());
 		        	driverstation.putDouble("voltage", DriverStation.getInstance().getBatteryVoltage());
+		        	driverstation.putBoolean("navX", isNavXConnected);
+		        	driverstation.putBoolean("encoders", encodersConnected);
 	        }
 	        }).start();
 	}
@@ -154,6 +164,10 @@ public class Aggregator extends Thread{
 			}
 		}
 		return "-1";
+	}
+
+	public void areEncodersWorking(boolean b) {
+		encodersConnected = b;
 	}
 }
 

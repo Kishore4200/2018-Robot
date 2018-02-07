@@ -11,7 +11,7 @@ public class Field {
 	public static final double SwitchWidth = 56.0;
 
 	public static final double SideToScale = 71.57;
-	public static final double ScaleWidth = 0.00; //DETERMINE THIS
+	public static final double ScaleWidth = 48; //DETERMINE THIS
 
 
 	public static final double DSToBaseline = 120.0;

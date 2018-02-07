@@ -1,7 +1,7 @@
 package org.usfirst.frc.team670.robot.commands.joysticks;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_Test;
+import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Test;
 import org.usfirst.frc.team670.robot.utilities.Constants;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
 

@@ -21,15 +21,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveBase extends Subsystem {
 	private TalonSRX left1, right1, left2, right2;
-	public static final double WHEEL_DIAMETER = 6.0;
-	private static final int MAG_ENCODER_TICKS_PER_REVOLUTION = 1440; // The old
-																		// values:
-																		// 1440,
-																		// new
-																		// encoder
-																		// mag:
-																		// 4096
-	public static final double GEAR_RATIO = 1.0;
 
 	// PID VALUES
 	/**
@@ -130,13 +121,13 @@ public class DriveBase extends Subsystem {
 	public double getLeftEncPositionInFeet() {
 		double ticks = left1.getSensorCollection().getQuadraturePosition();
 		// Convert encoder ticks to feet
-		return ((Math.PI * WHEEL_DIAMETER) / (MAG_ENCODER_TICKS_PER_REVOLUTION * GEAR_RATIO) * ticks) / 12;
+		return ((Math.PI * Constants.DIAMETERinInchesDriveBase) / (Constants.drivebaseTickPerRotation * Constants.gearRatioDB) * ticks) / 12;
 	}
 
 	public double getRightEncPositionInFeet() {
 		double ticks = right1.getSensorCollection().getQuadraturePosition();
 		// Convert encoder ticks to feet
-		return ((Math.PI * WHEEL_DIAMETER) / (MAG_ENCODER_TICKS_PER_REVOLUTION * GEAR_RATIO) * ticks) / 12;
+		return ((Math.PI * Constants.DIAMETERinInchesDriveBase) / (Constants.drivebaseTickPerRotation * Constants.gearRatioDB) * ticks) / 12;
 	}
 
 	/**
@@ -153,7 +144,7 @@ public class DriveBase extends Subsystem {
 	 * @return The value in ticks
 	 */
 	public double feetToEncoderTicks(double feet) {
-		return (MAG_ENCODER_TICKS_PER_REVOLUTION * GEAR_RATIO) / (Math.PI * WHEEL_DIAMETER) * feet;
+		return (Constants.drivebaseTickPerRotation * Constants.gearRatioDB) / (Math.PI * Constants.DIAMETERinInchesDriveBase) * feet;
 	}
 
 	public void initPID(TalonSRX talon) {

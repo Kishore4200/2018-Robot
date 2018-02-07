@@ -7,15 +7,15 @@
 
 package org.usfirst.frc.team670.robot;
 
-import org.usfirst.frc.team670.robot.commands.Auto_DeployIntake;
-import org.usfirst.frc.team670.robot.commands.Auto_RunIntake;
-import org.usfirst.frc.team670.robot.commands.Auto_StopIntake;
-import org.usfirst.frc.team670.robot.commands.SetDriverControl;
-import org.usfirst.frc.team670.robot.commands.SetOperatorControl;
-import org.usfirst.frc.team670.robot.commands.SwitchCamera;
-import org.usfirst.frc.team670.robot.commands.autonomous.actions.Encoders_Elevator;
-import org.usfirst.frc.team670.robot.commands.autonomous.primary.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Elevator;
+import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
+import org.usfirst.frc.team670.robot.commands.switches.DeployIntake;
+import org.usfirst.frc.team670.robot.commands.switches.RunIntake;
+import org.usfirst.frc.team670.robot.commands.switches.SetDriverControl;
+import org.usfirst.frc.team670.robot.commands.switches.SetOperatorControl;
+import org.usfirst.frc.team670.robot.commands.switches.SwitchCamera;
 import org.usfirst.frc.team670.robot.utilities.DriverState;
+import org.usfirst.frc.team670.robot.utilities.ElevatorState;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -32,13 +32,7 @@ public class OI {
 
 	private OperatorState os = OperatorState.NONE;
 	private DriverState ds = DriverState.TANK;
-<<<<<<< HEAD
-		
-=======
-
-	public static String homePath = "/home/lvuser/paths/";
-
->>>>>>> 0bd28fbc597b0aabae21e68f8e6db6471908055f
+	
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
@@ -73,13 +67,13 @@ public class OI {
 
 	public OI() {
 		// Arcade buttons
-		intakedeploy.whenPressed(new Auto_DeployIntake(true));
-		intakeretract.whenPressed(new Auto_DeployIntake(false));
-		runIntake.whenPressed(new Auto_RunIntake(1.0));
-		stopIntake.whenPressed(new Auto_StopIntake());
-		elevatorExchange.whenPressed(new Encoders_Elevator(1, 0.75));
-		elevatorSwitch.whenPressed(new Encoders_Elevator(2, 0.75));
-		elevatorScale.whenPressed(new Encoders_Elevator(3, 0.75));
+		intakedeploy.whenPressed(new DeployIntake(true));
+		intakeretract.whenPressed(new DeployIntake(false));
+		runIntake.whenPressed(new RunIntake(1.0, 10));
+		stopIntake.whenPressed(new RunIntake(0,0));
+		elevatorExchange.whenPressed(new Encoders_Elevator(ElevatorState.EXCHANGE, 0.75));
+		elevatorSwitch.whenPressed(new Encoders_Elevator(ElevatorState.SWITCH, 0.75));
+		elevatorScale.whenPressed(new Encoders_Elevator(ElevatorState.SCALE, 0.75));
 		cancelCommand.whenPressed(new CancelCommand());
 
 		// Driver Controls
