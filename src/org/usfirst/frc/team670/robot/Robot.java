@@ -104,7 +104,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		//putData();
 	}
 
 	/**
@@ -143,7 +142,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		//logger.logData();
 	}
 
 	@Override
@@ -171,12 +169,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		
+		putData();
 	}
 	
 	public void putData()
 	{
-		if(sensors != null)
+		sensors.sendCount++;
+		if(sensors != null && sensors.sendCount > 500)
 			sensors.sendState();
 	}
 }

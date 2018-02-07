@@ -6,6 +6,7 @@ import org.usfirst.frc.team670.robot.RobotMap;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Ultrasonic;
@@ -22,12 +23,13 @@ public class Aggregator extends Thread{
 	
 	// Sensors
 	private AHRS navXMicro;
-	private NetworkTable state;
+	private NetworkTable driverstation;
 	private Relay camSwitch;
 	private ArduinoUSB ard;
 	
 	//Booleans
 	private boolean isNavXConnected;
+	public int sendCount = 0;
 			
 	public Aggregator(){
 		camSwitch = new Relay(RobotMap.camRelay);
@@ -44,7 +46,7 @@ public class Aggregator extends Thread{
 	    
 	    ard = new ArduinoUSB(19200, 1);
 	    
-	    state = NetworkTable.getTable("state");
+	    driverstation = NetworkTable.getTable("driverstation");
 	}
 	
 	public void switchCam()
@@ -125,8 +127,11 @@ public class Aggregator extends Thread{
 		new Thread(new Runnable() {
 	        @Override
 	        public void run() {
-	        	state.putString("operator", Robot.oi.getOS().toString());
-	    		state.putString("drive", Robot.oi.getDS().toString());
+		        	driverstation.putString("operator_state", Robot.oi.getOS().toString());
+		        	driverstation.putString("driver_state", Robot.oi.getDS().toString());
+		        	driverstation.putDouble("time_left", DriverStation.getInstance().getMatchTime());
+		        	driverstation.putString("alliance", DriverStation.getInstance().getAlliance().toString());
+		        	driverstation.putDouble("voltage", DriverStation.getInstance().getBatteryVoltage());
 	        }
 	        }).start();
 	}
