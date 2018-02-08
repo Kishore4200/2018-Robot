@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Intake extends Subsystem {
 
-	private Solenoid deployIntakeElevator, deployGrabber;
+	//private Solenoid deployIntakeElevator, deployGrabber;
 	private TalonSRX leftIntake, rightIntake;
 	// Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -24,8 +24,8 @@ public class Intake extends Subsystem {
 	{
 		leftIntake = new TalonSRX(RobotMap.intakeLeftTalon);
 		rightIntake = new TalonSRX(RobotMap.intakeRightTalon);
-		deployIntakeElevator = new Solenoid(RobotMap.intakeDeploy);
-		deployGrabber = new Solenoid(RobotMap.clawDeploy);
+		//deployIntakeElevator = new Solenoid(RobotMap.intakeDeploy);
+		//deployGrabber = new Solenoid(RobotMap.clawDeploy);
 	}
 	
 	public void driveIntake(double speed)
@@ -36,12 +36,12 @@ public class Intake extends Subsystem {
 	
 	public void deploySupport(boolean deploy)
 	{
-		deployIntakeElevator.set(deploy);
+		//deployIntakeElevator.set(deploy);
 	}
 	
 	public void deployIntake(boolean deploy)
 	{
-		deployGrabber.set(deploy);
+		//deployGrabber.set(deploy);
 	}
 	
     public void initDefaultCommand() {

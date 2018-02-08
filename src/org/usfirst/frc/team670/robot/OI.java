@@ -13,7 +13,6 @@ import org.usfirst.frc.team670.robot.commands.switches.DeployIntake;
 import org.usfirst.frc.team670.robot.commands.switches.RunIntake;
 import org.usfirst.frc.team670.robot.commands.switches.SetDriverControl;
 import org.usfirst.frc.team670.robot.commands.switches.SetOperatorControl;
-import org.usfirst.frc.team670.robot.commands.switches.SwitchCamera;
 import org.usfirst.frc.team670.robot.utilities.DriverState;
 import org.usfirst.frc.team670.robot.utilities.ElevatorState;
 import org.usfirst.frc.team670.robot.utilities.OperatorState;
@@ -62,9 +61,7 @@ public class OI {
 	private Button singleStickDrive = new JoystickButton(leftDriveStick, 5);
 	private Button fieldDrive = new JoystickButton(leftDriveStick, 2);
 	private Button reverseFieldDrive = new JoystickButton(leftDriveStick, 10);
-
-	private Button camSwitch = new JoystickButton(rightDriveStick, 2);
-
+	
 	public OI() {
 		// Arcade buttons
 		intakedeploy.whenPressed(new DeployIntake(true));
@@ -82,8 +79,7 @@ public class OI {
 		singleStickDrive.whenPressed(new SetDriverControl(DriverState.SINGLE));
 		fieldDrive.whenPressed(new SetDriverControl(DriverState.FIELD));
 		reverseFieldDrive.whenPressed(new SetDriverControl(DriverState.FIELDREVERSE));
-		camSwitch.whenPressed(new SwitchCamera());
-
+		
 		// Operator buttons
 		toggleElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATOR));
 		toggleElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));

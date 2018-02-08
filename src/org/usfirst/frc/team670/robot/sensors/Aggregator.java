@@ -6,11 +6,9 @@ import org.usfirst.frc.team670.robot.RobotMap;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * 
@@ -23,15 +21,17 @@ public class Aggregator extends Thread{
 	
 	// Sensors
 	private AHRS navXMicro;
-	private NetworkTable driverstation;
+	private NetworkTable driverstation, rpi;
 	private Relay camSwitch;
-	private ArduinoUSB ard;
 	
 	//Booleans
-	private boolean isNavXConnected, encodersConnected;
-	public int sendCount = 0;
+	private boolean isNavXConnected, encodersConnected, runSensorNetwork, sendDataToDS;
+	private int sendCount = 0;
+	private double lidar_left, lidar_right;
 			
 	public Aggregator(){
+		runSensorNetwork = true;
+		sendDataToDS = true;
 		camSwitch = new Relay(RobotMap.camRelay);
 		camSwitch.set(Relay.Value.kOff);
 		//Check the navXMicro is plugged in
@@ -44,33 +44,39 @@ public class Aggregator extends Thread{
 			navXMicro = null;
 		}
 	    
-	    ard = new ArduinoUSB(19200, 1);
-	    
+		rpi = NetworkTable.getTable("rpi");
 	    driverstation = NetworkTable.getTable("driverstation");
-	}
-	
-	public void switchCam()
-	{
-		new Thread(new Runnable() {
+	    
+	    new Thread(new Runnable() {
 	        @Override
 	        public void run() {
-	        	camSwitch.set(Relay.Value.kOn);
-	        	for(int i = 0; i < 1000; i++){}
-	        	camSwitch.set(Relay.Value.kOff);
+	        	while(true)
+	        	{
+	        		sendCount++;
+	        		if(runSensorNetwork)
+	        		{
+			        	lidar_left = rpi.getDouble("lidar_left", -1);
+			        	lidar_right = rpi.getDouble("lidar_right", -1);
+	        		}
+	        		if(sendDataToDS && sendCount > 500)
+	        		{
+	        			driverstation.putString("operator_state", Robot.oi.getOS().toString());
+	        			driverstation.putString("driver_state", Robot.oi.getDS().toString());
+			        	driverstation.putDouble("time_left", DriverStation.getInstance().getMatchTime());
+			        	driverstation.putString("alliance", DriverStation.getInstance().getAlliance().toString());
+			        	driverstation.putDouble("voltage", DriverStation.getInstance().getBatteryVoltage());
+			        	driverstation.putBoolean("navX", isNavXConnected);
+			        	driverstation.putBoolean("encoders", encodersConnected);
+	        		}
+	        	}
 	        }
-	        }).start();
+	    }).start();
 	}
 	
 	/*@return The distance read in inches by the ultrasonic sensor inside the intake * */
 	public double getDistanceIntake()
 	{
-		double d = 0;
-		
-		if(ard.isConnected())
-			d = Double.parseDouble(getVal(ard.read()));
-		else
-			d = -1;
-		return d;
+		return -1;
 	}
 	
 	public void reset() {
@@ -128,22 +134,6 @@ public class Aggregator extends Thread{
 		if (isNavXConnected())
 			return navXMicro.getDisplacementZ();
 		return -1;
-	}
-	
-	public void transmitData()
-	{
-		new Thread(new Runnable() {
-	        @Override
-	        public void run() {
-		        	driverstation.putString("operator_state", Robot.oi.getOS().toString());
-		        	driverstation.putString("driver_state", Robot.oi.getDS().toString());
-		        	driverstation.putDouble("time_left", DriverStation.getInstance().getMatchTime());
-		        	driverstation.putString("alliance", DriverStation.getInstance().getAlliance().toString());
-		        	driverstation.putDouble("voltage", DriverStation.getInstance().getBatteryVoltage());
-		        	driverstation.putBoolean("navX", isNavXConnected);
-		        	driverstation.putBoolean("encoders", encodersConnected);
-	        }
-	        }).start();
 	}
 	
 	public String toString()

@@ -101,6 +101,8 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		double d = sensors.getDistanceIntake();
+		System.out.println(d);
 	}
 
 	/**
@@ -158,7 +160,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		putData();
 	}
 
 	/**
@@ -166,13 +167,5 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		putData();
-	}
-	
-	public void putData()
-	{
-		sensors.sendCount++;
-		if(sensors != null && sensors.sendCount > 500)
-			sensors.transmitData();
 	}
 }
