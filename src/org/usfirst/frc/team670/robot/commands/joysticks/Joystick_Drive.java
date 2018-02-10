@@ -29,8 +29,6 @@ public class Joystick_Drive extends Command {
 			Robot.driveBase.drive(Robot.oi.getLeftStick().getY(), Robot.oi.getRightStick().getY());
 		} else if (Robot.oi.getDS().equals(DriverState.FIELD)) {
 			PartyDrive(joy, true);
-		} else if (Robot.oi.getDS().equals(DriverState.FIELDREVERSE)) {
-			PartyDrive(joy, false);
 		} else {
 			Robot.driveBase.drive(-Robot.oi.getLeftStick().getY(), -Robot.oi.getRightStick().getY());
 		}
@@ -69,10 +67,7 @@ public class Joystick_Drive extends Command {
 
 		/* At this point, Joystick X/Y (strafe/forwrd) vectors have been */
 		/* rotated by the gyro angle, and can be sent to drive system */
-		if(isNormal)
-			singleStickDrive(strafe, forwrd); 
-		else
-			singleStickDrive(-strafe, -forwrd); 
+		singleStickDrive(strafe, forwrd);
 	}
 	
 	public void singleStickDrive(double x, double y) {
