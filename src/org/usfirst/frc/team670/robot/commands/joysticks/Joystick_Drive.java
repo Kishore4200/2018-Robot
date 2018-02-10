@@ -26,13 +26,13 @@ public class Joystick_Drive extends Command {
 	protected void execute() {
 		if (Robot.oi.getDS().equals(DriverState.TANKREVERSE)) {
 			// Tank Drive
-			Robot.driveBase.drive(-Robot.oi.getLeftStick().getY(), Robot.oi.getRightStick().getY());
+			Robot.driveBase.drive(Robot.oi.getLeftStick().getY(), Robot.oi.getRightStick().getY());
 		} else if (Robot.oi.getDS().equals(DriverState.FIELD)) {
 			PartyDrive(joy, true);
 		} else if (Robot.oi.getDS().equals(DriverState.FIELDREVERSE)) {
 			PartyDrive(joy, false);
 		} else {
-			Robot.driveBase.drive(Robot.oi.getLeftStick().getY(), -Robot.oi.getRightStick().getY());
+			Robot.driveBase.drive(-Robot.oi.getLeftStick().getY(), -Robot.oi.getRightStick().getY());
 		}
 	}
 

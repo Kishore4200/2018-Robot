@@ -39,10 +39,10 @@ public class right_scale_opposite extends CommandGroup {
     	addSequential(new Drive(Field.SwitchLength));
     	addSequential(new Pivot(90));
     	addSequential(new Drive(Field.DSToScale - (Field.DSToSwitch + Field.SwitchWidth - Robot.length + 0.5*(Field.DSToPlatform - Field.DSToSwitch - Field.SwitchWidth)) - Robot.length + Field.TOLERANCE));
-		addSequential(new Encoders_Elevator(ElevatorState.SCALE, 0.5)); //Raise Elevator
+		addSequential(new Encoders_Elevator(ElevatorState.SCALE, Constants.elevatorAutonSpeed)); //Raise Elevator
 		addSequential(new Drive(Constants.frontToElevator)); // DRIVE distance from front of robot to elevator arm
 		addSequential(new RunIntake(-0.8, Constants.intakeRunTime)); //Place Cube
     	addSequential(new Drive(-1.5 * Robot.length)); //Back Up
-		addSequential(new Encoders_Elevator(ElevatorState.DOWN, 0.5)); //Lower Elevator
+		addSequential(new Encoders_Elevator(ElevatorState.DOWN, Constants.elevatorAutonSpeed)); //Lower Elevator
 	}
 }

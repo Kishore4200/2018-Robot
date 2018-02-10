@@ -22,7 +22,6 @@ public class Aggregator extends Thread{
 	// Sensors
 	private AHRS navXMicro;
 	private NetworkTable driverstation, rpi;
-	private Relay camSwitch;
 	
 	//Booleans
 	private boolean isNavXConnected, encodersConnected, runSensorNetwork, sendDataToDS;
@@ -32,8 +31,7 @@ public class Aggregator extends Thread{
 	public Aggregator(){
 		runSensorNetwork = true;
 		sendDataToDS = true;
-		camSwitch = new Relay(RobotMap.camRelay);
-		camSwitch.set(Relay.Value.kOff);
+		
 		//Check the navXMicro is plugged in
 	    try {
 			navXMicro = new AHRS(RobotMap.navXPort);

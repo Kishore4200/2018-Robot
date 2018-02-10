@@ -41,9 +41,10 @@ public class center_right_switch_side extends CommandGroup {
     	addSequential(new Drive(Field.DSToSwitch + Field.SwitchWidth - 0.5*Robot.length));
     	addSequential(new Pivot(-90));
     	addSequential(new Drive(0.5*Robot.length + Field.TOLERANCE));
-    	addSequential(new Encoders_Elevator(ElevatorState.SWITCH, 0.5));
+    	addSequential(new Encoders_Elevator(ElevatorState.SWITCH, Constants.elevatorAutonSpeed));
     	addSequential(new RunIntake(-0.8, Constants.intakeRunTime));
     	addSequential(new Drive(-0.5*Robot.length));
     	addSequential(new Pivot(90));
+		addSequential(new Encoders_Elevator(ElevatorState.DOWN, Constants.elevatorAutonSpeed));
     }
 }
