@@ -44,7 +44,7 @@ public class Intake extends Subsystem {
 			SmartDashboard.putString("Intake Status:", "INTAKE OVER STRESSED"); //Change this to whatever notification method you want
 		}
 		leftIntake.set(ControlMode.PercentOutput, speed);
-		leftIntake.set(ControlMode.PercentOutput, speed);
+		rightIntake.set(ControlMode.PercentOutput, speed);
 	}
 	
 	public void deploySupport(boolean deploy)
@@ -61,5 +61,14 @@ public class Intake extends Subsystem {
         // Set the default command for a subsystem here.
         setDefaultCommand(new Joystick_Intake());
     }
+
+	public boolean isIntakeOpen() {
+		return deployGrabber.get();
+	}
+	
+	public boolean isIntakeDeployed()
+	{
+		return deployIntakeElevator.get();
+	}
 }
 

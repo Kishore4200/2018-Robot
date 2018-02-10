@@ -21,16 +21,16 @@ public class Aggregator extends Thread{
 	
 	// Sensors
 	private AHRS navXMicro;
-	private NetworkTable driverstation, rpi;
+	private NetworkTable driverstation;
 	
 	//Booleans
-	private boolean isNavXConnected, encodersConnected, runSensorNetwork, sendDataToDS;
-	private int sendCount = 0;
-	private double lidar_left, lidar_right;
-			
+	private boolean isNavXConnected, encodersConnected;
+	private boolean sendDataToDS;
+	
 	public Aggregator(){
-		runSensorNetwork = true;
 		sendDataToDS = true;
+		
+	    driverstation = NetworkTable.getTable("driverstation");
 		
 		//Check the navXMicro is plugged in
 	    try {
@@ -41,22 +41,13 @@ public class Aggregator extends Thread{
 			DriverStation.reportError("Error instantiating navX-MXP:  " + ex.getMessage(), true);
 			navXMicro = null;
 		}
-	    
-		rpi = NetworkTable.getTable("rpi");
-	    driverstation = NetworkTable.getTable("driverstation");
-	    
+	    	    
 	    new Thread(new Runnable() {
 	        @Override
 	        public void run() {
 	        	while(true)
 	        	{
-	        		sendCount++;
-	        		if(runSensorNetwork)
-	        		{
-			        	lidar_left = rpi.getDouble("lidar_left", -1);
-			        	lidar_right = rpi.getDouble("lidar_right", -1);
-	        		}
-	        		if(sendDataToDS && sendCount > 500)
+	        		if(sendDataToDS && System.currentTimeMillis()%50==0)
 	        		{
 	        			driverstation.putString("operator_state", Robot.oi.getOS().toString());
 	        			driverstation.putString("driver_state", Robot.oi.getDS().toString());
@@ -65,16 +56,12 @@ public class Aggregator extends Thread{
 			        	driverstation.putDouble("voltage", DriverStation.getInstance().getBatteryVoltage());
 			        	driverstation.putBoolean("navX", isNavXConnected);
 			        	driverstation.putBoolean("encoders", encodersConnected);
+			        	driverstation.putBoolean("isIntakeOpen", Robot.intake.isIntakeOpen());
+			        	driverstation.putBoolean("isIntakeDeployed", Robot.intake.isIntakeDeployed());
 	        		}
 	        	}
 	        }
 	    }).start();
-	}
-	
-	/*@return The distance read in inches by the ultrasonic sensor inside the intake * */
-	public double getDistanceIntake()
-	{
-		return -1;
 	}
 	
 	public void reset() {
