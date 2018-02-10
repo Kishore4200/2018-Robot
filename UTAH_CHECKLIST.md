@@ -1,0 +1,5 @@
+- [ ] Laptop
+- [ ] Raspberry Pi
+- [ ] Ethernet cables
+- [ ] USB cable for RoboRIO
+- [ ] Charging cables for laptop/Pi
