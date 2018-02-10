@@ -3,6 +3,11 @@ package paths.right;
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.actions.Drive;
 import org.usfirst.frc.team670.robot.commands.actions.Pivot;
+import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Drive;
+import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Elevator;
+import org.usfirst.frc.team670.robot.commands.switches.RunIntake;
+import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.utilities.ElevatorState;
 import org.usfirst.frc.team670.robot.utilities.Field;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -32,7 +37,11 @@ public class right_switch_side extends CommandGroup {
 		
     	addSequential(new Drive(Field.DSToSwitch - Robot.length + Field.SwitchWidth/2));
     	addSequential(new Pivot(-90));
+    	addSequential(new Encoders_Elevator(ElevatorState.SWITCH, 0.5));
     	addSequential(new Drive(Field.SideToSwitch - Robot.width - Field.SideTriangleWidth + Field.TOLERANCE));
-    	//PLACE CUBE
+    	addSequential(new RunIntake(-0.8, Constants.intakeRunTime));
+    	addSequential(new Encoders_Drive(-(Field.SideToSwitch - Robot.width - Field.SideTriangleWidth + Field.TOLERANCE)));
+    	addSequential(new Encoders_Elevator(ElevatorState.DOWN, 0.5));
+    	addSequential(new Pivot(90));
 	}
 }

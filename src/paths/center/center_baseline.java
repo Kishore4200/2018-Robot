@@ -4,6 +4,10 @@ import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.actions.Delay;
 import org.usfirst.frc.team670.robot.commands.actions.Drive;
 import org.usfirst.frc.team670.robot.commands.actions.Pivot;
+import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Elevator;
+import org.usfirst.frc.team670.robot.commands.switches.RunIntake;
+import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.utilities.ElevatorState;
 import org.usfirst.frc.team670.robot.utilities.Field;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -42,5 +46,9 @@ public class center_baseline extends CommandGroup {
     	addSequential(new Drive(Field.CubePileWidth));
     	addSequential(new Pivot(90));
     	addSequential(new Drive(Robot.length + Field.TOLERANCE));
+    	addSequential(new RunIntake(-0.8, Constants.intakeRunTime));
+    	addSequential(new Encoders_Elevator(ElevatorState.EXCHANGE, 0.5));
+
+
     }
 }

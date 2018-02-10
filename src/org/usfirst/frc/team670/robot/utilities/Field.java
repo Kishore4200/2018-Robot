@@ -3,7 +3,7 @@ package org.usfirst.frc.team670.robot.utilities;
 public class Field {
 
 	//All Distances in Inches
-	public static final double TOLERANCE = 5;
+	public static final double TOLERANCE = 3;
 	
 	public static final double DSToSwitch = 140.0;
 	public static final double DSToScale = 299.65;
@@ -11,7 +11,7 @@ public class Field {
 	public static final double SwitchWidth = 56.0;
 
 	public static final double SideToScale = 71.57;
-	public static final double ScaleWidth = 48; //DETERMINE THIS
+	public static final double ScaleWidth = 48;
 
 
 	public static final double DSToBaseline = 120.0;

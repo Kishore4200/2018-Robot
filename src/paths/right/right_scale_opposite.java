@@ -3,6 +3,10 @@ package paths.right;
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.actions.Drive;
 import org.usfirst.frc.team670.robot.commands.actions.Pivot;
+import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Elevator;
+import org.usfirst.frc.team670.robot.commands.switches.RunIntake;
+import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.utilities.ElevatorState;
 import org.usfirst.frc.team670.robot.utilities.Field;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -35,11 +39,10 @@ public class right_scale_opposite extends CommandGroup {
     	addSequential(new Drive(Field.SwitchLength));
     	addSequential(new Pivot(90));
     	addSequential(new Drive(Field.DSToScale - (Field.DSToSwitch + Field.SwitchWidth - Robot.length + 0.5*(Field.DSToPlatform - Field.DSToSwitch - Field.SwitchWidth)) - Robot.length + Field.TOLERANCE));
-    	// RAISE ELEVATOR
-    	// DRIVE distance from front of robot to elevator arm
-    	// PLACE CUBE
-    	addSequential(new Drive(-1.5 * Robot.length));
-    	// LOWER ELEVATOR
-
+		addSequential(new Encoders_Elevator(ElevatorState.SCALE, 0.5)); //Raise Elevator
+		addSequential(new Drive(Constants.frontToElevator)); // DRIVE distance from front of robot to elevator arm
+		addSequential(new RunIntake(-0.8, Constants.intakeRunTime)); //Place Cube
+    	addSequential(new Drive(-1.5 * Robot.length)); //Back Up
+		addSequential(new Encoders_Elevator(ElevatorState.DOWN, 0.5)); //Lower Elevator
 	}
 }

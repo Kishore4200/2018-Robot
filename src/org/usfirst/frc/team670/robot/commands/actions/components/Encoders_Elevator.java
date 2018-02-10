@@ -15,9 +15,6 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Encoders_Elevator extends Command{
 	
-	/**
-	 * @param state 1-Exchange/Pickup, 2-Switch, 3-Scale
-	 */
 	private double targetPulseHeight;
 	private boolean isGoingUp;
 	private double speed, tolerance;
@@ -27,10 +24,12 @@ public class Encoders_Elevator extends Command{
 		this.speed = speed;
 		if(state == ElevatorState.EXCHANGE)
 			targetPulseHeight = Constants.elevatorPulseForExchange;
-		else if(state == ElevatorState.SWITCH)
+		else if(state.equals(ElevatorState.SWITCH))
 			targetPulseHeight = Constants.elevatorPulseForSwitch;
-		else if(state == ElevatorState.SCALE)
+		else if(state.equals(ElevatorState.SCALE))
 			targetPulseHeight = Constants.elevatorPulseForScale;
+		else if(state.equals(ElevatorState.SCALE))
+			targetPulseHeight = Constants.elevatorPulseForDown;
 		else
 			targetPulseHeight = Constants.elevatorPulseForExchange;
 	}

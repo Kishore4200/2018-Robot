@@ -3,6 +3,10 @@ package paths.left;
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.actions.Drive;
 import org.usfirst.frc.team670.robot.commands.actions.Pivot;
+import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Elevator;
+import org.usfirst.frc.team670.robot.commands.switches.RunIntake;
+import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.utilities.ElevatorState;
 import org.usfirst.frc.team670.robot.utilities.Field;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -33,10 +37,10 @@ public class left_scale_straight extends CommandGroup {
     	addSequential(new Pivot(90));
     	addSequential(new Drive(Field.EdgeToPlatform - Field.SideTriangleWidth - Robot.width));
     	addSequential(new Pivot(-90));
-    	//RAISE ELEVATOR?
-    	//DRIVE UNTIL CUBE CAN BE PLACED, This will depend on elevator placement
-    	//PLACE CUBE
-    	//BACKUP
-    	//LOWER ELEVATOR
+    	addSequential(new Encoders_Elevator(ElevatorState.SCALE, 0.5)); //Raise Elevator
+    	addSequential(new Drive(Constants.frontToElevator)); // DRIVE distance from front of robot to elevator arm
+		addSequential(new RunIntake(-0.8, Constants.intakeRunTime)); //Place cube
+		addSequential(new Drive(-Constants.frontToElevator)); //BACK UP
+		addSequential(new Encoders_Elevator(ElevatorState.DOWN, 0.5));//lower Elevator
     }
 }

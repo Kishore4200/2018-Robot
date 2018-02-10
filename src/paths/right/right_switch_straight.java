@@ -3,6 +3,10 @@ package paths.right;
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.actions.Delay;
 import org.usfirst.frc.team670.robot.commands.actions.Drive;
+import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Elevator;
+import org.usfirst.frc.team670.robot.commands.switches.RunIntake;
+import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.utilities.ElevatorState;
 import org.usfirst.frc.team670.robot.utilities.Field;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -34,8 +38,10 @@ public class right_switch_straight extends CommandGroup {
 		// a CommandGroup containing them would require both the chassis and the
 		// arm.
 		addSequential(new Drive(Field.DSToSwitch - Robot.length));
-		//PLACE CUBE
+		addParallel(new Encoders_Elevator(ElevatorState.SWITCH, 0.5));
+		addSequential(new RunIntake(-0.8, Constants.intakeRunTime));
 		addSequential(new Delay(2.5));
 		addSequential(new Drive(-(Field.DSToSwitch)));
+		addSequential(new Encoders_Elevator(ElevatorState.DOWN, 0.5));
 	}
 }
