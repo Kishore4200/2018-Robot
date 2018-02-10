@@ -39,6 +39,9 @@ public class Constants {
 	public static final double elevatorPulseForScale = 0;
 	public static final double elevatorAutonSpeed = 0.05;
 
+	public static final int maxElevatorTicks = 0; //SET THIS
+	public static final int minElevatorTicks = 0; //SET THIS
+	
 	public static final double maxIntakeVoltage = 0;
 	
 	//Multiply by distance in inches to get needed ticks
