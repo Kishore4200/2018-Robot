@@ -25,8 +25,9 @@ import org.usfirst.frc.team670.robot.subsystems.Intake;
 /**
  * @author vsharma
  */
+
 public class Robot extends TimedRobot {
-	public static final double length = 0, width = 0; //DEFINE LENGTH AND WIDTH
+	public static final double width = 33.25, length = 38; //LENGTH AND WIDTH WITH BUMPERS
 	public static final Elevator elevator = new Elevator();
 	public static final DriveBase driveBase = new DriveBase();
 	public static final Intake intake = new Intake();
