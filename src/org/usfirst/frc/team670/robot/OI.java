@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team670.robot;
 
+import org.usfirst.frc.team670.robot.commands.PrintElevator;
 import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Elevator;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
 import org.usfirst.frc.team670.robot.commands.switches.DeployIntake;
@@ -61,6 +62,7 @@ public class OI {
 	private Button singleStickDrive = new JoystickButton(leftDriveStick, 5);
 	private Button fieldDrive = new JoystickButton(leftDriveStick, 2);
 	private Button reverseFieldDrive = new JoystickButton(leftDriveStick, 10);
+	private Button printElevator = new JoystickButton(arcadeStick, 6);
 	
 	public OI() {
 		// Arcade buttons
@@ -85,6 +87,8 @@ public class OI {
 		toggleElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));
 		toggleIntake.whenPressed(new SetOperatorControl(OperatorState.INTAKE));
 		toggleIntake.whenReleased(new SetOperatorControl(OperatorState.NONE));
+		
+		printElevator.whenPressed(new PrintElevator());
 	}
 
 	public Joystick getLeftStick() {

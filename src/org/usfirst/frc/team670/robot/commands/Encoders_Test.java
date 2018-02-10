@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands.actions.components;
+package org.usfirst.frc.team670.robot.commands;
 
 import org.usfirst.frc.team670.robot.Robot;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
