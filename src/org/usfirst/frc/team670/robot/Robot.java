@@ -104,8 +104,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		double d = sensors.getDistanceIntake();
-		System.out.println(d);
 	}
 
 	/**
