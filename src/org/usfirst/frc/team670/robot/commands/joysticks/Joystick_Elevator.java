@@ -24,7 +24,9 @@ public class Joystick_Elevator extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(Robot.oi.getOS().equals(OperatorState.ELEVATOR))
-    		Robot.elevator.moveElevator((Robot.oi.getOperatorStick().getY()*0.1));
+    		Robot.elevator.moveElevator((Robot.oi.getOperatorStick().getY()));
+    	else
+    		Robot.elevator.moveElevator(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

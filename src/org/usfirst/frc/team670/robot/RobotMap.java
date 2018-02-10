@@ -29,6 +29,9 @@ public class RobotMap {
     
     //Elevator
     
+    //PDP
+    public static final int pdp = 0;
+    
     //Intake
     public static final int intakeDeploy = 1;
     public static final int clawDeploy = 2;

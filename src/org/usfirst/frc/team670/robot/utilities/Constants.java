@@ -39,6 +39,8 @@ public class Constants {
 	public static final double elevatorPulseForScale = 0;
 	public static final double elevatorAutonSpeed = 0.05;
 
+	public static final double maxIntakeVoltage = 0;
+	
 	//Multiply by distance in inches to get needed ticks
 	public static final double elevatorInchesToTicks = 8/3 * drivebaseTickPerRotation / Math.PI * DIAMETERinInchesDriveBase;
 	public static final double elevatorTicksToInches = Math.PI * DIAMETERinInchesDriveBase / (8/3 * drivebaseTickPerRotation);

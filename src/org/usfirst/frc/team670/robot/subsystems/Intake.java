@@ -15,6 +15,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Intake extends Subsystem {
 
+	//DOES INTAKE NOT WORK?
+	//CHECK THE CONSTANTS FOR intakeMaxVoltage
+	
 	private Solenoid deployIntakeElevator, deployGrabber;
 	private TalonSRX leftIntake, rightIntake;
 	// Put methods for controlling this subsystem

@@ -7,6 +7,7 @@
 
 package org.usfirst.frc.team670.robot;
 
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -32,6 +33,7 @@ public class Robot extends TimedRobot {
 	public static final DriveBase driveBase = new DriveBase();
 	public static final Intake intake = new Intake();
 	public static PathFinder finder = new PathFinder();
+	public static PowerDistributionPanel pdp = new PowerDistributionPanel(RobotMap.pdp);
 	
 	public static Aggregator sensors;
 	public static OI oi;

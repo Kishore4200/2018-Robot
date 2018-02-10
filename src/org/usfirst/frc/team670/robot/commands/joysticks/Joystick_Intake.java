@@ -25,6 +25,8 @@ public class Joystick_Intake extends Command {
 	protected void execute() {
 		if(Robot.oi.getOS().equals(OperatorState.INTAKE))
 			Robot.intake.driveIntake(Robot.oi.getOperatorStick().getY());
+		else
+			Robot.intake.driveIntake(0);
 
 	}
 
