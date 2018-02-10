@@ -41,7 +41,7 @@ public class Aggregator extends Thread {
 
 		ard = new ArduinoUSB(19200);
 
-		state = NetworkTable.getTable("state");
+		state = NetworkTable.getTable("rpi");
 	}
 
 	/*
@@ -57,6 +57,11 @@ public class Aggregator extends Thread {
 			d = -1;
 		}
 		return d;
+	}
+	
+	public double getEXTVAL()
+	{
+		return state.getDouble("lidar_uno", -1);
 	}
 
 	public void reset() {

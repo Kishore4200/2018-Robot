@@ -107,7 +107,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println(sensors.getDistanceIntake());
+		System.out.println(sensors.getEXTVAL());
 		// System.out.println("LiDAR: " + "" + (sensors.getDistanceIntake()));
 
 		// putData()
