@@ -1,7 +1,4 @@
-package org.usfirst.frc.team670.robot.sensors;
-
-import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.RobotMap;
+package org.usfirst.frc.team670.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
