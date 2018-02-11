@@ -1,23 +1,20 @@
-package org.usfirst.frc.team670.robot.commands.switches;
+package org.usfirst.frc.team670.robot.commands.actions.components;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.utilities.DriverState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Flips controls for the driver when called
- * 
- * @author vsharma
+ *
  */
-public class SetDriverControl extends Command {
+public class Lidar_DriveLimit extends Command {
+
+	double speed, limit;
 	
-	private DriverState ds;
-	
-    public SetDriverControl(DriverState ds) {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	this.ds = ds;
+    public Lidar_DriveLimit(double speed, double limitInches) {
+        requires(Robot.driveBase);
+        limit = limitInches;
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -26,20 +23,25 @@ public class SetDriverControl extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.oi.setDriverState(ds);
+    	Robot.driveBase.drive(speed, speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        if(Robot.sensors.getDistanceIntakeInches() <= limit)
+        	return true;
+        else
+        	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveBase.drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

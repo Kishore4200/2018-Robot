@@ -1,8 +1,8 @@
 package org.usfirst.frc.team670.robot.commands.actions.components;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.utilities.Constants;
-import org.usfirst.frc.team670.robot.utilities.ElevatorState;
+import org.usfirst.frc.team670.robot.constants.ElevatorState;
+import org.usfirst.frc.team670.robot.constants.RoboConstants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,15 +21,15 @@ public class Encoders_Elevator extends Command{
 	public Encoders_Elevator(ElevatorState state) {
 		requires(Robot.elevator);
 		if(state == ElevatorState.EXCHANGE)
-			targetPulseHeight = Constants.elevatorPulseForExchange;
+			targetPulseHeight = RoboConstants.elevatorPulseForExchange;
 		else if(state.equals(ElevatorState.SWITCH))
-			targetPulseHeight = Constants.elevatorPulseForSwitch;
+			targetPulseHeight = RoboConstants.elevatorPulseForSwitch;
 		else if(state.equals(ElevatorState.SCALE))
-			targetPulseHeight = Constants.elevatorPulseForScale;
+			targetPulseHeight = RoboConstants.elevatorPulseForScale;
 		else if(state.equals(ElevatorState.SCALE))
-			targetPulseHeight = Constants.elevatorPulseForDown;
+			targetPulseHeight = RoboConstants.elevatorPulseForDown;
 		else
-			targetPulseHeight = Constants.elevatorPulseForExchange;
+			targetPulseHeight = RoboConstants.elevatorPulseForExchange;
 		
  		//this.ticksToTravel = ((inches)/(Math.PI*Constants.DIAMETERinInchesDriveBase)) * Constants.drivebaseTickPerRotation;
 		

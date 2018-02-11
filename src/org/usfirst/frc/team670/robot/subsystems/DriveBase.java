@@ -10,7 +10,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_Drive;
-import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.constants.RoboConstants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -121,13 +121,13 @@ public class DriveBase extends Subsystem {
 	public double getLeftEncPositionInFeet() {
 		double ticks = left1.getSensorCollection().getQuadraturePosition();
 		// Convert encoder ticks to feet
-		return ((Math.PI * Constants.DIAMETERinInchesDriveBase) / (Constants.drivebaseTickPerRotation * Constants.gearRatioDB) * ticks) / 12;
+		return ((Math.PI * RoboConstants.DIAMETERinInchesDriveBase) / (RoboConstants.drivebaseTickPerRotation * RoboConstants.gearRatioDB) * ticks) / 12;
 	}
 
 	public double getRightEncPositionInFeet() {
 		double ticks = right1.getSensorCollection().getQuadraturePosition();
 		// Convert encoder ticks to feet
-		return ((Math.PI * Constants.DIAMETERinInchesDriveBase) / (Constants.drivebaseTickPerRotation * Constants.gearRatioDB) * ticks) / 12;
+		return ((Math.PI * RoboConstants.DIAMETERinInchesDriveBase) / (RoboConstants.drivebaseTickPerRotation * RoboConstants.gearRatioDB) * ticks) / 12;
 	}
 
 	/**
@@ -144,39 +144,39 @@ public class DriveBase extends Subsystem {
 	 * @return The value in ticks
 	 */
 	public double feetToEncoderTicks(double feet) {
-		return (Constants.drivebaseTickPerRotation * Constants.gearRatioDB) / (Math.PI * Constants.DIAMETERinInchesDriveBase) * feet;
+		return (RoboConstants.drivebaseTickPerRotation * RoboConstants.gearRatioDB) / (Math.PI * RoboConstants.DIAMETERinInchesDriveBase) * feet;
 	}
 
 	public void initPID(TalonSRX talon) {
-		int absolutePosition = talon.getSelectedSensorPosition(Constants.kTimeoutMs)
+		int absolutePosition = talon.getSelectedSensorPosition(RoboConstants.kTimeoutMs)
 				& 0xFFF; /*
 							 * mask out the bottom12 bits, we don't care about
 							 * the wrap arounds
 							 */
 		/* use the low level API to set the quad encoder signal */
-		talon.setSelectedSensorPosition(absolutePosition, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+		talon.setSelectedSensorPosition(absolutePosition, RoboConstants.kPIDLoopIdx, RoboConstants.kTimeoutMs);
 
 		/* choose the sensor and sensor direction */
-		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, RoboConstants.kPIDLoopIdx, RoboConstants.kTimeoutMs);
 		talon.setSensorPhase(true);
 
 		/* set the peak and nominal outputs, 12V means full */
-		talon.configNominalOutputForward(0, Constants.kTimeoutMs);
-		talon.configNominalOutputReverse(0, Constants.kTimeoutMs);
-		talon.configPeakOutputForward(1, Constants.kTimeoutMs);
-		talon.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+		talon.configNominalOutputForward(0, RoboConstants.kTimeoutMs);
+		talon.configNominalOutputReverse(0, RoboConstants.kTimeoutMs);
+		talon.configPeakOutputForward(1, RoboConstants.kTimeoutMs);
+		talon.configPeakOutputReverse(-1, RoboConstants.kTimeoutMs);
 		/*
 		 * set the allowable closed-loop error, Closed-Loop output will be
 		 * neutral within this range. See Table in Section 17.2.1 for native
 		 * units per rotation.
 		 */
-		talon.configAllowableClosedloopError(0, Constants.kPIDLoopIdx,
-				Constants.kTimeoutMs); /* always servo */
+		talon.configAllowableClosedloopError(0, RoboConstants.kPIDLoopIdx,
+				RoboConstants.kTimeoutMs); /* always servo */
 		/* set closed loop gains in slot0 */
-		talon.config_kF(Constants.kPIDLoopIdx, 0.0, Constants.kTimeoutMs);
-		talon.config_kP(Constants.kPIDLoopIdx, Constants.Proportion, Constants.kTimeoutMs);
-		talon.config_kI(Constants.kPIDLoopIdx, Constants.Integral, Constants.kTimeoutMs);
-		talon.config_kD(Constants.kPIDLoopIdx, Constants.Derivative, Constants.kTimeoutMs);
+		talon.config_kF(RoboConstants.kPIDLoopIdx, 0.0, RoboConstants.kTimeoutMs);
+		talon.config_kP(RoboConstants.kPIDLoopIdx, RoboConstants.Proportion, RoboConstants.kTimeoutMs);
+		talon.config_kI(RoboConstants.kPIDLoopIdx, RoboConstants.Integral, RoboConstants.kTimeoutMs);
+		talon.config_kD(RoboConstants.kPIDLoopIdx, RoboConstants.Derivative, RoboConstants.kTimeoutMs);
 	}
 
 	public void singleStickDrive(Joystick joy) {

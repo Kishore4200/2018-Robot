@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands;
+package testing;
 
 import org.usfirst.frc.team670.robot.Robot;
 import com.ctre.phoenix.motorcontrol.SensorCollection;

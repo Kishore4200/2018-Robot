@@ -1,8 +1,8 @@
 package org.usfirst.frc.team670.robot.commands.joysticks;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.utilities.Constants;
-import org.usfirst.frc.team670.robot.utilities.DriverState;
+import org.usfirst.frc.team670.robot.constants.DriverState;
+import org.usfirst.frc.team670.robot.constants.RoboConstants;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
@@ -50,11 +50,11 @@ public class Joystick_Drive extends Command {
 
 		
 		if (Robot.oi.getDS().equals(DriverState.TANKREVERSE)) 
-			Robot.driveBase.drive(ly, ry);
-		else if (Robot.oi.getDS().equals(DriverState.FIELD))
+			Robot.driveBase.drive(-ly, -ry);
+		else if (Robot.oi.getDS().equals(DriverState.SINGLE))
 			PartyDrive(x, ly);
 		else
-			Robot.driveBase.drive(-ly, -ry);
+			Robot.driveBase.drive(ly, ry);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

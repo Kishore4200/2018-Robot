@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands;
+package org.usfirst.frc.team670.robot.commands.actions;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -7,28 +7,30 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PrintElevator extends Command {
+public class Grab extends Command {
+
+	private boolean isDeploy;
 	
-	
-    public PrintElevator() {
-    	requires(Robot.elevator);
+	/*
+	 * @param isDeploy true if it is the deploy, false if it is to pick up
+	 */
+    public Grab(boolean isDeploy) {
+    	this.isDeploy = isDeploy;
+        requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.elevator.getTalon().getSensorCollection().setPulseWidthPosition(0, 0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double y = Robot.oi.getLeftStick().getY();
-    	Robot.elevator.moveElevator(y*0.1);
-    	System.out.println(Robot.elevator.getTalon().getSensorCollection().getPulseWidthPosition());
+    	Robot.intake.deployIntake(isDeploy);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

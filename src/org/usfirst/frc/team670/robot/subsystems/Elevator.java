@@ -2,7 +2,7 @@ package org.usfirst.frc.team670.robot.subsystems;
 
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_Elevator;
-import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.constants.RoboConstants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -27,42 +27,42 @@ public class Elevator extends Subsystem {
 		elevator = new TalonSRX(RobotMap.elevatorMotor);
 		encoder = new SensorCollection(elevator);
 		encoder.setPulseWidthPosition(0, 0);
-		elevator.configForwardSoftLimitThreshold(Constants.maxElevatorTicks, Constants.kTimeoutMs);
-		elevator.configForwardSoftLimitThreshold(Constants.minElevatorTicks, Constants.kTimeoutMs);
-		elevator.configForwardSoftLimitEnable(true, Constants.kTimeoutMs);
-		elevator.configReverseSoftLimitEnable(true, Constants.kTimeoutMs);
+		elevator.configForwardSoftLimitThreshold(RoboConstants.maxElevatorTicks, RoboConstants.kTimeoutMs);
+		elevator.configForwardSoftLimitThreshold(RoboConstants.minElevatorTicks, RoboConstants.kTimeoutMs);
+		elevator.configForwardSoftLimitEnable(true, RoboConstants.kTimeoutMs);
+		elevator.configReverseSoftLimitEnable(true, RoboConstants.kTimeoutMs);
 	}
 	
 	public void initPID(TalonSRX talon) {
-		int absolutePosition = talon.getSelectedSensorPosition(Constants.kTimeoutMs)
+		int absolutePosition = talon.getSelectedSensorPosition(RoboConstants.kTimeoutMs)
 				& 0xFFF; /*
 							 * mask out the bottom12 bits, we don't care about
 							 * the wrap arounds
 							 */
 		/* use the low level API to set the quad encoder signal */
-		talon.setSelectedSensorPosition(absolutePosition, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+		talon.setSelectedSensorPosition(absolutePosition, RoboConstants.kPIDLoopIdx, RoboConstants.kTimeoutMs);
 
 		/* choose the sensor and sensor direction */
-		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, RoboConstants.kPIDLoopIdx, RoboConstants.kTimeoutMs);
 		talon.setSensorPhase(true);
 
 		/* set the peak and nominal outputs, 12V means full */
-		talon.configNominalOutputForward(0, Constants.kTimeoutMs);
-		talon.configNominalOutputReverse(0, Constants.kTimeoutMs);
-		talon.configPeakOutputForward(1, Constants.kTimeoutMs);
-		talon.configPeakOutputReverse(-1, Constants.kTimeoutMs);
+		talon.configNominalOutputForward(0, RoboConstants.kTimeoutMs);
+		talon.configNominalOutputReverse(0, RoboConstants.kTimeoutMs);
+		talon.configPeakOutputForward(1, RoboConstants.kTimeoutMs);
+		talon.configPeakOutputReverse(-1, RoboConstants.kTimeoutMs);
 		/*
 		 * set the allowable closed-loop error, Closed-Loop output will be
 		 * neutral within this range. See Table in Section 17.2.1 for native
 		 * units per rotation.
 		 */
-		talon.configAllowableClosedloopError(0, Constants.kPIDLoopIdx,
-				Constants.kTimeoutMs); /* always servo */
+		talon.configAllowableClosedloopError(0, RoboConstants.kPIDLoopIdx,
+				RoboConstants.kTimeoutMs); /* always servo */
 		/* set closed loop gains in slot0 */
-		talon.config_kF(Constants.kPIDLoopIdx, 0.0, Constants.kTimeoutMs);
-		talon.config_kP(Constants.kPIDLoopIdx, Constants.ProportionElevator, Constants.kTimeoutMs);
-		talon.config_kI(Constants.kPIDLoopIdx, Constants.IntegralElevator, Constants.kTimeoutMs);
-		talon.config_kD(Constants.kPIDLoopIdx, Constants.DerivativeElevator, Constants.kTimeoutMs);
+		talon.config_kF(RoboConstants.kPIDLoopIdx, 0.0, RoboConstants.kTimeoutMs);
+		talon.config_kP(RoboConstants.kPIDLoopIdx, RoboConstants.ProportionElevator, RoboConstants.kTimeoutMs);
+		talon.config_kI(RoboConstants.kPIDLoopIdx, RoboConstants.IntegralElevator, RoboConstants.kTimeoutMs);
+		talon.config_kD(RoboConstants.kPIDLoopIdx, RoboConstants.DerivativeElevator, RoboConstants.kTimeoutMs);
 	}
 	
 	public double getCurrentPosition()

@@ -2,7 +2,7 @@ package org.usfirst.frc.team670.robot.commands.joysticks;
 
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.utilities.OperatorState;
+import org.usfirst.frc.team670.robot.constants.OperatorState;
 
 import edu.wpi.first.wpilibj.command.Command;
 

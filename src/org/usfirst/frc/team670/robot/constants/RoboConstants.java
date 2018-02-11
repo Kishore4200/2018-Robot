@@ -1,6 +1,6 @@
-package org.usfirst.frc.team670.robot.utilities;
+package org.usfirst.frc.team670.robot.constants;
 
-public class Constants {
+public class RoboConstants {
 
 	//All PID Variables
 	public static final int kSlotIdx = 0;

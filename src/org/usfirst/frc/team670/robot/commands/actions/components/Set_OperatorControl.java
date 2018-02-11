@@ -1,19 +1,21 @@
-package org.usfirst.frc.team670.robot.commands.joysticks;
+package org.usfirst.frc.team670.robot.commands.actions.components;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.constants.OperatorState;
 
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Sets operator control to a different value
+ * 
+ * @author vsharma
  */
-public class Joystick_Elevator extends Command {
+public class Set_OperatorControl extends Command {
 
-    public Joystick_Elevator() {
-        // Use requires() here to declare subsystem dependencies
-        requires(Robot.elevator);
+	private OperatorState os;
+	
+    public Set_OperatorControl(OperatorState os) {
+    	this.os = os;
     }
 
     // Called just before this Command runs the first time
@@ -22,25 +24,20 @@ public class Joystick_Elevator extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.getOS().equals(OperatorState.ELEVATOR))
-    		Robot.elevator.moveElevator((Robot.oi.getOperatorStick().getY()));
-    	else
-    		Robot.elevator.moveElevator(0);
+    	Robot.oi.setOperatorCommand(os);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevator.moveElevator(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.elevator.moveElevator(0);
     }
 }

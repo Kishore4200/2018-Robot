@@ -1,22 +1,23 @@
-package org.usfirst.frc.team670.robot.commands.switches;
+package org.usfirst.frc.team670.robot.commands.actions.components;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.constants.DriverState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Flips controls for the driver when called
+ * 
+ * @author vsharma
  */
-public class DeployIntake extends Command {
-
-	private boolean isDeploy;
+public class Set_DriverControl extends Command {
 	
-	/*
-	 * @param isDeploy true if it is the deploy, false if it is to pick up
-	 */
-    public DeployIntake(boolean isDeploy) {
-    	this.isDeploy = isDeploy;
-        requires(Robot.intake);
+	private DriverState ds;
+	
+    public Set_DriverControl(DriverState ds) {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	this.ds = ds;
     }
 
     // Called just before this Command runs the first time
@@ -25,16 +26,7 @@ public class DeployIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(isDeploy)
-    	{
-    		Robot.intake.deploySupport(isDeploy);
-    		Robot.intake.deployIntake(isDeploy);
-    	}
-    	else
-    	{
-    		Robot.intake.deployIntake(isDeploy);
-    		Robot.intake.deploySupport(isDeploy);
-    	}
+    	Robot.oi.setDriverState(ds);
     }
 
     // Make this return true when this Command no longer needs to run execute()

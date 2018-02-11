@@ -1,4 +1,4 @@
-package org.usfirst.frc.team670.robot.commands.switches;
+package org.usfirst.frc.team670.robot.commands.actions;
 
 import org.usfirst.frc.team670.robot.Robot;
 
@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RunIntake extends Command {
+public class Intake extends Command {
 
 	private double speed, seconds;
 	
-    public RunIntake(double speed, double seconds) {
+    public Intake(double speed, double seconds) {
     	this.speed = speed;
         this.seconds = seconds;
         requires(Robot.intake);

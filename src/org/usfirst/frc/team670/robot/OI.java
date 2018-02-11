@@ -7,16 +7,15 @@
 
 package org.usfirst.frc.team670.robot;
 
-import org.usfirst.frc.team670.robot.commands.PrintElevator;
+import org.usfirst.frc.team670.robot.commands.actions.Grab;
+import org.usfirst.frc.team670.robot.commands.actions.Intake;
 import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Elevator;
+import org.usfirst.frc.team670.robot.commands.actions.components.Set_DriverControl;
+import org.usfirst.frc.team670.robot.commands.actions.components.Set_OperatorControl;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
-import org.usfirst.frc.team670.robot.commands.switches.DeployIntake;
-import org.usfirst.frc.team670.robot.commands.switches.RunIntake;
-import org.usfirst.frc.team670.robot.commands.switches.SetDriverControl;
-import org.usfirst.frc.team670.robot.commands.switches.SetOperatorControl;
-import org.usfirst.frc.team670.robot.utilities.DriverState;
-import org.usfirst.frc.team670.robot.utilities.ElevatorState;
-import org.usfirst.frc.team670.robot.utilities.OperatorState;
+import org.usfirst.frc.team670.robot.constants.DriverState;
+import org.usfirst.frc.team670.robot.constants.ElevatorState;
+import org.usfirst.frc.team670.robot.constants.OperatorState;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -55,40 +54,37 @@ public class OI {
 	private Button elevatorScale = new JoystickButton(arcadeStick, 4);
 
 	private Button cancelCommand = new JoystickButton(arcadeStick, 5);
+	private Button printElevator = new JoystickButton(arcadeStick, 6);
 
+	
 	// Driver Controls
 	private Button tankDrive = new JoystickButton(leftDriveStick, 3);
 	private Button reverseTankDrive = new JoystickButton(leftDriveStick, 4);
 	private Button singleStickDrive = new JoystickButton(leftDriveStick, 5);
-	private Button fieldDrive = new JoystickButton(leftDriveStick, 2);
-	private Button reverseFieldDrive = new JoystickButton(leftDriveStick, 10);
-	private Button printElevator = new JoystickButton(arcadeStick, 6);
 	
 	public OI() {
 		// Arcade buttons
-		intakedeploy.whenPressed(new DeployIntake(true));
-		intakeretract.whenPressed(new DeployIntake(false));
-		runIntake.whenPressed(new RunIntake(1.0, 10));
-		stopIntake.whenPressed(new RunIntake(0,0));
+		intakedeploy.whenPressed(new Grab(true));
+		intakeretract.whenPressed(new Grab(false));
+		runIntake.whenPressed(new Intake(1.0, 10));
+		stopIntake.whenPressed(new Intake(0,0));
 		elevatorExchange.whenPressed(new Encoders_Elevator(ElevatorState.EXCHANGE));
 		elevatorSwitch.whenPressed(new Encoders_Elevator(ElevatorState.SWITCH));
 		elevatorScale.whenPressed(new Encoders_Elevator(ElevatorState.SCALE));
 		cancelCommand.whenPressed(new CancelCommand());
 
 		// Driver Controls
-		tankDrive.whenPressed(new SetDriverControl(DriverState.TANK));
-		reverseTankDrive.whenPressed(new SetDriverControl(DriverState.TANKREVERSE));
-		singleStickDrive.whenPressed(new SetDriverControl(DriverState.SINGLE));
-		fieldDrive.whenPressed(new SetDriverControl(DriverState.FIELD));
-		reverseFieldDrive.whenPressed(new SetDriverControl(DriverState.FIELDREVERSE));
+		tankDrive.whenPressed(new Set_DriverControl(DriverState.TANK));
+		reverseTankDrive.whenPressed(new Set_DriverControl(DriverState.TANKREVERSE));
+		singleStickDrive.whenPressed(new Set_DriverControl(DriverState.SINGLE));
 		
 		// Operator buttons
-		toggleElevator.whenPressed(new SetOperatorControl(OperatorState.ELEVATOR));
-		toggleElevator.whenReleased(new SetOperatorControl(OperatorState.NONE));
-		toggleIntake.whenPressed(new SetOperatorControl(OperatorState.INTAKE));
-		toggleIntake.whenReleased(new SetOperatorControl(OperatorState.NONE));
+		toggleElevator.whenPressed(new Set_OperatorControl(OperatorState.ELEVATOR));
+		toggleElevator.whenReleased(new Set_OperatorControl(OperatorState.NONE));
+		toggleIntake.whenPressed(new Set_OperatorControl(OperatorState.INTAKE));
+		toggleIntake.whenReleased(new Set_OperatorControl(OperatorState.NONE));
 		
-		printElevator.whenPressed(new PrintElevator());
+		printElevator.whenPressed(new testing.PrintElevator());
 	}
 
 	public Joystick getLeftStick() {

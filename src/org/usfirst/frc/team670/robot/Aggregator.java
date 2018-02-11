@@ -18,16 +18,18 @@ public class Aggregator extends Thread{
 	
 	// Sensors
 	private AHRS navXMicro;
-	private NetworkTable driverstation;
+	private NetworkTable driverstation, knuckles;
+	private double angle = 0;
 	
 	//Booleans
-	private boolean isNavXConnected, encodersConnected;
+	private boolean isNavXConnected, encodersConnected, elevatorEncoders;
 	private boolean sendDataToDS;
 	
 	public Aggregator(){
 		sendDataToDS = true;
 		
 	    driverstation = NetworkTable.getTable("driverstation");
+		knuckles = NetworkTable.getTable("vision");
 		
 		//Check the navXMicro is plugged in
 	    try {
@@ -55,10 +57,21 @@ public class Aggregator extends Thread{
 			        	driverstation.putBoolean("encoders", encodersConnected);
 			        	driverstation.putBoolean("isIntakeOpen", Robot.intake.isIntakeOpen());
 			        	driverstation.putBoolean("isIntakeDeployed", Robot.intake.isIntakeDeployed());
+			        	angle = knuckles.getNumber("angle", 0);
 	        		}
 	        	}
 	        }
 	    }).start();
+	}
+	
+	public double getDistanceIntakeInches()
+	{
+		return 0;
+	}
+	
+	public double getAngle()
+	{
+		return angle;
 	}
 	
 	public void reset() {
@@ -140,6 +153,10 @@ public class Aggregator extends Thread{
 
 	public void areEncodersWorking(boolean b) {
 		encodersConnected = b;
+	}
+
+	public void areElevatorEncodersWorking(boolean b) {
+		elevatorEncoders = b;
 	}
 }
 

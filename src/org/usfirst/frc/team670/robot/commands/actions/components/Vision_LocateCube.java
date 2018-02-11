@@ -1,19 +1,22 @@
-package paths.left;
+package org.usfirst.frc.team670.robot.commands.actions.components;
 
-import org.usfirst.frc.team670.robot.commands.actions.Delay;
-import org.usfirst.frc.team670.robot.commands.actions.Deploy;
-import org.usfirst.frc.team670.robot.commands.actions.Drive;
-import org.usfirst.frc.team670.robot.constants.Field;
+import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.commands.actions.Intake;
+import org.usfirst.frc.team670.robot.commands.actions.Pivot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class left_baseline extends CommandGroup {
+public class Vision_LocateCube extends CommandGroup {
 
-    public left_baseline() {
-        // Add Commands here:
+    public Vision_LocateCube() {
+        double angle = Robot.sensors.getAngle();
+        addSequential(new Pivot(angle));
+        addParallel(new Lidar_DriveLimit(0.3, 6));
+        addParallel(new Intake(0.7, 5));
+    	// Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
@@ -29,10 +32,5 @@ public class left_baseline extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addParallel(new Deploy(true));
-    	addSequential(new Drive(Field.DSToBaseline + Field.TOLERANCE));
-    	addSequential(new Delay(4));
-    	addSequential(new Drive(-Field.DSToBaseline));
-    	
     }
 }

@@ -1,21 +1,22 @@
-package org.usfirst.frc.team670.robot.commands.switches;
+package org.usfirst.frc.team670.robot.commands.actions;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.utilities.OperatorState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Sets operator control to a different value
- * 
- * @author vsharma
+ *
  */
-public class SetOperatorControl extends Command {
+public class Deploy extends Command {
 
-	private OperatorState os;
+	private boolean isDeploy;
 	
-    public SetOperatorControl(OperatorState os) {
-    	this.os = os;
+	/*
+	 * @param isDeploy true if it is the deploy, false if it is to pick up
+	 */
+    public Deploy(boolean isDeploy) {
+    	this.isDeploy = isDeploy;
+        requires(Robot.intake);
     }
 
     // Called just before this Command runs the first time
@@ -24,7 +25,7 @@ public class SetOperatorControl extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.oi.setOperatorCommand(os);
+    	Robot.intake.deploySupport(isDeploy);
     }
 
     // Make this return true when this Command no longer needs to run execute()

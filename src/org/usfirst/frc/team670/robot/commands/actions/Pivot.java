@@ -5,7 +5,7 @@ import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Drive;
 import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Pivot;
 import org.usfirst.frc.team670.robot.commands.actions.components.NavX_Pivot;
 import org.usfirst.frc.team670.robot.commands.actions.components.Time_Pivot;
-import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.constants.RoboConstants;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -27,17 +27,15 @@ public class Pivot extends Command{
 		requires(Robot.driveBase);
 		this.degrees = degrees;
 
-		if(Robot.sensors.isNavXConnected()) {
+		if(Robot.sensors.isNavXConnected())
 			com = new NavX_Pivot(degrees);
-		}
 		else if(Robot.driveBase.getLeft().getSensorCollection() != null && Robot.driveBase.getRight().getSensorCollection() != null ) {
 			com = new Encoders_Pivot(degrees);
 			Robot.sensors.areEncodersWorking(true);
 		}
-		else {
-			com = new Time_Pivot(1/(Constants.wheelVelocity/(Constants.pivotRadius * 2 * Math.PI * (degrees/360))), Constants.timeAutoSpeed);
-		}
-
+		else
+			com = new Time_Pivot(1/(RoboConstants.wheelVelocity/(RoboConstants.pivotRadius * 2 * Math.PI * (degrees/360))), RoboConstants.timeAutoSpeed);
+		com.start();
 	}
 
 	@Override

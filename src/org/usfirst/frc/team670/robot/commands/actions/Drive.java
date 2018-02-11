@@ -3,7 +3,7 @@ package org.usfirst.frc.team670.robot.commands.actions;
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Drive;
 import org.usfirst.frc.team670.robot.commands.actions.components.Time_Drive;
-import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.constants.RoboConstants;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -30,10 +30,10 @@ public class Drive extends Command{
 			Robot.sensors.areEncodersWorking(true);
 		}
 		else {
-			com = new Time_Drive(1/(Constants.wheelVelocity/distance), Constants.timeAutoSpeed);
+			com = new Time_Drive(1/(RoboConstants.wheelVelocity/distance), RoboConstants.timeAutoSpeed);
 			Robot.sensors.areEncodersWorking(false);
 		}
-
+		com.start();
 	}
 
 	@Override
