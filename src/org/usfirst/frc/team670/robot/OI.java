@@ -70,9 +70,9 @@ public class OI {
 		intakeretract.whenPressed(new DeployIntake(false));
 		runIntake.whenPressed(new RunIntake(1.0, 10));
 		stopIntake.whenPressed(new RunIntake(0,0));
-		elevatorExchange.whenPressed(new Encoders_Elevator(ElevatorState.EXCHANGE, 0.75));
-		elevatorSwitch.whenPressed(new Encoders_Elevator(ElevatorState.SWITCH, 0.75));
-		elevatorScale.whenPressed(new Encoders_Elevator(ElevatorState.SCALE, 0.75));
+		elevatorExchange.whenPressed(new Encoders_Elevator(ElevatorState.EXCHANGE));
+		elevatorSwitch.whenPressed(new Encoders_Elevator(ElevatorState.SWITCH));
+		elevatorScale.whenPressed(new Encoders_Elevator(ElevatorState.SCALE));
 		cancelCommand.whenPressed(new CancelCommand());
 
 		// Driver Controls
