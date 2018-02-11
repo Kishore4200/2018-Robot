@@ -3,15 +3,15 @@ package org.usfirst.frc.team670.robot.subsystems;
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.RobotMap;
 import org.usfirst.frc.team670.robot.commands.joysticks.Joystick_Intake;
-import org.usfirst.frc.team670.robot.commands.switches.DeployIntake;
-import org.usfirst.frc.team670.robot.utilities.Constants;
+
+import org.usfirst.frc.team670.robot.constants.RoboConstants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -32,19 +32,21 @@ public class Intake extends Subsystem {
 		rightIntake = new TalonSRX(RobotMap.intakeRightTalon);
 		deployIntakeElevator = new Solenoid(RobotMap.intakeDeploy);
 		deployGrabber = new Solenoid(RobotMap.clawDeploy);
+		leftIntake.setNeutralMode(NeutralMode.Brake);
+		rightIntake.setNeutralMode(NeutralMode.Brake);
 	}
 	
 	public void driveIntake(double speed)
 	{
 		double batteryVoltage = Robot.pdp.getVoltage();
-		double currentLimit = Constants.maxIntakeVoltage/batteryVoltage;
+		double currentLimit = RoboConstants.maxIntakeVoltage/batteryVoltage;
 		double current = Robot.pdp.getCurrent(RobotMap.intakeLeftTalon);
 		current += Robot.pdp.getCurrent(RobotMap.intakeRightTalon);
 		if(current >= currentLimit){
-			SmartDashboard.putString("Intake Status:", "INTAKE OVER STRESSED"); //Change this to whatever notification method you want
+			//Write information to network tables
 		}
 		leftIntake.set(ControlMode.PercentOutput, speed);
-		leftIntake.set(ControlMode.PercentOutput, speed);
+		rightIntake.set(ControlMode.PercentOutput, -speed);
 	}
 	
 	public void deploySupport(boolean deploy)
@@ -61,5 +63,13 @@ public class Intake extends Subsystem {
         // Set the default command for a subsystem here.
         setDefaultCommand(new Joystick_Intake());
     }
+
+	public boolean isIntakeOpen() {
+		return deployGrabber.get();
+	}
+
+	public boolean isIntakeDeployed() {
+		return deployIntakeElevator.get();
+	}
 }
 

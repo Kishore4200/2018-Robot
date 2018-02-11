@@ -1,13 +1,14 @@
 package paths.right;
 
 import org.usfirst.frc.team670.robot.Robot;
+import org.usfirst.frc.team670.robot.commands.actions.Deploy;
 import org.usfirst.frc.team670.robot.commands.actions.Drive;
+import org.usfirst.frc.team670.robot.commands.actions.Intake;
 import org.usfirst.frc.team670.robot.commands.actions.Pivot;
 import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Elevator;
-import org.usfirst.frc.team670.robot.commands.switches.RunIntake;
-import org.usfirst.frc.team670.robot.utilities.Constants;
-import org.usfirst.frc.team670.robot.utilities.ElevatorState;
-import org.usfirst.frc.team670.robot.utilities.Field;
+import org.usfirst.frc.team670.robot.constants.ElevatorState;
+import org.usfirst.frc.team670.robot.constants.Field;
+import org.usfirst.frc.team670.robot.constants.RoboConstants;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -33,15 +34,16 @@ public class right_scale_straight extends CommandGroup {
 		// e.g. if Command1 requires chassis, and Command2 requires arm,
 		// a CommandGroup containing them would require both the chassis and the
 		// arm.
+		addParallel(new Deploy(true));
 		addSequential(new Drive(Field.DSToScale - Robot.length));
     	addSequential(new Pivot(-90));
     	addSequential(new Drive(Field.EdgeToPlatform - Field.SideTriangleWidth - Robot.width));
     	addSequential(new Pivot(90));
-		addSequential(new Encoders_Elevator(ElevatorState.SCALE, Constants.elevatorAutonSpeed)); //Raise Elevator
-		addSequential(new Drive(Constants.frontToElevator)); // DRIVE distance from front of robot to elevator arm
-		addSequential(new RunIntake(-0.8, Constants.intakeRunTime)); //Place Cube
+		addSequential(new Encoders_Elevator(ElevatorState.SCALE)); //Raise Elevator
+		addSequential(new Drive(RoboConstants.frontToElevator)); // DRIVE distance from front of robot to elevator arm
+		addSequential(new Intake(-0.8, RoboConstants.intakeRunTime)); //Place Cube
     	addSequential(new Drive(-1.5 * Robot.length)); //Back Up
-		addSequential(new Encoders_Elevator(ElevatorState.DOWN, Constants.elevatorAutonSpeed)); //Lower Elevator
+		addSequential(new Encoders_Elevator(ElevatorState.DOWN)); //Lower Elevator
 		
 	}
 }

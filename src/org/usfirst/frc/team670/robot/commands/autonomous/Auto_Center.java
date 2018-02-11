@@ -2,7 +2,7 @@ package org.usfirst.frc.team670.robot.commands.autonomous;
 
 import org.usfirst.frc.team670.robot.Robot;
 import org.usfirst.frc.team670.robot.commands.actions.Delay;
-import org.usfirst.frc.team670.robot.utilities.Target;
+import org.usfirst.frc.team670.robot.constants.Target;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;

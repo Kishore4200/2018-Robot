@@ -17,8 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team670.robot.commands.actions.components.Encoders_Drive;
 import org.usfirst.frc.team670.robot.commands.actions.components.NavX_Pivot;
 import org.usfirst.frc.team670.robot.commands.autonomous.CancelCommand;
-import org.usfirst.frc.team670.robot.sensors.Aggregator;
-import org.usfirst.frc.team670.robot.utilities.PathFinder;
+import org.usfirst.frc.team670.robot.constants.PathFinder;
 import org.usfirst.frc.team670.robot.subsystems.DriveBase;
 import org.usfirst.frc.team670.robot.subsystems.Elevator;
 import org.usfirst.frc.team670.robot.subsystems.Intake;
@@ -104,8 +103,6 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
-		double d = sensors.getDistanceIntake();
-		System.out.println(d);
 	}
 
 	/**

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team670.robot.commands.actions.components;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.constants.RoboConstants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
@@ -18,9 +18,9 @@ public class Encoders_Pivot extends Command{
 	private int numTimesMotorOutput;
 	
 	public Encoders_Pivot(double angle) {
-		double circum = Math.PI*Constants.pivotRadius;
+		double circum = Math.PI*RoboConstants.pivotRadius;
 		double inches = circum*(angle/360.0);
- 		this.ticksToTravel = ((inches)/(Math.PI*Constants.DIAMETERinInchesDriveBase)) * Constants.drivebaseTickPerRotation;
+ 		this.ticksToTravel = ((inches)/(Math.PI*RoboConstants.DIAMETERinInchesDriveBase)) * RoboConstants.drivebaseTickPerRotation;
 		requires(Robot.driveBase);
 	}
 

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team670.robot.commands.actions.components;
 
 import org.usfirst.frc.team670.robot.Robot;
-import org.usfirst.frc.team670.robot.utilities.Constants;
+import org.usfirst.frc.team670.robot.constants.RoboConstants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * Uses a PID control loop plus the navX getDisplacement to move a given distance in feet
  * 
- * @author vsharma8363
+ * @author vsharma8363AZ	
  *
  */
 public class Encoders_Drive extends Command{
@@ -19,7 +19,7 @@ public class Encoders_Drive extends Command{
 	
 	public Encoders_Drive(double inches) {
 		
- 		this.ticksToTravel = ((inches)/(Math.PI*Constants.DIAMETERinInchesDriveBase)) * Constants.drivebaseTickPerRotation;
+ 		this.ticksToTravel = ((inches)/(Math.PI*RoboConstants.DIAMETERinInchesDriveBase)) * RoboConstants.drivebaseTickPerRotation;
 		requires(Robot.driveBase);
 	}
 
