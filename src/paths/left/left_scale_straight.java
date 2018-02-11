@@ -37,10 +37,10 @@ public class left_scale_straight extends CommandGroup {
     	addSequential(new Pivot(90));
     	addSequential(new Drive(Field.EdgeToPlatform - Field.SideTriangleWidth - Robot.width));
     	addSequential(new Pivot(-90));
-    	addSequential(new Encoders_Elevator(ElevatorState.SCALE, Constants.elevatorAutonSpeed)); //Raise Elevator
+    	addSequential(new Encoders_Elevator(ElevatorState.SCALE)); //Raise Elevator
     	addSequential(new Drive(Constants.frontToElevator)); // DRIVE distance from front of robot to elevator arm
 		addSequential(new RunIntake(-0.8, Constants.intakeRunTime)); //Place cube
 		addSequential(new Drive(-Constants.frontToElevator)); //BACK UP
-		addSequential(new Encoders_Elevator(ElevatorState.DOWN, Constants.elevatorAutonSpeed));//lower Elevator
+		addSequential(new Encoders_Elevator(ElevatorState.DOWN));//lower Elevator
     }
 }

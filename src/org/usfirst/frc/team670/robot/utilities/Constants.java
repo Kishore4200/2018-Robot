@@ -33,8 +33,8 @@ public class Constants {
 	public static final double DIAMETERinInchesElevator = 6;
 
 	//Elevator Heights
-	public static final double elevatorPulseForExchange = 0; //THESE NEED TO BE SET
 	public static final double elevatorPulseForDown = 0;
+	public static final double elevatorPulseForExchange= 0;
 	public static final double elevatorPulseForSwitch = 0;
 	public static final double elevatorPulseForScale = 0;
 	public static final double elevatorAutonSpeed = 0.05;
@@ -47,7 +47,11 @@ public class Constants {
 	//Multiply by distance in inches to get needed ticks
 	public static final double elevatorInchesToTicks = 8/3 * drivebaseTickPerRotation / Math.PI * DIAMETERinInchesDriveBase;
 	public static final double elevatorTicksToInches = Math.PI * DIAMETERinInchesDriveBase / (8/3 * drivebaseTickPerRotation);
-
+	
+	public static final double ProportionElevator = 1;
+	public static final double IntegralElevator = 0;
+	public static final double DerivativeElevator = 0;
+	
 	public static double elevatorTicksToGo(double inches) {
 		return inches * elevatorInchesToTicks;
 	}

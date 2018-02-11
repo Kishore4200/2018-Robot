@@ -157,7 +157,7 @@ public class DriveBase extends Subsystem {
 		talon.setSelectedSensorPosition(absolutePosition, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 
 		/* choose the sensor and sensor direction */
-		talon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
+		talon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, Constants.kPIDLoopIdx, Constants.kTimeoutMs);
 		talon.setSensorPhase(true);
 
 		/* set the peak and nominal outputs, 12V means full */

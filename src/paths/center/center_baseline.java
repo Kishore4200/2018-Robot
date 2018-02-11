@@ -47,7 +47,7 @@ public class center_baseline extends CommandGroup {
     	addSequential(new Pivot(90));
     	addSequential(new Drive(Robot.length + Field.TOLERANCE));
     	addSequential(new RunIntake(-0.8, Constants.intakeRunTime));
-    	addSequential(new Encoders_Elevator(ElevatorState.EXCHANGE, 0.5));
+    	addSequential(new Encoders_Elevator(ElevatorState.EXCHANGE));
 
 
     }

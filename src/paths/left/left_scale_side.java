@@ -36,11 +36,11 @@ public class left_scale_side extends CommandGroup {
     	addSequential(new Drive(Field.DSToScale - Robot.length + Field.ScaleWidth/2));
     	addSequential(new Pivot(90));
     	addSequential(new Drive(Field.SideToScale - Field.SideTriangleWidth));
-    	addSequential(new Encoders_Elevator(ElevatorState.SCALE, Constants.elevatorAutonSpeed));//Raise Elevator
+    	addSequential(new Encoders_Elevator(ElevatorState.SCALE));//Raise Elevator
     	addSequential(new Drive(Constants.frontToElevator));
     	addSequential(new RunIntake(-0.8, Constants.intakeRunTime)); //Place Cube
     	addSequential(new Drive(Robot.length * -1.5));
-    	addSequential(new Encoders_Elevator(ElevatorState.DOWN, Constants.elevatorAutonSpeed)); //Lower Elevator
+    	addSequential(new Encoders_Elevator(ElevatorState.DOWN)); //Lower Elevator
     	addSequential(new Pivot(-90));
     }
 }

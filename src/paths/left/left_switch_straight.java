@@ -34,10 +34,10 @@ public class left_switch_straight extends CommandGroup {
 		// a CommandGroup containing them would require both the chassis and the
 		// arm.
 		addSequential(new Drive(Field.DSToSwitch - Robot.length));
-		addSequential(new Encoders_Elevator(ElevatorState.SWITCH, Constants.elevatorAutonSpeed));
+		addSequential(new Encoders_Elevator(ElevatorState.SWITCH));
 		addSequential(new RunIntake(-0.8, Constants.intakeRunTime));
 		addSequential(new Delay(2.5));
 		addSequential(new Drive(-(Field.DSToSwitch)));
-		addSequential(new Encoders_Elevator(ElevatorState.DOWN, Constants.elevatorAutonSpeed));
+		addSequential(new Encoders_Elevator(ElevatorState.DOWN));
 	}
 }

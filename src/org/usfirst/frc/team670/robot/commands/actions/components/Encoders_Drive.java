@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * Uses a PID control loop plus the navX getDisplacement to move a given distance in feet
  * 
- * @author vsharma8363
+ * @author vsharma8363AZ	
  *
  */
 public class Encoders_Drive extends Command{

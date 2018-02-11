@@ -39,9 +39,9 @@ public class center_right_switch_straight extends CommandGroup {
     	addSequential(new Drive(Math.sqrt((Math.pow(Field.DSToSwitch-1.5*Robot.length, 2)) + (Math.pow(0.5*(Field.SwitchLength-Robot.width-Field.ExchangeWidth), 2)))));
     	addSequential(new Pivot(-Math.atan((Field.DSToSwitch-1.5*Robot.length)/(0.5*(Field.SwitchLength-Robot.width-Field.ExchangeWidth)))));
     	addSequential(new Drive(0.5*Robot.length));
-    	addSequential(new Encoders_Elevator(ElevatorState.SWITCH, Constants.elevatorAutonSpeed));
+    	addSequential(new Encoders_Elevator(ElevatorState.SWITCH));
     	addSequential(new RunIntake(-0.8, Constants.intakeRunTime));
     	addSequential(new Drive(-0.5*Robot.length));
-		addSequential(new Encoders_Elevator(ElevatorState.DOWN, Constants.elevatorAutonSpeed));
+		addSequential(new Encoders_Elevator(ElevatorState.DOWN));
     }
 }
