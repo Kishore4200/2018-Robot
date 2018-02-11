@@ -24,14 +24,32 @@ public class Joystick_Drive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (Robot.oi.getDS().equals(DriverState.TANKREVERSE)) {
-			// Tank Drive
-			Robot.driveBase.drive(Robot.oi.getLeftStick().getY(), Robot.oi.getRightStick().getY());
-		} else if (Robot.oi.getDS().equals(DriverState.FIELD)) {
-			PartyDrive(joy, true);
-		} else {
-			Robot.driveBase.drive(-Robot.oi.getLeftStick().getY(), -Robot.oi.getRightStick().getY());
-		}
+		double x, ly, ry;
+		double power = 10.0*(1 - (Robot.elevator.getCurrentPosition())/(Constants.maxElevatorTicks * 1.0));
+		if(power < 1.0)
+			power = 1.0;
+		//LeftStick X
+		if(Robot.oi.getLeftStick().getX() < 0.0)
+			x = -Math.pow(Robot.oi.getLeftStick().getX(), power);
+		else
+			x = Math.pow(Robot.oi.getLeftStick().getX(), power);
+		//LeftStick Y
+		if(Robot.oi.getLeftStick().getY() < 0.0)
+			ly = Math.pow(Robot.oi.getLeftStick().getY() ,power);
+		else
+			ly = Math.pow(Robot.oi.getLeftStick().getY() ,power);
+		//RightStick Y
+		if(Robot.oi.getRightStick().getY() < 0.0)
+			ry = Math.pow(Robot.oi.getRightStick().getY(), power);
+		else
+			ry = Math.pow(Robot.oi.getRightStick().getY(), power);
+		
+		if (Robot.oi.getDS().equals(DriverState.TANKREVERSE)) 
+			Robot.driveBase.drive(ly, ry);
+		else if (Robot.oi.getDS().equals(DriverState.FIELD))
+			PartyDrive(x, ly);
+		else
+			Robot.driveBase.drive(-ly, -ry);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -50,11 +68,10 @@ public class Joystick_Drive extends Command {
 		Robot.driveBase.drive(0, 0);
 	}
 
-	private void PartyDrive(Joystick left, boolean isNormal)
+	private void PartyDrive(double x, double y)
 	{
-		double rcw = left.getTwist();
-		double forwrd = left.getY() * -1; /* Invert stick Y axis */
-		double strafe = left.getX();
+		double forwrd = y * -1; /* Invert stick Y axis */
+		double strafe = x;
 		 
 		/* Adjust Joystick X/Y inputs by navX MXP yaw angle */
 		

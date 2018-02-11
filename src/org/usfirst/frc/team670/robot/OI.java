@@ -32,7 +32,7 @@ public class OI {
 
 	private OperatorState os = OperatorState.NONE;
 	private DriverState ds = DriverState.TANK;
-	
+		
 	private Joystick leftDriveStick = new Joystick(RobotMap.leftDriveStick);
 	private Joystick rightDriveStick = new Joystick(RobotMap.rightDriveStick);
 	private Joystick operatorStick = new Joystick(RobotMap.operatorStick);
@@ -118,5 +118,4 @@ public class OI {
 	public void setDriverState(DriverState ds) {
 		this.ds = ds;
 	}
-
 }
